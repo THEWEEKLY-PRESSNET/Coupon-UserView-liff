@@ -1,31 +1,27 @@
-import React from 'react';
-import { Provider, useSelector } from 'react-redux';
-import { ThemeProvider } from '@mui/material/styles';
+import React from "react";
+import { Provider, useSelector } from "react-redux";
+import { ThemeProvider } from "@mui/material/styles";
 
-// import Dev from './apiPostButton';
-import Dev from './ReservationPostButton';
-// import Dev from './NewAccount';
-// import Dev from './Reservation';
-import store from '../stores';
-import { theme } from '../themes/index';
+import Comp from "../App";
+import store from "../stores";
+import { theme } from "../styles/theme";
 
-const DevComponent: React.VFC = () => {
-  console.log('dev start');
+const TestComponent: React.FC = () => {
   const store = useSelector(s => s);
-  console.log('stores', store);
-  return <Dev />;
+  // console.log('stores', store);
+  return <Comp />;
 };
 
-const Develop: React.VFC = () => {
+const Test: React.FC = () => {
   // return <div></div>;
 
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <DevComponent />
+        <TestComponent />
       </Provider>
     </ThemeProvider>
   );
 };
 
-export default Develop;
+export default Test;

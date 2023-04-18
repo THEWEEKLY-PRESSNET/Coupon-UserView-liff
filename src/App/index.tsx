@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 
 import Layout from "../components/Layout";
+import Ticket from "../components/TicketUnit";
 
 const styles = {};
 
@@ -9,7 +10,12 @@ type props = {
 };
 
 const App: React.FC<props> = () => {
-  return <Layout>hello!</Layout>;
+  return (
+    <Layout>
+      hello!
+      <Ticket />
+    </Layout>
+  );
 };
 
 export default App;

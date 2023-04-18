@@ -10,7 +10,6 @@ const styles = {
     display: "flex",
     justifyContent: "space-around",
     px: 6,
-    bgcolor: "#FFF",
   },
   divider: {
     borderColor: "black",
