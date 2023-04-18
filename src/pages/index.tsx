@@ -1,25 +1,18 @@
 import React from "react";
-import { Link } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
+import { Box } from "@mui/material";
 
 import Seo from "../components/seo";
+import App from "../App";
+import { usePreRender } from "../hooks/usePreRender";
 
-const IndexPage = () => (
-  <div>
-    <StaticImage
-      src="../images/example.png"
-      loading="eager"
-      width={64}
-      quality={95}
-      formats={["auto", "webp", "avif"]}
-      alt=""
-      style={{ marginBottom: `var(--space-3)` }}
-    />
-  </div>
-);
+const PreRender: React.FC = () => <div>loading...</div>;
+
+const IndexPage: React.FC = () => {
+  return <App />;
+};
 
 export const Head = () => (
-  <Seo title="Home" description={undefined} children={undefined} />
+  <Seo title="Home" description="" children={undefined} />
 );
 
 export default IndexPage;

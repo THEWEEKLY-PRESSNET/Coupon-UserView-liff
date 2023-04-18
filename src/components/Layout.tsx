@@ -1,0 +1,51 @@
+import React, { ReactNode } from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import { Container, Box, Paper } from "@mui/material";
+
+import FooterNav from "../components/FooterNav";
+import theme from "../styles/theme";
+import "../styles/index.scss";
+
+const styles = {
+  container: {
+    display: { sm: "flex" },
+    justifyContent: { sm: "center" },
+    maxWidth: "600px",
+    width: "600px",
+    minHeight: "100vh",
+    p: 0,
+    bgcolor: "bg1.main",
+  },
+  layout: {
+    width: { xs: "100vw", sm: 600 },
+    maxWidth: 600,
+  },
+  footer: {
+    position: "fixed",
+    width: "100%",
+    maxWidth: "600px",
+    bottom: 0,
+    p: { xs: 1, xm: 2, sm: 3 },
+    // bgcolor: "#FFF",
+    boxSizing: "border-box",
+  },
+};
+
+type props = {
+  children: ReactNode;
+};
+
+const Layout: React.FC<props> = ({ children }) => (
+  <ThemeProvider theme={theme}>
+    <Container className="layout-container" sx={styles.container}>
+      <Box className="layout" sx={styles.layout}>
+        {children}
+      </Box>
+      <Paper elevation={5} sx={styles.footer}>
+        <FooterNav />
+      </Paper>
+    </Container>
+  </ThemeProvider>
+);
+
+export default Layout;
