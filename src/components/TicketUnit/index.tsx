@@ -23,7 +23,7 @@ const styles = {
     // borderBottomLeftRadius: "50px",
     bgcolor: "bg1.main",
     boxShadow: "3px 4px 4px rgba(64, 64, 64, 0.25) inset",
-    zIndex: 10,
+    zIndex: 2,
   },
   ellipseL: {
     position: "absolute",
@@ -36,10 +36,10 @@ const styles = {
     // borderBottomLeftRadius: "50px",
     bgcolor: "bg1.main",
     boxShadow: "-3px 4px 4px rgba(64, 64, 64, 0.25) inset",
-    zIndex: 10,
+    zIndex: 2,
   },
   ticket: {
-    background: "white",
+    background: "#FFF",
     boxShadow: "0px 4px 4px rgba(64, 64, 64, 0.25)",
     borderRadius: "5px",
     width: "345px",

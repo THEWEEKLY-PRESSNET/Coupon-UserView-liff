@@ -57,7 +57,7 @@ export const theme = createTheme({
     },
     sub1: { main: "#8f7e62", contrastText: "#fff" },
     bg1: {
-      main: "#f5f7fa",
+      main: "#F5F5F5",
     },
   },
   breakpoints: {

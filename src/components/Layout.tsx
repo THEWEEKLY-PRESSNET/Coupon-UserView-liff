@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { Container, Box, Paper } from "@mui/material";
 
+import Header from "../components/Header";
 import FooterNav from "../components/FooterNav";
 import theme from "../styles/theme";
 import "../styles/index.scss";
@@ -14,7 +15,21 @@ const styles = {
     width: "600px",
     minHeight: "100vh",
     p: 0,
+    pt: "90px",
     bgcolor: "bg1.main",
+    overflow: "hidden",
+  },
+  header: {
+    position: "fixed",
+    width: "100%",
+    maxWidth: "600px",
+    height: "90px",
+    top: 0,
+    p: { xs: 1, xm: 2, sm: 3 },
+    bgcolor: "#FFFEE8",
+    boxSizing: "border-box",
+    borderRadius: 0,
+    zIndex: 10,
   },
   layout: {
     width: { xs: "100vw", sm: 600 },
@@ -28,6 +43,8 @@ const styles = {
     p: { xs: 1, xm: 2, sm: 3 },
     // bgcolor: "#FFF",
     boxSizing: "border-box",
+    borderRadius: 0,
+    zIndex: 10,
   },
 };
 
@@ -38,10 +55,13 @@ type props = {
 const Layout: React.FC<props> = ({ children }) => (
   <ThemeProvider theme={theme}>
     <Container className="layout-container" sx={styles.container}>
-      <Box className="layout" sx={styles.layout}>
+      <Paper className="layout-header" elevation={5} sx={styles.header}>
+        <Header />
+      </Paper>
+      <Box className="layout-body" sx={styles.layout}>
         {children}
       </Box>
-      <Paper elevation={5} sx={styles.footer}>
+      <Paper className="layout-footer" elevation={5} sx={styles.footer}>
         <FooterNav />
       </Paper>
     </Container>
