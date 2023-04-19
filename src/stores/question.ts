@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type Question = {
+export type Gender = {
   gender?: "mail" | "femail" | "others";
-  age?: "10s" | "20s" | "30s" | "40s" | "50s" | "60s" | "70s";
-  living?:
+};
+export type Age = {
+  age: "10s" | "20s" | "30s" | "40s" | "50s" | "60s" | "70s";
+};
+export type Living = {
+  living:
     | "saijo"
     | "hachihonmatsu"
     | "shiwa"
@@ -14,7 +18,9 @@ export type Question = {
     | "kouchi"
     | "akitu"
     | "others";
-  interested?:
+};
+export type Interesting = {
+  interesting:
     | "gourmet"
     | "shoping"
     | "fashion"
@@ -29,6 +35,13 @@ export type Question = {
     | "jobchange"
     | "travel"
     | "money";
+};
+
+export type Question = {
+  gender?: Gender;
+  age?: Age;
+  living?: Living;
+  interesting?: Interesting;
 };
 
 const initialState: Question = {};
