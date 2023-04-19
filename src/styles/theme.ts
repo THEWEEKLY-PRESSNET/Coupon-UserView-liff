@@ -3,8 +3,11 @@ import { createTheme } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Palette {
-    sub1: {
-      main: string;
+    accent: {
+      g: string;
+      b: string;
+      p: string;
+      r: string;
       contrastText: string;
     };
     bg1: {
@@ -12,8 +15,11 @@ declare module "@mui/material/styles" {
     };
   }
   interface PaletteOptions {
-    sub1?: {
-      main?: string;
+    accent?: {
+      g?: string;
+      b?: string;
+      p?: string;
+      r?: string;
       contrastText?: string;
     };
     bg1?: {
@@ -51,14 +57,20 @@ declare module "@mui/material/Typography" {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#E2563B",
+      main: "#F6AD3C",
       contrastText: "#fff",
     },
     secondary: {
-      main: "#ef7f40",
+      main: "#00ACA9",
       contrastText: "#fff",
     },
-    sub1: { main: "#8f7e62", contrastText: "#fff" },
+    accent: {
+      g: "#8f7e62",
+      b: "#53A0E0",
+      p: "#E57A7A",
+      r: "#E74343",
+      contrastText: "#fff",
+    },
     bg1: {
       main: "#F5F5F5",
     },
