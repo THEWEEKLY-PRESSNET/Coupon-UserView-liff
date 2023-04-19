@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Box, Divider } from "@mui/material";
 
 import HomeBtn from "./Btn.Home";
@@ -10,34 +10,30 @@ const styles = {
     display: "flex",
     justifyContent: "space-around",
     px: 6,
+    height: "56px",
   },
   divider: {
     borderColor: "black",
+  },
+  btnWrapper: {
+    display: "flex",
+    alignItems: "center",
+    cursor: "pointer",
   },
 };
 
 const FooterNav: React.FC = () => {
   return (
     <Box className="footernav" sx={styles.container}>
-      <Box>
+      <Box sx={styles.btnWrapper}>
         <HomeBtn />
       </Box>
-      <Divider
-        orientation="vertical"
-        variant="middle"
-        flexItem
-        sx={styles.divider}
-      />
-      <Box>
+      <Divider orientation="vertical" flexItem sx={styles.divider} />
+      <Box sx={styles.btnWrapper}>
         <CouponBtn />
       </Box>
-      <Divider
-        orientation="vertical"
-        variant="middle"
-        flexItem
-        sx={styles.divider}
-      />
-      <Box>
+      <Divider orientation="vertical" flexItem sx={styles.divider} />
+      <Box sx={styles.btnWrapper}>
         <LineBtn />
       </Box>
     </Box>

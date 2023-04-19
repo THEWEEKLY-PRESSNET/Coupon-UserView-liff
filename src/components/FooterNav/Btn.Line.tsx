@@ -2,21 +2,26 @@ import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Typography } from "@mui/material";
 
-import Seo from "../../images/home.png";
-
 const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
   },
   img: {
-    display: "flex",
-    flexDirection: "column",
+    width: "30px",
+    height: "30px",
+  },
+  label: {
+    mt: 1,
+    fontSize: "10px",
+    fontWeight: 600,
   },
 };
 
-const HomeBtn = () => (
+const LineBtn = () => (
   <Box sx={styles.container}>
     <Box sx={styles.img}>
       <StaticImage
@@ -29,9 +34,10 @@ const HomeBtn = () => (
         style={{ marginBottom: `var(--space-3)` }}
       />
     </Box>
-
-    <Typography>公式ライン</Typography>
+    <Typography noWrap sx={styles.label}>
+      公式ライン
+    </Typography>
   </Box>
 );
 
-export default HomeBtn;
+export default LineBtn;

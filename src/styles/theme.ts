@@ -33,14 +33,17 @@ declare module "@mui/material/styles" {
     desktop: false;
   }
   interface TypographyVariants {
+    subtitle: React.CSSProperties;
     note: React.CSSProperties;
   }
   interface TypographyVariantsOptions {
+    subtitle?: React.CSSProperties;
     note?: React.CSSProperties;
   }
 }
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
+    subtitle: true;
     note: true;
   }
 }
@@ -74,9 +77,10 @@ export const theme = createTheme({
     // In Chinese and Japanese the characters are usually larger,
     // so a smaller fontsize may be appropriate.
     fontSize: 12,
-    subtitle1: {
-      fontSize: 18,
+    subtitle: {
+      fontSize: 13,
       fontWeight: "bold",
+      color: "#404040",
     },
     note: {
       fontSize: 10,
@@ -87,7 +91,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: ['"Noto Sans JP"', "sans-serif", "Roboto"].join(","),
-          color: "#434343",
+          color: "#404040",
         },
       },
     },
