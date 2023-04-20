@@ -79,7 +79,7 @@ const Header: React.FC = () => {
       </Box>
       <Box sx={styles.body}>
         <Box sx={styles.img}>
-          {<ImgBox width={80} height={54} img={articleImg} /> || (
+          {<ImgBox width={80} height={54} size="cover" img={articleImg} /> || (
             <Box sx={styles.dummy} />
           )}
         </Box>
