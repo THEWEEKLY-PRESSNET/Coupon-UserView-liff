@@ -9,7 +9,7 @@ type props = {
   children: ReactNode;
 };
 
-const App: React.FC<props> = () => {
+const App: React.FC = () => {
   return (
     <Layout>
       <Coupons />

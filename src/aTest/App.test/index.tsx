@@ -6,40 +6,16 @@ import TestComponent from "../../App";
 import { theme } from "../../styles/theme";
 import store from "../../stores";
 import { updateTopState } from "../../stores/topState";
-import { updateUser } from "../../stores/user";
-// import { updateNewReservation } from "../../stores/newReservation";
-import useLogin from "./useLogin";
 
 import type { Root } from "../../stores";
 
 const mockData: Root = {
   topState: {
     view: "top",
-    lastView: "top",
-    activeStep: 0,
-    membered: false,
-    logged: false,
-    checked: false,
-    history: [],
-    loginType: "reservation",
-    isModal: false,
-    isNew: false,
-    isLoading: true,
-  },
-  user: {
-    company: "新山田商会",
-    firstName: "新太郎",
-    firstRuby: "タロウ",
-    lastName: "新規山田",
-    lastRuby: "シンヤマダ",
-    userId: 5113278539759616,
-    userMail: "uniwork.contact@gmail.com",
-    userOauthId: 4852205194575872,
-    userTel: "090-2222-2222",
+    isStop: false,
+    lottered: false,
   },
 };
-
-// const useLogin = () => {};
 
 const TestApp: React.FC = () => {
   // const topState = useSelector((s: root) => s.topState);
@@ -52,7 +28,6 @@ const TestApp: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(updateTopState(mockData.topState));
-    dispatch(updateUser(mockData.user));
   }, []);
   // useEffect(() => {
   //   const setTopState = async () => {
@@ -70,7 +45,7 @@ const TestApp: React.FC = () => {
   //   };
   //   setTopState();
   // }, []);
-  return <TestComponent userId={null} userOauthId={null} userMail={null} />;
+  return <TestComponent />;
 };
 
 const Test: React.FC = () => {
