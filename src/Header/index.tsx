@@ -1,5 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
+
+import type { Root } from "../stores";
 
 const styles = {
   container: {
@@ -24,8 +27,6 @@ const styles = {
     gap: 1,
     height: "100%",
     mt: 0.5,
-    // flexDirection: "column",
-    // justifyContent: "space-around",
   },
   img: {
     flexGrow: 1,
@@ -49,22 +50,37 @@ type Props = {
   img: string;
 };
 
-const Header: React.FC<Props> = ({ title, img }) => {
+const Header: React.FC = () => {
+  const articles = useSelector((s: Root) => s.articles);
+  const { articleTitle, articleText, articleUrl, articleImg } = articles[0] || [
+    {
+      articleTitle: undefined,
+      articleText: undefined,
+      articleUrl: undefined,
+      articleImg: undefined,
+    },
+  ];
+  // console.log("article", articles);
+
   return (
     <Box className="footernav" sx={styles.container}>
       <Box>
         <Typography sx={styles.badge}>NEW</Typography>
         <Typography variant="subtitle" sx={{ display: "inline-block" }}>
-          {title || "東広島デジタル新着記事"}
+          {articleTitle || "東広島デジタル新着記事"}
         </Typography>
       </Box>
       <Box sx={styles.body}>
-        <Box sx={styles.img}>{img || <Box sx={styles.dummy} />}</Box>
+        <Box sx={styles.img}>{articleImg || <Box sx={styles.dummy} />}</Box>
         <Box sx={styles.article}>
           <Typography variant="note" sx={{ display: "block" }}>
-            東広島デジタル新着記事 東広島デジタル新着記事 東広島デジタル新着記事
+            {articleText}
           </Typography>
-          <Typography variant="note" sx={styles.link}>
+          <Typography
+            component="a"
+            href={articleUrl || "https://www.higashihiroshima-digital.com/"}
+            sx={styles.link}
+          >
             記事を読む ＞
           </Typography>
         </Box>

@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { Container, Box, Paper } from "@mui/material";
 
-import Header from "../components/Header";
+import Header from "../Header";
 import FooterNav from "../components/FooterNav";
 import theme from "../styles/theme";
 import "../styles/index.scss";

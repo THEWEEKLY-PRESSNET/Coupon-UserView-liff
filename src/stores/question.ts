@@ -47,7 +47,7 @@ export type Question = {
 const initialState: Question = {};
 
 const slice = createSlice({
-  name: "topState",
+  name: "question",
   initialState,
   reducers: {
     updateQuestion: (state, action) => {
