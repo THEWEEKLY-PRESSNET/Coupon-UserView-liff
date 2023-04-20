@@ -3,7 +3,7 @@ import { Coupon } from "./coupon";
 
 const initialState: Coupon[] = [];
 const slice = createSlice({
-  name: "topState",
+  name: "coupons",
   initialState,
   reducers: {
     updateCoupons: (_, action) => {

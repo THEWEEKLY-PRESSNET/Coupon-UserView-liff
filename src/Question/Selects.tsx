@@ -38,32 +38,6 @@ type props = {
   children: ReactNode;
 };
 
-const genderLabels = [
-  { key: "male", label: "男性" },
-  { key: "femaile", label: "女性" },
-  { key: "others", label: "その他" },
-];
-const ageLabels = [
-  { key: "10s", label: "１０代" },
-  { key: "20s", label: "２０代" },
-  { key: "30s", label: "３０代" },
-  { key: "40s", label: "４０代" },
-  { key: "50s", label: "５０代" },
-  { key: "60s", label: "６０代" },
-  { key: "70s", label: "７０代" },
-];
-const livingLabels = [
-  { key: "saijo", label: "西条" },
-  { key: "hachihonmatu", label: "八本松" },
-  { key: "shiwa", label: "志和" },
-  { key: "takaya", label: "高屋" },
-  { key: "kurose", label: "黒瀬" },
-  { key: "fukutomi", label: "福富" },
-  { key: "toyosaka", label: "豊栄" },
-  { key: "kouchi", label: "河内" },
-  { key: "akitu", label: "安芸津" },
-  { key: "others", label: "その他" },
-];
 const interestingLabels = [
   { key: "gourmet", label: "グルメ" },
   { key: "shoping", label: "ショッピング" },

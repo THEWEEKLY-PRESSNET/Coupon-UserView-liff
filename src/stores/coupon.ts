@@ -51,7 +51,7 @@ const initialState: Coupon = {
 };
 
 const slice = createSlice({
-  name: "topState",
+  name: "coupon",
   initialState,
   reducers: {
     updateCoupon: (state, action) => {

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 
 import Layout from "../components/Layout";
-import Ticket from "../components/TicketUnit";
+import Coupons from "../Coupons";
 
 const styles = {};
 
@@ -9,11 +9,10 @@ type props = {
   children: ReactNode;
 };
 
-const App: React.FC<props> = () => {
+const App: React.FC = () => {
   return (
     <Layout>
-      hello!
-      <Ticket />
+      <Coupons />
     </Layout>
   );
 };

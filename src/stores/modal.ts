@@ -11,7 +11,7 @@ const initialState: Modal = {
 };
 
 const slice = createSlice({
-  name: "Modal",
+  name: "modal",
   initialState,
   reducers: {
     updateModal: (state, action) => {

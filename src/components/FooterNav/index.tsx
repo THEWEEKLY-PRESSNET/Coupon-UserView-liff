@@ -9,7 +9,7 @@ const styles = {
   container: {
     display: "flex",
     justifyContent: "space-around",
-    px: 6,
+    px: { xs: 0, xm: 3 },
     height: "56px",
   },
   divider: {
