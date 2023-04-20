@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 
+import ImgBox from "../components/ImgBox";
 import type { Root } from "../stores";
 
 const styles = {
@@ -15,6 +16,11 @@ const styles = {
     p: 0.5,
     bgcolor: "#FFF",
   },
+  titleBox: {
+    display: "flex",
+    // flexDirection: "column",
+    width: "100%",
+  },
   badge: {
     display: "inline-block",
     color: "#FFF",
@@ -22,6 +28,7 @@ const styles = {
     px: 0.5,
     mr: 0.5,
   },
+  title: {},
   body: {
     display: "flex",
     gap: 1,
@@ -64,14 +71,18 @@ const Header: React.FC = () => {
 
   return (
     <Box className="footernav" sx={styles.container}>
-      <Box>
+      <Box sx={styles.titleBox}>
         <Typography sx={styles.badge}>NEW</Typography>
-        <Typography variant="subtitle" sx={{ display: "inline-block" }}>
+        <Typography variant="subtitle" noWrap sx={{ display: "inline-block" }}>
           {articleTitle || "東広島デジタル新着記事"}
         </Typography>
       </Box>
       <Box sx={styles.body}>
-        <Box sx={styles.img}>{articleImg || <Box sx={styles.dummy} />}</Box>
+        <Box sx={styles.img}>
+          {<ImgBox width={80} height={54} img={articleImg} /> || (
+            <Box sx={styles.dummy} />
+          )}
+        </Box>
         <Box sx={styles.article}>
           <Typography variant="note" sx={{ display: "block" }}>
             {articleText}
