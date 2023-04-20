@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type Gender = {
-  gender?: "mail" | "femail" | "others";
+  gender?: "male" | "femail" | "others";
 };
 export type Age = {
   age: "10s" | "20s" | "30s" | "40s" | "50s" | "60s" | "70s";
