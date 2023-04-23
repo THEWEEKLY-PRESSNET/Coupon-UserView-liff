@@ -21,23 +21,29 @@ const styles = {
   },
 };
 
-const LineBtn = () => (
-  <Box sx={styles.container}>
-    <Box sx={styles.img}>
-      <StaticImage
-        src="../../images/line.png"
-        loading="eager"
-        width={30}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
+const LineBtn = () => {
+  const handleClick = () => {
+    window.location.href = "https://lin.ee/f62Smod";
+  };
+
+  return (
+    <Box className="linebtn" onClick={handleClick} sx={styles.container}>
+      <Box sx={styles.img}>
+        <StaticImage
+          src="../../images/line.png"
+          loading="eager"
+          width={30}
+          quality={95}
+          formats={["auto", "webp", "avif"]}
+          alt=""
+          style={{ marginBottom: `var(--space-3)` }}
+        />
+      </Box>
+      <Typography noWrap sx={styles.label}>
+        公式ライン
+      </Typography>
     </Box>
-    <Typography noWrap sx={styles.label}>
-      公式ライン
-    </Typography>
-  </Box>
-);
+  );
+};
 
 export default LineBtn;

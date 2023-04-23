@@ -7,7 +7,7 @@ const styles = {
     flexDirection: "column",
     // justifyContent: "center",
     alignItems: "center",
-    mt: 4,
+    // mt: 4,
     px: "auto",
   },
 };
