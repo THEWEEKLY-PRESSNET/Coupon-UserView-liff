@@ -8,20 +8,20 @@
  * @type {import('gatsby').GatsbySSR['onRenderBody']}
  */
 
-const React = require("react")
-const { Provider } = require("react-redux")
+// const React = require("react")
+// const { Provider } = require("react-redux")
 
-const store = require("./src/stores")
-// console.log("ssr stores", store)
+// const store = require("./src/stores")
+// // console.log("ssr stores", store)
 
-exports.wrapRootElement = ({ element }) => {
-  console.log("el", element)
-  return (
-    <Provider store={store}>
-      {element}
-    </Provider>
-  )
-}
+// exports.wrapRootElement = ({ element }) => {
+//   console.log("el", element)
+//   return (
+//     <Provider store={store}>
+//       {element}
+//     </Provider>
+//   )
+// }
 
 exports.onRenderBody = ({ setHtmlAttributes }) => {
   setHtmlAttributes({ lang: `ja` })
