@@ -8,7 +8,7 @@ type Props = {
 const IndexPage: React.FC<Props> = ({ imgUrl }) => (
   <div>
     <StaticImage
-      src={imgUrl}
+      src=""
       loading="eager"
       width={64}
       quality={95}

@@ -17,6 +17,13 @@ const IndexPage: React.FC = () => {
   );
 };
 
+const test = () => {
+  const topState = useSelector((s: Root) => s.topState);
+  console.log("topstate", topState);
+
+  return <Box>hello</Box>;
+};
+
 export const Head = () => (
   <Seo title="Home" description="" children={undefined} />
 );

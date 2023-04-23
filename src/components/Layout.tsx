@@ -13,7 +13,7 @@ const styles = {
     justifyContent: { sm: "center" },
     maxWidth: "600px",
     width: { xs: "100vw", sm: "600px" },
-    minHeight: "100vh",
+    minHeight: "calc(100vh - 110px)",
     p: 0,
     pt: "90px",
     bgcolor: "bg1.main",
@@ -31,9 +31,10 @@ const styles = {
     borderRadius: 0,
     zIndex: 10,
   },
-  layout: {
+  body: {
     width: { xs: "100vw", sm: 600 },
     maxWidth: 600,
+    mt: "110px",
   },
   footer: {
     position: "fixed",
@@ -58,7 +59,7 @@ const Layout: React.FC<props> = ({ children }) => (
       <Paper className="layout-header" elevation={5} sx={styles.header}>
         <Header />
       </Paper>
-      <Box className="layout-body" sx={styles.layout}>
+      <Box className="layout-body" sx={styles.body}>
         {children}
       </Box>
       <Paper className="layout-footer" elevation={5} sx={styles.footer}>

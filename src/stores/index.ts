@@ -27,4 +27,5 @@ const reducer = combineReducers({
 });
 
 const store = configureStore({ reducer });
+console.log("st", store);
 export default store;
