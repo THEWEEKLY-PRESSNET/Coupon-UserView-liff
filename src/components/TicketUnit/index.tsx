@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Box, Typography } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 
 import Badge from "./Ticket.Badge";
 import Flag from "./Ticket.Flag";
+import Shadow from "./Ticket.Shadow";
 import { dateTrance } from "../../utils/formatter";
-import badge from "../../images/badge.png";
 
 const styles = {
   container: {
@@ -21,7 +22,7 @@ const styles = {
     width: "50px",
     height: "50px",
     top: "49px",
-    right: "-32px",
+    right: "-36px",
     borderRadius: "50%",
     // borderTopLeftRadius: "50%/11%",
     // borderBottomLeftRadius: "50px",
@@ -34,7 +35,7 @@ const styles = {
     width: "50px",
     height: "50px",
     top: "46px",
-    left: "-34px",
+    left: "-36px",
     borderRadius: "50%",
     // borderTopLeftRadius: "50%/11%",
     // borderBottomLeftRadius: "50px",
@@ -99,6 +100,36 @@ const styles = {
     fontSize: "10px",
     lineHeight: "15px",
   },
+  favor: {
+    position: "absolute",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    // width: "100px",
+    top: "78%",
+    right: "4%",
+    bgcolor: "#E57A7A",
+    color: "#FFF",
+  },
+  favorText: {
+    // position: "absolute",
+    // display: "flex",
+    // verticalAlign: "middle",
+    pt: "2px",
+    pr: "4px",
+    // top: "78%",
+    // left: "18%",
+    fontWeight: 600,
+    fontSize: "12px",
+    lineHeight: "12px",
+    // bgcolor: "#E57A7A",
+    color: "#FFF",
+  },
+  favorIcon: {
+    color: "#FFF",
+    height: "12px",
+    // pt: "1px",
+  },
   ticket: {
     background: "#FFF",
     boxShadow: "0px 4px 4px rgba(64, 64, 64, 0.25)",
@@ -109,7 +140,7 @@ const styles = {
   },
   badge: {
     position: "absolute",
-    top: "3px",
+    top: "8px",
     left: "3px",
   },
 };
@@ -120,7 +151,9 @@ type Props = {
   storeName: string;
   valiedStart: string;
   valiedEnd: string;
-  badgeText?: string;
+  badgeText?: number;
+  favored?: boolean;
+  used?: boolean;
   isFlag?: boolean;
 };
 
@@ -131,6 +164,8 @@ const Test: React.FC<Props> = ({
   valiedStart,
   valiedEnd,
   badgeText,
+  favored,
+  used,
   isFlag,
 }) => {
   const startStr = dateTrance(valiedStart);
@@ -145,16 +180,25 @@ const Test: React.FC<Props> = ({
       <Typography sx={styles.title}>{couponTitleBig}</Typography>
       <Typography sx={styles.subtitle}>{couponTitleSmall}</Typography>
       <Typography sx={styles.name}>{storeName}</Typography>
-      <Typography
-        sx={styles.start}
-      >{`${startStr}からご利用いただけます。`}</Typography>
       <Typography sx={styles.limit}>{`有効期限　${valiedStr}まで`}</Typography>
+      {favored && (
+        <Box sx={styles.favor}>
+          <StarIcon sx={styles.favorIcon} />
+          <Typography sx={styles.favorText}>お気に入り</Typography>
+        </Box>
+      )}
       {badgeText && (
         <Box sx={styles.badge}>
-          <Badge />
+          <Badge badgeText={badgeText} />
         </Box>
       )}
       {isFlag && <Flag />}
+      {isFlag && (
+        <Typography
+          sx={styles.start}
+        >{`${startStr}からご利用いただけます。`}</Typography>
+      )}
+      {used && <Shadow />}
     </Box>
   );
 };
