@@ -6,25 +6,64 @@ import TestComponent from "../../App";
 import { theme } from "../../styles/theme";
 import store from "../../stores";
 
+import { updateCoupons } from "../../stores/coupons";
 import type { Root } from "../../stores";
 
 const mockData: Root = {
-  // topState: {
-  //   view: "top",
-  //   lastView: "top",
-  //   activeStep: 0,
-  //   membered: false,
-  //   logged: false,
-  //   checked: false,
-  //   history: [],
-  //   loginType: "reservation",
-  //   isModal: false,
-  //   isNew: false,
-  //   isLoading: true,
-  // },
+  coupons: [
+    {
+      couponTitleBig: "10%OFF",
+      couponTitleSmall: "平日に使える味噌ラーメン割引券",
+      storeName: "みそラーメン東口店",
+      valiedStart: "20230429",
+      valiedEnd: "20230505",
+      badgeText: 3,
+      favored: true,
+    },
+    {
+      couponTitleBig: "10%OFF",
+      couponTitleSmall: "平日に使える味噌ラーメン割引券",
+      storeName: "みそラーメン東口店",
+      valiedStart: "20230429",
+      valiedEnd: "20230505",
+    },
+    {
+      couponTitleBig: "10%OFF",
+      couponTitleSmall: "平日に使える味噌ラーメン割引券",
+      storeName: "みそラーメン東口店",
+      valiedStart: "20230429",
+      valiedEnd: "20230505",
+      isFlag: true,
+    },
+    {
+      couponTitleBig: "10%OFF",
+      couponTitleSmall: "平日に使える味噌ラーメン割引券",
+      storeName: "みそラーメン東口店",
+      valiedStart: "20230429",
+      valiedEnd: "20230505",
+      favored: true,
+    },
+    {
+      couponTitleBig: "10%OFF",
+      couponTitleSmall: "平日に使える味噌ラーメン割引券",
+      storeName: "みそラーメン東口店",
+      valiedStart: "20230429",
+      valiedEnd: "20230505",
+      badgeText: 3,
+      favored: true,
+      used: true,
+    },
+    {
+      couponTitleBig: "10%OFF",
+      couponTitleSmall: "平日に使える味噌ラーメン割引券",
+      storeName: "みそラーメン東口店",
+      valiedStart: "20230429",
+      valiedEnd: "20230505",
+      favored: true,
+      isFlag: true,
+    },
+  ],
 };
-
-// const useLogin = () => {};
 
 const TestApp: React.FC = () => {
   // const topState = useSelector((s: root) => s.topState);
@@ -36,7 +75,7 @@ const TestApp: React.FC = () => {
 
   const dispatch = useDispatch();
   // useEffect(() => {
-  //   dispatch(updateTopState(mockData.topState));
+  dispatch(updateCoupons(mockData.coupons));
   //   dispatch(updateUser(mockData.user));
   // }, []);
   // useEffect(() => {
