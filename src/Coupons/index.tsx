@@ -18,6 +18,7 @@ const styles = {
   title: {
     position: "fixed",
     width: "100%",
+    maxWidth: "600px",
     textAlign: "center",
     fontSize: "12px",
     fontWeight: 600,
@@ -29,6 +30,9 @@ const styles = {
     zIndex: 3,
   },
   coupons: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     width: "100%",
     boxSizing: "border-box",
     p: "10px",
