@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 export type Article = {
   articleId: number;
   articleTitle: string;
-  articleText: string;
   articleUrl: string;
   articleImg: string;
   createdAt: number;
