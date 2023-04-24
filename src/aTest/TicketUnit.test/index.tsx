@@ -3,25 +3,37 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 
 import TestComponent from "../../components/TicketUnit";
+import { updateCoupon } from "../../stores/coupon";
 import { theme } from "../../styles/theme";
 import store from "../../stores";
 
 import type { Root } from "../../stores";
 
 const mockData: Root = {
-  // topState: {
-  //   view: "top",
-  //   lastView: "top",
-  //   activeStep: 0,
-  //   membered: false,
-  //   logged: false,
-  //   checked: false,
-  //   history: [],
-  //   loginType: "reservation",
-  //   isModal: false,
-  //   isNew: false,
-  //   isLoading: true,
-  // },
+  coupon: {
+    storeName: "みそラーメン東口店",
+    issuedCouponId: 0,
+    userId: 0,
+    usedAt: null,
+    favorite: false,
+    expired: false,
+    couponId: 0,
+    storeId: 0,
+    couponTitleBig: "",
+    couponTitleSmall: "",
+    issueStart: "",
+    issueEnd: "",
+    validStart: "",
+    validEnd: "",
+    issueNumber: 0,
+    issueRatio: 1,
+    couponDescription: "",
+    couponImg: "",
+    usageguideId: 0,
+    usageguideText: "",
+    couponNote: "",
+    createdAt: 0,
+  },
 };
 
 // const useLogin = () => {};
@@ -35,10 +47,10 @@ const TestApp: React.FC = () => {
   // console.log("rst", rState);
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(updateTopState(mockData.topState));
-  //   dispatch(updateUser(mockData.user));
-  // }, []);
+  useEffect(() => {
+    dispatch(updateCoupon(mockData.coupon));
+    // dispatch(updateUser(mockData.user));
+  }, []);
   // useEffect(() => {
   //   const setTopState = async () => {
   //     const { result, payload } = await useLogin();
@@ -55,7 +67,16 @@ const TestApp: React.FC = () => {
   //   };
   //   setTopState();
   // }, []);
-  return <TestComponent />;
+  return (
+    <TestComponent
+      couponTitleBig="10%OFF"
+      couponTitleSmall="平日に使える味噌ラーメン割引券"
+      storeName="みそラーメン東口店"
+      valiedStart="20230429"
+      valiedEnd="20230505"
+      isFlag
+    />
+  );
 };
 
 const Test: React.FC = () => {

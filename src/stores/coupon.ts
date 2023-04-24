@@ -44,7 +44,7 @@ const initialState: Coupon = {
   issueRatio: 1,
   couponDescription: "",
   couponImg: "",
-  usageguideId: 1234567890123456,
+  usageguideId: 0,
   usageguideText: "",
   couponNote: "",
   createdAt: 0,
