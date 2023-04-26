@@ -5,14 +5,13 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
     alignItems: "center",
-    // mt: 4,
+    mt: 4,
     px: "auto",
   },
 };
 
-const Test: React.FC = () => {
+const Empty: React.FC = () => {
   return (
     <Box sx={styles.container}>
       <Typography variant="subtitle">
@@ -29,4 +28,4 @@ const Test: React.FC = () => {
   );
 };
 
-export default Test;
+export default Empty;

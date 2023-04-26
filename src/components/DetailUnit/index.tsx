@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import { Box, Typography } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 
-import Ticket from "./coupon";
-
-import { dateTrance } from "../../utils/formatter";
+import Coupon from "./coupon";
 import ImgBox from "../ImgBox";
+import { dateTrance } from "../../utils/formatter";
+import type { Detail } from "../../stores/coupon";
 
 const styles = {
   container: {
@@ -49,17 +48,17 @@ const styles = {
   },
 };
 
-type Props = {
-  couponTitleBig: string;
-  valiedStart: string;
-  storeName: string;
-  valiedEnd: string;
-  couponDescription: string;
-  storeImg: string;
-  storeUrl: string;
-};
+// type Props = {
+//   couponTitleBig: string;
+//   valiedStart: string;
+//   storeName: string;
+//   valiedEnd: string;
+//   couponDescription: string;
+//   storeImg: string;
+//   storeUrl: string;
+// };
 
-const Test: React.FC<Props> = ({
+const Test: React.FC<Detail> = ({
   couponTitleBig,
   valiedStart,
   storeName,
@@ -74,7 +73,7 @@ const Test: React.FC<Props> = ({
   return (
     <Box sx={styles.container}>
       <Box sx={styles.ticket}>
-        <Ticket couponTitleBig={couponTitleBig} />
+        <Coupon couponTitleBig={couponTitleBig} />
       </Box>
       <Typography
         sx={styles.start}

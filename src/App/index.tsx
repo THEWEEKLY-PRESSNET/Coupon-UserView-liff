@@ -1,7 +1,9 @@
 import React, { ReactNode } from "react";
+import { useSelector } from "react-redux";
 
 import Layout from "../components/Layout";
 import Coupons from "../Coupons";
+import type { Root } from "../stores";
 
 const styles = {};
 
@@ -10,11 +12,8 @@ type props = {
 };
 
 const App: React.FC = () => {
-  return (
-    <Layout>
-      <Coupons />
-    </Layout>
-  );
+  const { view } = useSelector((s: Root) => s.topState);
+  return <Layout>{view === "top" && <Coupons />}</Layout>;
 };
 
 export default App;
