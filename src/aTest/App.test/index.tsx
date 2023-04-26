@@ -20,9 +20,7 @@ const mockData: Root = {
     {
       articleId: 1,
       articleTitle:
-        "【移転オープン】店名を「LOCO FOUNDATION」に変更し、くらら隣りにオープン！！",
-      articleText:
-        "東広島市西条昭和町の美容室「LOCOPICARO本店」が移転をして、店名を「LOCO FOUNDATION」に変更して、4月14日にオープンします。新店舗は東広島市西条栄町の東広島市芸術文化ホールくらら隣のビル１階で、 大きなガラス張りでシンプルなデザインの店舗となっています。",
+        "【移転オープン】店名を「LOCO FOUNDATION」に変更し、くらら隣りにオープン！！ 東広島市西条昭和町の美容室「LOCOPICARO本店」が移転をして、店名を「LOCO FOUNDATION」に変更して、4月14日にオープンします。新店舗は東広島市西条栄町の東広島市芸術文化ホールくらら隣のビル１階で、 大きなガラス張りでシンプルなデザインの店舗となっています。新店舗は東広島市西条栄町の東広島市芸術文化ホールくらら隣のビル１階で、 大きなガラス張りでシンプルなデザインの店舗となっています。",
       articleUrl:
         "https://www.higashihiroshima-digital.com/news-230420-lccopicaro/",
       articleImg:
