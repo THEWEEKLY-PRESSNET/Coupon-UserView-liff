@@ -8,6 +8,8 @@ export type Coupon = {
   expired: boolean;
   couponId: number;
   storeId: number;
+  storeImg: string;
+  storeRemark: string;
   couponTitleBig: string;
   couponTitleSmall: string;
   issueStart: string;
@@ -34,6 +36,8 @@ const initialState: Coupon = {
   expired: false,
   couponId: 0,
   storeId: 0,
+  storeImg: "",
+  storeRemark: "",
   couponTitleBig: "",
   couponTitleSmall: "",
   issueStart: "",

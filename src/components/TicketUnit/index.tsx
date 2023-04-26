@@ -170,6 +170,7 @@ const Test: React.FC<Props> = ({
 }) => {
   const startStr = dateTrance(valiedStart);
   const valiedStr = dateTrance(valiedEnd);
+
   return (
     <Box sx={styles.container}>
       <Box className="coupon-ticket" sx={styles.ticket} />

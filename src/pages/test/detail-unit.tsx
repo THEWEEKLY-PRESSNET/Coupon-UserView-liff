@@ -1,5 +1,5 @@
 import React from "react";
-import Test from "../../aTest/index";
+import Test from "../../aTest/DetailUnit.test";
 
 const TestIndex: React.FC = () => {
   return <Test />;

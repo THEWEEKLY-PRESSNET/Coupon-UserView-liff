@@ -22,18 +22,22 @@ const ImgBox: React.FC<props> = ({
   sx,
 }) => {
   return (
-    <Box
-      sx={{
-        className,
-        width,
-        height,
-        backgroundSize: size || "auto",
-        backgroundPosition: position || "center",
-        backgroundImage: `url(${img})`,
-        backgroundRepeat: "no-repeat",
-        ...sx,
-      }}
-    />
+    <>
+      {(img && (
+        <Box
+          sx={{
+            className,
+            width,
+            height,
+            backgroundSize: size || "auto",
+            backgroundPosition: position || "center",
+            backgroundImage: `url(${img})`,
+            backgroundRepeat: "no-repeat",
+            ...sx,
+          }}
+        />
+      )) || <Box sx={{ width, height, bgcolor: "#D9D9D9" }} />}
+    </>
   );
 };
 
