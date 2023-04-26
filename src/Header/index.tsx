@@ -9,7 +9,6 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "space-around",
     width: "100%",
     height: "100%",
     boxSizing: "border-box",
@@ -18,13 +17,14 @@ const styles = {
   },
   titleBox: {
     display: "flex",
-    // flexDirection: "column",
     width: "100%",
   },
   badge: {
     display: "inline-block",
     color: "#FFF",
     bgcolor: "#A64996",
+    fontSize: "10px",
+    lineHeight: "10px",
     px: 0.5,
     mr: 0.5,
   },
@@ -59,10 +59,9 @@ type Props = {
 
 const Header: React.FC = () => {
   const articles = useSelector((s: Root) => s.articles);
-  const { articleTitle, articleText, articleUrl, articleImg } = articles[0] || [
+  const { articleTitle, articleUrl, articleImg } = articles[0] || [
     {
       articleTitle: undefined,
-      articleText: undefined,
       articleUrl: undefined,
       articleImg: undefined,
     },
@@ -74,7 +73,7 @@ const Header: React.FC = () => {
       <Box sx={styles.titleBox}>
         <Typography sx={styles.badge}>NEW</Typography>
         <Typography variant="subtitle" noWrap sx={{ display: "inline-block" }}>
-          {articleTitle || "東広島デジタル新着記事"}
+          東広島デジタル新着記事
         </Typography>
       </Box>
       <Box sx={styles.body}>
@@ -85,7 +84,7 @@ const Header: React.FC = () => {
         </Box>
         <Box sx={styles.article}>
           <Typography variant="note" sx={{ display: "block" }}>
-            {articleText}
+            {articleTitle}
           </Typography>
           <Typography
             component="a"

@@ -138,11 +138,11 @@ const styles = {
     height: "128px",
     // filter: "drop-shadow(0px 4px 4px #404040)",
   },
-  badge: {
-    position: "absolute",
-    top: "8px",
-    left: "3px",
-  },
+  // badge: {
+  //   position: "absolute",
+  //   top: "8px",
+  //   left: "3px",
+  // },
 };
 
 type Props = {
@@ -170,6 +170,7 @@ const Test: React.FC<Props> = ({
 }) => {
   const startStr = dateTrance(valiedStart);
   const valiedStr = dateTrance(valiedEnd);
+
   return (
     <Box sx={styles.container}>
       <Box className="coupon-ticket" sx={styles.ticket} />

@@ -74,10 +74,11 @@ const TestApp: React.FC = () => {
       storeName="みそラーメン東口店"
       valiedStart="20230429"
       valiedEnd="20230505"
-      badgeText={3}
-      favored
-      used
-      isFlag
+      badgeText={5}
+      // favored
+
+      // used
+      // isFlag
     />
   );
 };
