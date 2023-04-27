@@ -101,6 +101,18 @@ const Selects = ({ labels, value, setValue }) => {
   );
 };
 
+// const Checks = ({}) => {
+//   const handleChange = () => {
+
+//   }
+//   return (
+//     <Box>
+
+// somthing.map((s) => <Check />)
+//     </Box>
+//   )
+// }
+
 const Question: React.FC<props> = () => {
   const [gender, setGender] = useState<Gender | null>(null);
   const [age, setAge] = useState<Age | null>(null);
