@@ -101,7 +101,7 @@ const Header: React.FC = () => {
         </Box>
         <Box sx={styles.article}>
           <Typography variant="note" sx={styles.artText}>
-            {`${articleTitle}\t`}
+            {articleTitle}
           </Typography>
           <Typography
             component="a"
