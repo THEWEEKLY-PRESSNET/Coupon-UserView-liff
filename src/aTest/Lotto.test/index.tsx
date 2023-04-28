@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 
-import TestComponent from "../../App";
+import TestComponent from "../../Lotto";
 import { theme } from "../../styles/theme";
 import store from "../../stores";
 import { updateTopState } from "../../stores/topState";

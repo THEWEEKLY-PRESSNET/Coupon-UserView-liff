@@ -18,17 +18,25 @@ const styles = {
   titleBox: {
     display: "flex",
     width: "100%",
+    justfyContent: "center",
   },
   badge: {
     display: "inline-block",
     color: "#FFF",
     bgcolor: "#A64996",
-    fontSize: "10px",
-    lineHeight: "10px",
+    height: "20px",
+    lineHeight: "20px",
     px: 0.5,
     mr: 0.5,
   },
-  title: {},
+  title: {
+    display: "inline-block",
+    height: "20px",
+    lineHeight: "20px",
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#404040",
+  },
   body: {
     display: "flex",
     gap: 1,
@@ -42,12 +50,21 @@ const styles = {
   article: {
     flexGrow: 2,
   },
+  artText: {
+    display: "-webkit-box",
+    "-webkit-box-orient": "vertical",
+    "-webkit-line-clamp": "3",
+    overflow: "hidden",
+  },
   dummy: {
     width: "100%",
     height: "100%",
     bgcolor: "#D9D9D9",
   },
   link: {
+    position: "absolute",
+    right: "10px",
+    bottom: "10px",
     color: "#53A0E0",
   },
 };
@@ -72,7 +89,7 @@ const Header: React.FC = () => {
     <Box className="footernav" sx={styles.container}>
       <Box sx={styles.titleBox}>
         <Typography sx={styles.badge}>NEW</Typography>
-        <Typography variant="subtitle" noWrap sx={{ display: "inline-block" }}>
+        <Typography noWrap sx={styles.title}>
           東広島デジタル新着記事
         </Typography>
       </Box>
@@ -83,7 +100,7 @@ const Header: React.FC = () => {
           )}
         </Box>
         <Box sx={styles.article}>
-          <Typography variant="note" sx={{ display: "block" }}>
+          <Typography variant="note" sx={styles.artText}>
             {articleTitle}
           </Typography>
           <Typography
