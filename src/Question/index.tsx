@@ -4,6 +4,7 @@ import {
   FormControl,
   FormLabel,
   RadioGroup,
+  Checkbox,
   FormControlLabel,
   Radio,
   Typography,
@@ -101,17 +102,48 @@ const Selects = ({ labels, value, setValue }) => {
   );
 };
 
-// const Checks = ({}) => {
-//   const handleChange = () => {
+const Checks = ({ labels, value, setValue }) => {
+  const [check, setCheck] = useState([
+    { key: "gourmet", label: "グルメ", checkbox: "false" },
+    { key: "shoping", label: "ショッピング", checkbox: "false" },
+    { key: "fashion", label: "おしゃれ", checkbox: "false" },
+    { key: "car", label: "車", checkbox: "false" },
+    { key: "health", label: "健康", checkbox: "false" },
+    { key: "living", label: "住まい", checkbox: "false" },
+    { key: "study", label: "習い事（スキルアップ）", checkbox: "false" },
+    { key: "entertainment", label: "エンタメ", checkbox: "false" },
+    { key: "sports", label: "スポーツ", checkbox: "false" },
+    { key: "childcare", label: "子育て", checkbox: "false" },
+    { key: "work", label: "働く", checkbox: "false" },
+    { key: "jobchange", label: "転職", checkbox: "false" },
+    { key: "travel", label: "旅行", checkbox: "false" },
+    { key: "money", label: "マネー", checkbox: "false" },
+  ]);
 
-//   }
-//   return (
-//     <Box>
+  // const falseObjects = check.filter(object => object.checkbox === false);
+  // console.log("falseObjects", falseObjects);
 
-// somthing.map((s) => <Check />)
-//     </Box>
-//   )
-// }
+  // const checkboxValues = check.map((i) => i.checkbox);
+  // console.log("checkboxValues", checkboxValues);
+  
+  const handleChange = (key) => {
+    const checkboxValues = check.map((i) => i.target.checked);
+    console.log("checked", checkboxValues);
+  };
+  return (
+    <Box>
+      {check.map((checkbox) => (
+        <FormControlLabel
+          value={checkbox.key}
+          control={<Checkbox />}
+          label={checkbox.label}
+          onChange={handleChange}
+        />
+      ))
+      }
+    </Box>
+  )
+}
 
 const Question: React.FC<props> = () => {
   const [gender, setGender] = useState<Gender | null>(null);
@@ -150,7 +182,8 @@ const Question: React.FC<props> = () => {
           興味・関心があるジャンル
         </Typography>
         <Box>
-          <Selects labels={interestingLabels} />
+          {/* <Selects labels={interestingLabels} value={interesting} setValue={setInteresting} /> */}
+          <Checks labels={interestingLabels} value={interesting} setValue={setInteresting} />
         </Box>
       </Paper>
     </Box>
