@@ -5,7 +5,7 @@ export type TopState = {
     | "login"
     | "lotted"
     | "stoped"
-    | "lotte"
+    | "lotto"
     | "lose"
     | "win"
     | "coupons"
