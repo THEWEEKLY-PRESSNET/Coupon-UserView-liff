@@ -120,6 +120,10 @@ const Question: React.FC<props> = () => {
   const [interesting, setInteresting] = useState<Interesting | null>(null);
   console.log("gender", gender);
 
+  interestingLabels[0].checkbox = true;
+
+  console.log("inte", interestingLabels);
+
   return (
     <Box sx={styles.container}>
       <Typography sx={styles.capTitle}>アンケート</Typography>
