@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 
-import ImgBox from "../components/ImgBox";
-import type { Root } from "../stores";
+import ImgBox from "../ImgBox";
+import type { Root } from "../../stores";
 
 const styles = {
   container: {
