@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 import Coupon from "../components/DetailUnit";
 import FavoriteBtn from "./FavoriteBtn";
+import ShowBtn from "./ShowBtn";
 import CouponNote from "./CouponNote";
 // import theme from "../styles/theme";
 import type { Root } from "../stores";
@@ -53,6 +54,7 @@ const CouponDetail: React.FC = () => {
         <Coupon />
         <FavoriteBtn />
         <CouponNote />
+        <ShowBtn />
     </>
     // <Box sx={styles.container}>
     //   クーポン詳細
