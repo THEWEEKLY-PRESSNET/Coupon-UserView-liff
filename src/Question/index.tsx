@@ -102,50 +102,98 @@ const Selects = ({ labels, value, setValue }) => {
   );
 };
 
-const checks = [
-  { key: "gourmet", label: "グルメ", checkbox: "false" },
-  { key: "shoping", label: "ショッピング", checkbox: "false" },
-  { key: "fashion", label: "おしゃれ", checkbox: "false" },
-  { key: "car", label: "車", checkbox: "false" },
-  { key: "health", label: "健康", checkbox: "false" },
-  { key: "living", label: "住まい", checkbox: "false" },
-  { key: "study", label: "習い事（スキルアップ）", checkbox: "false" },
-  { key: "entertainment", label: "エンタメ", checkbox: "false" },
-  { key: "sports", label: "スポーツ", checkbox: "false" },
-  { key: "childcare", label: "子育て", checkbox: "false" },
-  { key: "work", label: "働く", checkbox: "false" },
-  { key: "jobchange", label: "転職", checkbox: "false" },
-  { key: "travel", label: "旅行", checkbox: "false" },
-  { key: "money", label: "マネー", checkbox: "false" },
-];
+
+// const falseObjects = check.filter(object => object.checkbox === false);
+// console.log("falseObjects", falseObjects);
+
+// const checkboxValues = check.map((i) => i.checkbox);
+// console.log("checkboxValues", checkboxValues);
+
+
+  // const handleChange = (index) => {
+  //   const newLabels = [...newInterestingLabels]; // 配列を複製する
+  //   newLabels[index].checkbox = "true"; // チェックボックスの値を更新する
+  //   setCheck(newLabels); // 更新した配列をセットする（stateを使う場合）
+  //   console.log("newLabels",newLabels);
+  // };
+
+  // ボタンを表示する部分のコード
+  // {newInterestingLabels.map((label, index) => (
+  //   <button onClick={() => handleButtonClick(index)}>{label.label}</button>
+  // ))}
+
 
 const Checks = ({ labels, value, setValue }) => {
-  const checks = "something";
-  const [check, setCheck] = useState(checks);
+  // const checks = "something";
+  // const [check, setCheck] = useState(checks);
 
-  const checksWithFunc = () => {};
-  const [checkF, setCheckF] = useState(checksWithFunc());
+  // const newInterestingLabels = interestingLabels.map((i) => {
+  //   return {
+  //     ...i, // 既存のプロパティを展開
+  //     checkbox: "false", // 新しいプロパティを追加
+  //   };
+  // });
 
-  // const falseObjects = check.filter(object => object.checkbox === false);
-  // console.log("falseObjects", falseObjects);
+//   interestingLabels[0].checkbox = true;
+ const hoge = interestingLabels.map((i) =>{
+   i.checkbox = true;
+   return i
+  }
+  );
+  console.log("hoge",hoge);
 
-  // const checkboxValues = check.map((i) => i.checkbox);
-  // console.log("checkboxValues", checkboxValues);
+  // console.log("newInteresting-1",interestingLabels)
+  // const hoge = interestingLabels;
+  // hoge.push({checkbox: false});
+  // console.log("newInteresting-2",interestingLabels)
 
-  const handleChange = key => {
-    const checkboxValues = check.map(i => i.target.checked);
-    console.log("checked", checkboxValues);
+  // console.log("newInterestingLabels", newInterestingLabels)
+  // const [check, setCheck] = useState(newInterestingLabels);
+
+
+  // const checksWithFunc = () => {};
+  // const [checkF, setCheckF] = useState(checksWithFunc());
+
+  const newInterestingLabelsFunc = () => {
+    return interestingLabels.map((i) => {
+      return {
+        ...i,
+        checkbox: "false",
+      };
+    });
+  };
+
+  console.log("newInterestingLabelsFunc", newInterestingLabelsFunc());
+  const [checkFunc, setCheckFunc] = useState(newInterestingLabelsFunc());
+
+
+
+  const handleChange = () => {
+    // newInterestingLabels.map((i, index) => {
+    //   if (newInterestingLabels[index].checkbox === "false") {
+    //     newInterestingLabels[index].checkbox = "true" 
+    //   }
+    //   else {
+    //     newInterestingLabels[index].checkbox = "false" 
+    //   }
+    //   console.log("index", newInterestingLabels[index].checkbox)
+    //   // return {
+    //   // 
+    //   // };
+    // });
+    // const checkboxValues = check.map(i => i.target.checked);
+    // console.log("checked", checkboxValues);
   };
   return (
     <Box>
-      {check.map(checkbox => (
+      {/* {check.map(checkbox => (
         <FormControlLabel
           value={checkbox.key}
           control={<Checkbox />}
           label={checkbox.label}
-          onChange={handleChange}
+          onChange={() => handleChange()}
         />
-      ))}
+      ))} */}
     </Box>
   );
 };
