@@ -83,6 +83,7 @@ const interestingLabels = [
 
 const Selects = ({ labels, value, setValue }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("changed");
     setValue((event.target as HTMLInputElement).value);
   };
 
