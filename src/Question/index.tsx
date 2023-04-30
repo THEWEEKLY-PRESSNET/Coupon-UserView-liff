@@ -84,6 +84,7 @@ const interestingLabels = [
 
 const Selects = ({ labels, value, setValue }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("checked1");
     setValue((event.target as HTMLInputElement).value);
   };
 
@@ -103,26 +104,6 @@ const Selects = ({ labels, value, setValue }) => {
 };
 
 
-// const falseObjects = check.filter(object => object.checkbox === false);
-// console.log("falseObjects", falseObjects);
-
-// const checkboxValues = check.map((i) => i.checkbox);
-// console.log("checkboxValues", checkboxValues);
-
-
-  // const handleChange = (index) => {
-  //   const newLabels = [...newInterestingLabels]; // 配列を複製する
-  //   newLabels[index].checkbox = "true"; // チェックボックスの値を更新する
-  //   setCheck(newLabels); // 更新した配列をセットする（stateを使う場合）
-  //   console.log("newLabels",newLabels);
-  // };
-
-  // ボタンを表示する部分のコード
-  // {newInterestingLabels.map((label, index) => (
-  //   <button onClick={() => handleButtonClick(index)}>{label.label}</button>
-  // ))}
-
-
 const Checks = ({ labels, value, setValue }) => {
   // const checks = "something";
   // const [check, setCheck] = useState(checks);
@@ -136,7 +117,7 @@ const Checks = ({ labels, value, setValue }) => {
 
 //   interestingLabels[0].checkbox = true;
  const hoge = interestingLabels.map((i) =>{
-   i.checkbox = true;
+   i.checkbox = false;
    return i
   }
   );
@@ -154,46 +135,33 @@ const Checks = ({ labels, value, setValue }) => {
   // const checksWithFunc = () => {};
   // const [checkF, setCheckF] = useState(checksWithFunc());
 
-  const newInterestingLabelsFunc = () => {
-    return interestingLabels.map((i) => {
-      return {
-        ...i,
-        checkbox: "false",
-      };
-    });
-  };
+  // const newInterestingLabelsFunc = () => {
+  //   return interestingLabels.map((i) => {
+  //     return {
+  //       ...i,
+  //       checkbox: "false",
+  //     };
+  //   });
+  // };
 
-  console.log("newInterestingLabelsFunc", newInterestingLabelsFunc());
-  const [checkFunc, setCheckFunc] = useState(newInterestingLabelsFunc());
+  // console.log("newInterestingLabelsFunc", newInterestingLabelsFunc());
+  // const [checkFunc, setCheckFunc] = useState(newInterestingLabelsFunc());
 
 
 
   const handleChange = () => {
-    // newInterestingLabels.map((i, index) => {
-    //   if (newInterestingLabels[index].checkbox === "false") {
-    //     newInterestingLabels[index].checkbox = "true" 
-    //   }
-    //   else {
-    //     newInterestingLabels[index].checkbox = "false" 
-    //   }
-    //   console.log("index", newInterestingLabels[index].checkbox)
-    //   // return {
-    //   // 
-    //   // };
-    // });
-    // const checkboxValues = check.map(i => i.target.checked);
-    // console.log("checked", checkboxValues);
+
   };
   return (
     <Box>
-      {/* {check.map(checkbox => (
+      {hoge.map(checkbox => (
         <FormControlLabel
           value={checkbox.key}
           control={<Checkbox />}
           label={checkbox.label}
           onChange={() => handleChange()}
         />
-      ))} */}
+      ))}
     </Box>
   );
 };
@@ -205,9 +173,18 @@ const Question: React.FC<props> = () => {
   const [interesting, setInteresting] = useState<Interesting | null>(null);
   console.log("gender", gender);
 
+  const hoge2 = () => {
+  if (gender || age || living || interesting != null) {
+    console.log("checked");
+  }
+  if (gender != null) {
+    console.log("gender-checked");
+  }
+}
+
   return (
     <Box sx={styles.container}>
-      <Typography sx={styles.capTitle}>アンケート</Typography>
+      <Typography sx={styles.capTitle}>アンケート!!!!!</Typography>
       <Paper sx={styles.body}>
         <Typography>
           お友達登録ありがとうございます。
@@ -235,7 +212,7 @@ const Question: React.FC<props> = () => {
           興味・関心があるジャンル
         </Typography>
         <Box>
-          {/* <Selects labels={interestingLabels} value={interesting} setValue={setInteresting} /> */}
+          <Selects labels={interestingLabels} value={interesting} setValue={setInteresting} />
           <Checks
             labels={interestingLabels}
             value={interesting}
