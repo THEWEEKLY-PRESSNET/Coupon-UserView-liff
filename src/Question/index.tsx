@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, useMemo, ReactNode } from "react";
 import {
   Box,
   FormControl,
@@ -9,6 +9,7 @@ import {
   Radio,
   Typography,
   Paper,
+  Button,
 } from "@mui/material";
 
 import type { Gender, Age, Living, Interesting } from "src/stores/question";
@@ -103,7 +104,6 @@ const Selects = ({ labels, value, setValue }) => {
   );
 };
 
-
 const Checks = ({ labels, value, setValue }) => {
   // const checks = "something";
   // const [check, setCheck] = useState(checks);
@@ -115,13 +115,12 @@ const Checks = ({ labels, value, setValue }) => {
   //   };
   // });
 
-//   interestingLabels[0].checkbox = true;
- const hoge = interestingLabels.map((i) =>{
-   i.checkbox = false;
-   return i
-  }
-  );
-  console.log("hoge",hoge);
+  //   interestingLabels[0].checkbox = true;
+  const hoge = interestingLabels.map(i => {
+    i.checkbox = false;
+    return i;
+  });
+  console.log("hoge", hoge);
 
   // console.log("newInteresting-1",interestingLabels)
   // const hoge = interestingLabels;
@@ -130,7 +129,6 @@ const Checks = ({ labels, value, setValue }) => {
 
   // console.log("newInterestingLabels", newInterestingLabels)
   // const [check, setCheck] = useState(newInterestingLabels);
-
 
   // const checksWithFunc = () => {};
   // const [checkF, setCheckF] = useState(checksWithFunc());
@@ -147,11 +145,7 @@ const Checks = ({ labels, value, setValue }) => {
   // console.log("newInterestingLabelsFunc", newInterestingLabelsFunc());
   // const [checkFunc, setCheckFunc] = useState(newInterestingLabelsFunc());
 
-
-
-  const handleChange = () => {
-
-  };
+  const handleChange = () => {};
   return (
     <Box>
       {hoge.map(checkbox => (
@@ -173,14 +167,32 @@ const Question: React.FC<props> = () => {
   const [interesting, setInteresting] = useState<Interesting | null>(null);
   console.log("gender", gender);
 
-  const hoge2 = () => {
-  if (gender || age || living || interesting != null) {
-    console.log("checked");
-  }
-  if (gender != null) {
-    console.log("gender-checked");
-  }
-}
+  const selectChecked = () => {
+    if (gender || age || living || interesting !== null) {
+      console.log("checked");
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const c = gender === null;
+
+  const notChecked = useMemo(() => {
+    if (gender !== null) {
+      return false;
+    }
+    return true;
+  }, [gender]);
+
+  const genderChecked = (() => {
+    if (gender !== null) {
+      console.log("gender-checked");
+      return false;
+    } else {
+      return true;
+    }
+  })();
 
   return (
     <Box sx={styles.container}>
@@ -212,7 +224,11 @@ const Question: React.FC<props> = () => {
           興味・関心があるジャンル
         </Typography>
         <Box>
-          <Selects labels={interestingLabels} value={interesting} setValue={setInteresting} />
+          <Selects
+            labels={interestingLabels}
+            value={interesting}
+            setValue={setInteresting}
+          />
           <Checks
             labels={interestingLabels}
             value={interesting}
@@ -220,6 +236,9 @@ const Question: React.FC<props> = () => {
           />
         </Box>
       </Paper>
+      <Button variant="contained" disabled={gender === null}>
+        ボタン
+      </Button>
     </Box>
   );
 };
