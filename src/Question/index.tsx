@@ -1,4 +1,5 @@
-import React, { useState, useMemo, ReactNode } from "react";
+import React, { useState, useMemo, ReactNode, useReducer, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   FormControl,
@@ -13,6 +14,8 @@ import {
 } from "@mui/material";
 
 import type { Gender, Age, Living, Interesting } from "src/stores/question";
+
+import { updateQuestion } from '../stores/question';
 
 const styles = {
   container: {
@@ -42,7 +45,7 @@ type props = {
 
 const genderLabels = [
   { key: "male", label: "男性" },
-  { key: "femaile", label: "女性" },
+  { key: "female", label: "女性" },
   { key: "others", label: "その他" },
 ];
 const ageLabels = [
@@ -84,10 +87,43 @@ const interestingLabels = [
 ];
 
 const Selects = ({ labels, value, setValue }) => {
+  console.log("value1", value);
+  const dispatch = useDispatch();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("checked1");
+    console.log("event", event);
     setValue((event.target as HTMLInputElement).value);
+    const newValue = event.target.value;
+    // dispatch(
+    //   updateQuestion({
+    //     gender: event.target.value,
+    //     age: event.target.value,
+    //     living: event.target.value,
+    //   })
+    // );
+    if (newValue === "male" || newValue === "female" || newValue === "others") {
+      dispatch(
+        updateQuestion({
+          gender: newValue
+        }),
+      )
+      return
+    }
+    if (newValue === "10s" || newValue === "20s" || newValue === "30s" || newValue === "40s" || newValue === "50s" || newValue === "60s" || newValue === "70s") {
+      dispatch(
+        updateQuestion({
+          age: newValue
+        }),
+      )
+      return
+    }
+    else{
+    dispatch(
+      updateQuestion({
+        living: newValue
+      })
+    )}
   };
+
 
   return (
     <FormControl sx={styles.selects}>
@@ -145,7 +181,8 @@ const Checks = ({ labels, value, setValue }) => {
   // console.log("newInterestingLabelsFunc", newInterestingLabelsFunc());
   // const [checkFunc, setCheckFunc] = useState(newInterestingLabelsFunc());
 
-  const handleChange = () => {};
+  const handleChange = () => {
+  };
   return (
     <Box>
       {hoge.map(checkbox => (
@@ -162,32 +199,35 @@ const Checks = ({ labels, value, setValue }) => {
 
 const Question: React.FC<props> = () => {
   const [gender, setGender] = useState<Gender | null>(null);
+  // const [gender, setGender] = useReducer<Gender | null>(reducer, initialState);
   const [age, setAge] = useState<Age | null>(null);
   const [living, setLiving] = useState<Living | null>(null);
   const [interesting, setInteresting] = useState<Interesting | null>(null);
   console.log("gender", gender);
 
-  const selectChecked = () => {
-    if (gender || age || living || interesting !== null) {
-      console.log("checked");
-      return false;
-    } else {
-      return true;
-    }
-  };
+  const question = useSelector((s) => s.question);
+  console.log("question", question);
+  // const selectChecked = () => {
+  //   if (gender || age || living || interesting !== null) {
+  //     console.log("checked");
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // };
 
-  const c = gender === null;
+  // const c = gender === null;
 
-  const notChecked = useMemo(() => {
-    if (gender !== null) {
-      return false;
-    }
-    return true;
-  }, [gender]);
+  // const notChecked = useMemo(() => {
+  //   if (gender !== null) {
+  //     return false;
+  //   }
+  //   return true;
+  // }, [gender]);
 
-  const genderChecked = (() => {
-    if (gender !== null) {
-      console.log("gender-checked");
+  const allChecked = (() => {
+    if (gender && age && living !== null) {
+      console.log("all-checked");
       return false;
     } else {
       return true;
@@ -196,7 +236,7 @@ const Question: React.FC<props> = () => {
 
   return (
     <Box sx={styles.container}>
-      <Typography sx={styles.capTitle}>アンケート!!!!!</Typography>
+      <Typography sx={styles.capTitle}>アンケートです!!!!!</Typography>
       <Paper sx={styles.body}>
         <Typography>
           お友達登録ありがとうございます。
@@ -224,11 +264,11 @@ const Question: React.FC<props> = () => {
           興味・関心があるジャンル
         </Typography>
         <Box>
-          <Selects
+          {/* <Selects
             labels={interestingLabels}
             value={interesting}
             setValue={setInteresting}
-          />
+          /> */}
           <Checks
             labels={interestingLabels}
             value={interesting}
@@ -236,7 +276,7 @@ const Question: React.FC<props> = () => {
           />
         </Box>
       </Paper>
-      <Button variant="contained" disabled={gender === null}>
+      <Button variant="contained" disabled={allChecked}>
         ボタン
       </Button>
     </Box>
