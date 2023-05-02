@@ -106,15 +106,15 @@ const Selects = ({ labels, value, setValue }) => {
           gender: newValue
         }),
       )
-      return
+      // return
     }
-    if (newValue === "10s" || newValue === "20s" || newValue === "30s" || newValue === "40s" || newValue === "50s" || newValue === "60s" || newValue === "70s") {
+    else if (newValue === "10s" || newValue === "20s" || newValue === "30s" || newValue === "40s" || newValue === "50s" || newValue === "60s" || newValue === "70s") {
       dispatch(
         updateQuestion({
           age: newValue
         }),
       )
-      return
+      // return
     }
     else{
     dispatch(
