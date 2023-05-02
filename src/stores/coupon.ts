@@ -31,6 +31,7 @@ export type Coupon = {
   storeImg: string;
   storeUrl: string;
   couponTitleSmall: string;
+  storeId: number;
 
   issuedCouponId: number;
   userId: number;
@@ -38,7 +39,7 @@ export type Coupon = {
   favorite: boolean;
   expired: boolean;
   couponId: number;
-  storeId: number;
+
   // storeImg: string;
   storeRemark: string;
   // couponTitleBig: string;
