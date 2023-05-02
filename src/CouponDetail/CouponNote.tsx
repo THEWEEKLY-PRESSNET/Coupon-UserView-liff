@@ -6,11 +6,11 @@ const styles = {
     padding: "30px 0",
     maxWidth: "305px",
     margin: "auto",
+    mb: "70px",
   },
   note: {
     display: "block",
     fontSize: "13px",
-    mb: "10px"
   },
   noteSml: {
     fontSize: "12px",

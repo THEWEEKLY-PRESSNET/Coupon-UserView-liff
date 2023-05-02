@@ -7,6 +7,8 @@ const styles = {
   showBtn: {
     color: "#fff",
     bgcolor: "primary.main",
+    position: "fixed",
+    bottom: "0",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
