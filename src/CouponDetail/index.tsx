@@ -48,6 +48,7 @@ const styles = {
 const CouponDetail: React.FC = () => {
   const coupons = useSelector((s: Root) => s.coupons);
   console.log("coupons", coupons);
+
   return (
     <>
       {/* <CouponUnit /> */}
