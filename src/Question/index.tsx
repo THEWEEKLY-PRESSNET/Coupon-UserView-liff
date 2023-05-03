@@ -1,4 +1,10 @@
-import React, { useState, useMemo, ReactNode, useReducer, useEffect } from "react";
+import React, {
+  useState,
+  useMemo,
+  ReactNode,
+  useReducer,
+  useEffect,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -15,7 +21,7 @@ import {
 
 import type { Gender, Age, Living, Interesting } from "src/stores/question";
 
-import { updateQuestion } from '../stores/question';
+import { updateQuestion } from "../stores/question";
 
 const styles = {
   container: {
@@ -95,11 +101,10 @@ const Selects = ({ labels, value, setValue, index }) => {
     const newValue = event.target.value;
     dispatch(
       updateQuestion({
-        [index]: newValue
+        [index]: newValue,
       })
     );
   };
-
 
   return (
     <FormControl sx={styles.selects}>
@@ -116,102 +121,67 @@ const Selects = ({ labels, value, setValue, index }) => {
   );
 };
 
-const Checks = ({ labels, value, setValue }) => {
+const Checks = ({ labels, setValue }) => {
   const [boxChecked, setBoxChecked] = useState(false);
-  console.log("value2", value);
+  // console.log("value2", value);
+  const value = false;
   console.log("labels", labels);
   // console.log("checked", checked);
   const dispatch = useDispatch();
-  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
     console.log("event2", event);
-    setValue((event.target as HTMLInputElement).value);
+    console.log("key tag", index);
+    const newArr = setValue((event.target as HTMLInputElement).value);
     const newValue = event.target.value;
     console.log("newValue", newValue);
     dispatch(
       updateQuestion({
-        [labels]: newValue
+        [labels]: newValue,
       })
-      );
+    );
+  };
 
-    // const checkedItems = labels.filter((value) => {
-    //   return value = checked === checked;
-    // })
-    // console.log("vcheckedItems", checkedItems);
-    const newInterestingLabels = interestingLabels.map(i => {
-      i.checkbox = false;
-      return i
-    });
-    console.log("newInterestingLabels", newInterestingLabels);
-
-  //   const checkA = newInterestingLabels.map(i => {
-  //     if (i.checked) {
-  //       i.checkbox = true;
-  //     }
-  //     else {
-  //       i.checkbox = false;
-  //     }
-  //     return i;
-  //   });
-  // console.log("checkA", checkA);
-
-};
-
-
-
-return (
-  <Box>
-    {interestingLabels.map(checkbox => (
-      <FormControlLabel
-        // value={checkbox.key}
-        // index="interesting"
-        checked={checkbox.checked}
-        label={checkbox.label}
-        control={<Checkbox
-          labels={interestingLabels}
-          value={value}
-          setValue={setValue}
-          onChange={handleChange2}
-          label={checkbox.label}
+  return (
+    <Box>
+      {interestingLabels.map(checkbox => (
+        <FormControlLabel
+          // value={checkbox.key}
+          // index="interesting"
           checked={checkbox.checked}
-          index="interesting"
-        />}
-      />
-    ))}
-  </Box>
-);
+          label={checkbox.label}
+          control={
+            <Checkbox
+              labels={interestingLabels}
+              setValue={setValue}
+              onChange={(e, b) => handleChange2(e, checkbox.key)}
+              label={checkbox.label}
+              checked={checkbox.checked}
+              index="interesting"
+            />
+          }
+        />
+      ))}
+    </Box>
+  );
 };
 
 const Question: React.FC<props> = () => {
   const [gender, setGender] = useState<Gender | null>(null);
   const [age, setAge] = useState<Age | null>(null);
   const [living, setLiving] = useState<Living | null>(null);
-  const [interesting, setInteresting] = useState<Interesting | null>(null);
+  const newInterestingLabels = interestingLabels.map(i => {
+    i.checkbox = false;
+    return i;
+  });
+  const [interesting, setInteresting] = useState<Interesting | null>(
+    newInterestingLabels
+  );
   console.log("gender", gender);
   console.log("interesting", interesting);
 
-  const question = useSelector((s) => s.question);
+  const question = useSelector(s => s.question);
   console.log("question", question);
-
-  //   interestingLabels[0].checkbox = true;
-  // const newInterestingLabels = interestingLabels.map(i => {
-  //   if (i.checked) {
-  //     i.checkbox = true;
-  //   }
-  //   else if(!i.checked){
-  //     i.checkbox = false;
-  //   }
-  //   return i;
-  // });
-  // console.log("newInterestingLabels", newInterestingLabels);
-
-
-  // const c = gender === null;
-  // const notChecked = useMemo(() => {
-  //   if (gender !== null) {
-  //     return false;
-  //   }
-  //   return true;
-  // }, [gender]);
 
   const allChecked = (() => {
     if (gender && age && living && interesting !== null) {
@@ -234,19 +204,34 @@ const Question: React.FC<props> = () => {
           性別
         </Typography>
         <Box>
-          <Selects labels={genderLabels} value={gender} setValue={setGender} index="gender" />
+          <Selects
+            labels={genderLabels}
+            value={gender}
+            setValue={setGender}
+            index="gender"
+          />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
           年代
         </Typography>
         <Box>
-          <Selects labels={ageLabels} value={age} setValue={setAge} index="age" />
+          <Selects
+            labels={ageLabels}
+            value={age}
+            setValue={setAge}
+            index="age"
+          />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
           居住地
         </Typography>
         <Box>
-          <Selects labels={livingLabels} value={living} setValue={setLiving} index="living" />
+          <Selects
+            labels={livingLabels}
+            value={living}
+            setValue={setLiving}
+            index="living"
+          />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
           興味・関心があるジャンル
@@ -254,7 +239,6 @@ const Question: React.FC<props> = () => {
         <Box>
           <Checks
             labels={interestingLabels}
-            value={interesting}
             setValue={setInteresting}
             index="interesting"
           />
