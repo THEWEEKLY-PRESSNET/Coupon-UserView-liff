@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useMemo } from "react";
 import { Box, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
 import Badge from "./Ticket.Badge";
 import Flag from "./Ticket.Flag";
 import Shadow from "./Ticket.Shadow";
-import { dateTrance } from "../../utils/formatter";
+import { dateTrance, strToDate } from "../../utils/formatter";
 
 const styles = {
   container: {
@@ -138,38 +138,48 @@ const styles = {
     height: "128px",
     // filter: "drop-shadow(0px 4px 4px #404040)",
   },
-  // badge: {
-  //   position: "absolute",
-  //   top: "8px",
-  //   left: "3px",
-  // },
+  badge: {
+    position: "absolute",
+    top: "8px",
+    left: "3px",
+  },
 };
 
 type Props = {
   couponTitleBig: string;
   couponTitleSmall: string;
   storeName: string;
-  valiedStart: string;
-  valiedEnd: string;
+  validStart: string;
+  validEnd: string;
   badgeText?: number;
   favored?: boolean;
   used?: boolean;
-  isFlag?: boolean;
 };
 
 const Test: React.FC<Props> = ({
   couponTitleBig,
   couponTitleSmall,
   storeName,
-  valiedStart,
-  valiedEnd,
+  validStart,
+  validEnd,
   badgeText,
   favored,
   used,
-  isFlag,
 }) => {
-  const startStr = dateTrance(valiedStart);
-  const valiedStr = dateTrance(valiedEnd);
+  const startStr = dateTrance(validStart);
+  const validStr = dateTrance(validEnd);
+  console.log("used", used);
+  const isFlag = useMemo(() => {
+    const now = new Date();
+    const past = strToDate(validStart);
+    return now < past;
+  }, [validStart]);
+  const expired = useMemo(() => {
+    const now = new Date();
+    console.log(now);
+    const past = strToDate(validEnd);
+    return now > past;
+  }, [validEnd]);
 
   return (
     <Box sx={styles.container}>
@@ -181,7 +191,7 @@ const Test: React.FC<Props> = ({
       <Typography sx={styles.title}>{couponTitleBig}</Typography>
       <Typography sx={styles.subtitle}>{couponTitleSmall}</Typography>
       <Typography sx={styles.name}>{storeName}</Typography>
-      <Typography sx={styles.limit}>{`有効期限　${valiedStr}まで`}</Typography>
+      <Typography sx={styles.limit}>{`有効期限　${validStr}まで`}</Typography>
       {favored && (
         <Box sx={styles.favor}>
           <StarIcon sx={styles.favorIcon} />
@@ -199,7 +209,8 @@ const Test: React.FC<Props> = ({
           sx={styles.start}
         >{`${startStr}からご利用いただけます。`}</Typography>
       )}
-      {used && <Shadow />}
+      {used && <Shadow text="使用済み" />}
+      {expired && <Shadow text="期限切れ" />}
     </Box>
   );
 };

@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type Ticket = {
+  issuedCouponId: number;
   couponTitleBig: string;
   couponTitleSmall: string;
   storeName: string;
-  valiedStart: string;
-  valiedEnd: string;
+  validStart: string;
+  validEnd: string;
   badgeText?: number;
   favored?: boolean;
   used?: boolean;
@@ -14,9 +15,9 @@ export type Ticket = {
 
 export type Detail = {
   couponTitleBig: string;
-  valiedStart: string;
+  validStart: string;
   storeName: string;
-  valiedEnd: string;
+  validEnd: string;
   couponDescription: string;
   storeImg: string;
   storeUrl: string;
@@ -24,9 +25,9 @@ export type Detail = {
 
 export type Coupon = {
   couponTitleBig: string;
-  valiedStart: string;
+  validStart: string;
   storeName: string;
-  valiedEnd: string;
+  validEnd: string;
   couponDescription: string;
   storeImg: string;
   storeUrl: string;
@@ -46,8 +47,8 @@ export type Coupon = {
   // couponTitleSmall: string;
   issueStart: string;
   issueEnd: string;
-  validStart: string;
-  validEnd: string;
+  // validStart: string;
+  // validEnd: string;
   issueNumber: number;
   issueRatio: number;
   // couponDescription: string;
@@ -68,7 +69,9 @@ const initialState: Coupon = {
   expired: false,
   couponId: 0,
   storeId: 0,
+  storeName: "",
   storeImg: "",
+  storeUrl: "",
   storeRemark: "",
   couponTitleBig: "",
   couponTitleSmall: "",

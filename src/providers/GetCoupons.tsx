@@ -6,11 +6,12 @@ import { updateCoupons } from "../stores/coupons";
 // import { updateSnackBar } from "../../stores/snackBar";
 
 type Params = {
-  userId: number;
+  userId: string;
 };
 
 export const getCoupons = async (params: Params) => {
-  const url = "https://";
+  const url =
+    "https://asia-northeast2-coupon-proj.cloudfunctions.net/Issued-dev";
   const requestParams: typeRequest = {
     url,
     params,
@@ -39,6 +40,7 @@ const GetCoupons: React.FC<Params> = ({ userId }) => {
         // );
       }
     };
+    resolvePromise();
   }, []);
   return <></>;
 };
