@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
-import FvaroiteIcon from "../images/favorite.png"
+import type { Root } from "../stores";
+import { updateTopState } from "../stores/topState";
 
 
 const styles = {
   showBtn: {
     color: "#fff",
     bgcolor: "primary.main",
+    position: "fixed",
+    bottom: "0",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -20,8 +24,20 @@ const styles = {
 
 
 const ShowBtn: React.FC = () => {
+  const topState = useSelector((s: Root) => s.topState);
+  console.log("topState", topState);
+
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(
+      updateTopState({
+        view: "use"
+      })
+    );
+  };
+
   return (
-      <Button sx={styles.showBtn}>クーポンを提示する</Button>
+    <Button sx={styles.showBtn} onClick={handleClick}>クーポンを提示する</Button>
   );
 };
 
