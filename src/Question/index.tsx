@@ -101,7 +101,7 @@ const Selects = ({ labels, value, setValue, index }) => {
     const newValue = event.target.value;
     dispatch(
       updateQuestion({
-        [index]: newValue,
+          [index]: newValue
       })
     );
   };
@@ -121,13 +121,11 @@ const Selects = ({ labels, value, setValue, index }) => {
   );
 };
 
-const Checks = ({ labels, setValue}) => {
+const Checks = ({ labels, setValue }) => {
   const question = useSelector(s => s.question);
   console.log("question", question);
-  // console.log("value2", value);
   const value = false;
   console.log("labels", labels);
-  // console.log("checked", checked);
   const dispatch = useDispatch();
 
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
@@ -139,7 +137,9 @@ const Checks = ({ labels, setValue}) => {
     console.log("newValue", newValue);
     dispatch(
       updateQuestion({
-        [index]: newValue,
+        interesting:{
+          [index]: newValue,
+        }
       })
     );
   };
@@ -155,7 +155,7 @@ const Checks = ({ labels, setValue}) => {
           control={
             <Checkbox
               onChange={(e, b) => handleChange2(e, checkbox.key)}
-              // checked={checkbox.checked}
+            // checked={checkbox.checked}
             />
           }
         />
@@ -238,7 +238,7 @@ const Question: React.FC<props> = () => {
           <Checks
             // labels={interestingLabels}
             setValue={setInteresting}
-            // index="interesting"
+          // index="interesting"
           />
         </Box>
       </Paper>
