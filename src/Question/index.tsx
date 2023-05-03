@@ -83,6 +83,7 @@ const interestingLabels = [
 
 const Selects = ({ labels, value, setValue }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("changed");
     setValue((event.target as HTMLInputElement).value);
   };
 
@@ -119,6 +120,10 @@ const Question: React.FC<props> = () => {
   const [living, setLiving] = useState<Living | null>(null);
   const [interesting, setInteresting] = useState<Interesting | null>(null);
   console.log("gender", gender);
+
+  interestingLabels[0].checkbox = true;
+
+  console.log("inte", interestingLabels);
 
   return (
     <Box sx={styles.container}>

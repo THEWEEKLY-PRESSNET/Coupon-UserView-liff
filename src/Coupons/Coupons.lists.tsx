@@ -12,8 +12,7 @@ const styles = {
     flexDirection: "column",
     // justifyContent: "center",
     alignItems: "center",
-    // pt: 4,
-    px: "auto",
+    width: "100%",
   },
   title: {
     position: "fixed",
@@ -47,12 +46,13 @@ type Props = {
 
 const Test: React.FC<Props> = ({ coupons }) => {
   return (
-    <Box sx={styles.container}>
+    <Box className="coupons-list" sx={styles.container}>
       <Typography sx={styles.title}>お持ちのクーポン一覧</Typography>
       <Box sx={styles.coupons}>
-        {coupons.map(coupon => (
-          <CouponUnit {...coupon} />
-        ))}
+        {coupons.map(coupon => {
+          // console.log("co", coupon);
+          return <CouponUnit {...coupon} key={coupon.issuedCouponId} />;
+        })}
       </Box>
     </Box>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { Provider, useSelector } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 
+import GetCoupons from "../providers/GetCoupons";
 import Comp from "../App";
 import store from "../stores";
 import { theme } from "../styles/theme";
@@ -18,6 +19,7 @@ const Test: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
+        <GetCoupons userId="test" />
         <TestComponent />
       </Provider>
     </ThemeProvider>
