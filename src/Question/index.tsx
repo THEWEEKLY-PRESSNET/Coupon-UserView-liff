@@ -121,8 +121,9 @@ const Selects = ({ labels, value, setValue, index }) => {
   );
 };
 
-const Checks = ({ labels, setValue }) => {
-  const [boxChecked, setBoxChecked] = useState(false);
+const Checks = ({ labels, setValue}) => {
+  const question = useSelector(s => s.question);
+  console.log("question", question);
   // console.log("value2", value);
   const value = false;
   console.log("labels", labels);
@@ -133,11 +134,12 @@ const Checks = ({ labels, setValue }) => {
     console.log("event2", event);
     console.log("key tag", index);
     const newArr = setValue((event.target as HTMLInputElement).value);
-    const newValue = event.target.value;
+    console.log("newArr", newArr);
+    const newValue = event.target.checked;
     console.log("newValue", newValue);
     dispatch(
       updateQuestion({
-        [labels]: newValue,
+        [index]: newValue,
       })
     );
   };
@@ -148,16 +150,12 @@ const Checks = ({ labels, setValue }) => {
         <FormControlLabel
           // value={checkbox.key}
           // index="interesting"
-          checked={checkbox.checked}
+          // ラベルの文字
           label={checkbox.label}
           control={
             <Checkbox
-              labels={interestingLabels}
-              setValue={setValue}
               onChange={(e, b) => handleChange2(e, checkbox.key)}
-              label={checkbox.label}
-              checked={checkbox.checked}
-              index="interesting"
+              // checked={checkbox.checked}
             />
           }
         />
@@ -178,7 +176,7 @@ const Question: React.FC<props> = () => {
     newInterestingLabels
   );
   console.log("gender", gender);
-  console.log("interesting", interesting);
+  console.log("interesting1", interesting);
 
   const question = useSelector(s => s.question);
   console.log("question", question);
@@ -238,9 +236,9 @@ const Question: React.FC<props> = () => {
         </Typography>
         <Box>
           <Checks
-            labels={interestingLabels}
+            // labels={interestingLabels}
             setValue={setInteresting}
-            index="interesting"
+            // index="interesting"
           />
         </Box>
       </Paper>
