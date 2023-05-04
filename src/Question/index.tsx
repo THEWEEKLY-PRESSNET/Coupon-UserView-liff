@@ -131,7 +131,7 @@ const Checks = ({ labels, setValue }) => {
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
     console.log("event2", event);
     console.log("key tag", index);
-    const newArr = setValue((event.target as HTMLInputElement).value);
+    const newArr = setValue((event.target as HTMLInputElement).checked);
     console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
