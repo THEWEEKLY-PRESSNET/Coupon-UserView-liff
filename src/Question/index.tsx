@@ -135,6 +135,47 @@ const Checks = ({ labels, setValue }) => {
     console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
+    
+
+    let hoge = 4
+    const fuga = 2
+
+    const hoge2 = hoge
+
+    const hoge3 = Number(hoge)
+    console.log(hoge3)
+    hoge = 3
+
+    const hoge4 = Number(hoge)
+    console.log(hoge4)
+
+    const res1 = hoge + fuga
+    const res2  = 4 
+
+
+    const answer = res == res2  => true
+    const answer2 = res === res2 => false
+
+
+    const hoge = ["a", {"b": 4}]
+    hoge[1] === {"b": 4}
+
+    const obj = {
+      key: "val1",
+      high: {
+        highkey: "val2"
+      }
+    }
+
+    obj.high.highkey = "val"
+    obj.high === {
+
+    }
+
+    const num = 2
+    const str = "2"
+
+
     dispatch(
       updateQuestion({
         interesting:{
