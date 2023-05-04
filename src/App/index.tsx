@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import GetCoupons from "../providers/GetCoupons";
 import Layout from "../components/Layout";
 import Coupons from "../Coupons";
+import Detail from "../CouponDetail";
 import type { Root } from "../stores";
 
 const styles = {};
@@ -16,7 +17,10 @@ const App: React.FC = () => {
   const { view } = useSelector((s: Root) => s.topState);
   return (
     <>
-      <Layout>{view === "top" && <Coupons />}</Layout>
+      <Layout>
+        {view === "top" && <Coupons />}
+        {view === "detail" && <Detail />}
+      </Layout>
     </>
   );
 };

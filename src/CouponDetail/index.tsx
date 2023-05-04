@@ -2,21 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 
-import Coupon from "../components/DetailUnit";
+import Detail from "../components/DetailUnit";
 import FavoriteBtn from "./FavoriteBtn";
 import ShowBtn from "./ShowBtn";
 import CouponNote from "./CouponNote";
-// import theme from "../styles/theme";
 import type { Root } from "../stores";
-// import Cou from "src/stores/coupon";
 
 const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
     alignItems: "center",
-    // pt: 4,
     px: "auto",
   },
   title: {
@@ -46,16 +42,15 @@ const styles = {
 };
 
 const CouponDetail: React.FC = () => {
-  const coupons = useSelector((s: Root) => s.coupons);
-  console.log("coupons", coupons);
+  const coupon = useSelector((s: Root) => s.coupon);
+  console.log("coupon", coupon);
 
   return (
     <>
-      {/* <CouponUnit /> */}
-        <Coupon />
-        <FavoriteBtn />
-        <CouponNote />
-        <ShowBtn />
+      <Detail {...coupon} />
+      <FavoriteBtn />
+      <CouponNote />
+      <ShowBtn />
     </>
     // <Box sx={styles.container}>
     //   クーポン詳細

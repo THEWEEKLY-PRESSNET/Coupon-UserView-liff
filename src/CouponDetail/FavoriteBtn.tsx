@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback, useReducer } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Box } from "@mui/material";
-import FavoriteIcon from "../images/favorite.png"
-import FavoriteIconBefore from "../images/favoriteBefore.png"
+import FavoriteIcon from "../images/favorite.png";
+import FavoriteIconBefore from "../images/favoriteBefore.png";
 import { updateCoupon } from "../stores/coupon";
 import type { Root } from "../stores";
-
 
 const styles = {
   btnWrapper: {
@@ -46,16 +45,16 @@ const styles = {
   },
   iconImg: {
     width: "12px",
-    height: "12px"
-  }
+    height: "12px",
+  },
 };
-
 
 const FavoriteBtn: React.FC = () => {
   const coupon = useSelector((s: Root) => s.coupon);
-  console.log("coupons", coupon);
+  // console.log("coupons", coupon);
 
   const dispatch = useDispatch();
+  const favorite = true;
 
   const handleClick = () => {
     if (!coupon.favorite) {
@@ -64,20 +63,26 @@ const FavoriteBtn: React.FC = () => {
           favorite: true,
         })
       );
-      return
-    }
-    else {
+      return;
+    } else {
       dispatch(
         updateCoupon({
           favorite: false,
         })
       );
     }
-  }
+  };
   return (
     <Box sx={styles.btnWrapper}>
-      <Button sx={!coupon.favorite ? styles.favoriteBtnBefore : styles.favoriteBtn} onClick={handleClick}>
-        <img style={styles.iconImg} src={!coupon.favorite ? FavoriteIconBefore : FavoriteIcon} alt="" />
+      <Button
+        variant={coupon.favorite ? "contained" : "outlined"}
+        onClick={handleClick}
+      >
+        <img
+          style={styles.iconImg}
+          src={!coupon.favorite ? FavoriteIconBefore : FavoriteIcon}
+          alt=""
+        />
         お気に入り
       </Button>
     </Box>
@@ -85,3 +90,4 @@ const FavoriteBtn: React.FC = () => {
 };
 
 export default FavoriteBtn;
+// sx={!coupon.favorite ? styles.favoriteBtnBefore : styles.favoriteBtn}

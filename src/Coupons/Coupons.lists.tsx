@@ -1,10 +1,11 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 
 import CouponUnit from "../components/TicketUnit";
 import type { Root } from "../stores";
-import type { Ticket } from "../stores/coupon";
+import { Ticket, updateCoupon } from "../stores/coupon";
+import { updateTopState } from "../stores/topState";
 
 const styles = {
   container: {
@@ -45,13 +46,29 @@ type Props = {
 };
 
 const Test: React.FC<Props> = ({ coupons }) => {
+  const dispatch = useDispatch();
+  const handleClick = useCallback(coupon => {
+    dispatch(updateCoupon({ ...coupon }));
+    dispatch(
+      updateTopState({
+        view: "detail",
+      })
+    );
+  }, []);
+
   return (
     <Box className="coupons-list" sx={styles.container}>
       <Typography sx={styles.title}>お持ちのクーポン一覧</Typography>
       <Box sx={styles.coupons}>
         {coupons.map(coupon => {
           // console.log("co", coupon);
-          return <CouponUnit {...coupon} key={coupon.issuedCouponId} />;
+          return (
+            <CouponUnit
+              {...coupon}
+              handleClick={() => handleClick(coupon)}
+              key={coupon.issuedCouponId}
+            />
+          );
         })}
       </Box>
     </Box>
