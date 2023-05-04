@@ -184,7 +184,10 @@ const Test: React.FC<Props> = ({
   }, [validEnd]);
 
   return (
-    <Box onClick={handleClick} sx={styles.container}>
+    <Box
+      onClick={used || expired ? undefined : handleClick}
+      sx={styles.container}
+    >
       <Box className="coupon-ticket" sx={styles.ticket} />
       <Box sx={styles.ellipseR} />
       <Box sx={styles.ellipseL} />
