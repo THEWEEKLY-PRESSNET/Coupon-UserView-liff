@@ -144,6 +144,8 @@ const Checks = ({ labels, setValue }) => {
     );
   };
 
+  // テスト
+
   return (
     <Box>
       {interestingLabels.map(checkbox => (
