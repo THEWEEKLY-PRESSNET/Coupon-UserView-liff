@@ -60,15 +60,15 @@ const styles = {
 
 const Test: React.FC<Detail> = ({
   couponTitleBig,
-  valiedStart,
+  validStart,
   storeName,
-  valiedEnd,
+  validEnd,
   couponDescription,
   storeImg,
   storeUrl,
 }) => {
-  const startStr = dateTrance(valiedStart);
-  const valiedStr = dateTrance(valiedEnd);
+  const startStr = dateTrance(validStart);
+  const valiedStr = dateTrance(validEnd);
 
   return (
     <Box sx={styles.container}>
@@ -84,7 +84,7 @@ const Test: React.FC<Detail> = ({
         {couponDescription || "description"}
       </Typography>
       <Box>
-        <ImgBox img={storeImg} width={100} height={100} />
+        <ImgBox img={storeImg} width={100} height={100} size="contain" />
       </Box>
       <Typography
         component="a"
