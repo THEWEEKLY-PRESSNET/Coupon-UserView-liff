@@ -146,6 +146,7 @@ const styles = {
 };
 
 type Props = {
+  handleClick: (coupon: any) => void;
   couponTitleBig: string;
   couponTitleSmall: string;
   storeName: string;
@@ -157,6 +158,7 @@ type Props = {
 };
 
 const Test: React.FC<Props> = ({
+  handleClick,
   couponTitleBig,
   couponTitleSmall,
   storeName,
@@ -182,7 +184,10 @@ const Test: React.FC<Props> = ({
   }, [validEnd]);
 
   return (
-    <Box sx={styles.container}>
+    <Box
+      onClick={used || expired ? undefined : handleClick}
+      sx={styles.container}
+    >
       <Box className="coupon-ticket" sx={styles.ticket} />
       <Box sx={styles.ellipseR} />
       <Box sx={styles.ellipseL} />
