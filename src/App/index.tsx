@@ -5,6 +5,8 @@ import GetCoupons from "../providers/GetCoupons";
 import Layout from "../components/Layout";
 import Coupons from "../Coupons";
 import Detail from "../CouponDetail";
+import CouponUse from "../CouponUse";
+import Modal from "../Modal";
 import type { Root } from "../stores";
 
 const styles = {};
@@ -20,7 +22,9 @@ const App: React.FC = () => {
       <Layout>
         {view === "top" && <Coupons />}
         {view === "detail" && <Detail />}
+        {view === "use" && <CouponUse />}
       </Layout>
+      <Modal />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 
 import CouponUnit from "../components/TicketUnit";
 import type { Root } from "../stores";
@@ -15,10 +15,15 @@ const styles = {
     alignItems: "center",
     width: "100%",
   },
-  title: {
+  titleBody: {
     position: "fixed",
     width: "100%",
     maxWidth: "600px",
+    pb: 2,
+    zIndex: 5,
+    borderRadius: 0,
+  },
+  title: {
     textAlign: "center",
     fontSize: "12px",
     fontWeight: 600,
@@ -36,7 +41,7 @@ const styles = {
     width: "100%",
     boxSizing: "border-box",
     p: "10px",
-    mt: 5,
+    mt: 7,
     mb: 10,
   },
 };
@@ -58,7 +63,9 @@ const Test: React.FC<Props> = ({ coupons }) => {
 
   return (
     <Box className="coupons-list" sx={styles.container}>
-      <Typography sx={styles.title}>お持ちのクーポン一覧</Typography>
+      <Paper elevation={2} sx={styles.titleBody}>
+        <Typography sx={styles.title}>お持ちのクーポン一覧</Typography>
+      </Paper>
       <Box sx={styles.coupons}>
         {coupons.map(coupon => {
           // console.log("co", coupon);

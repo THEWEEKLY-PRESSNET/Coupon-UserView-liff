@@ -21,6 +21,8 @@ export type Detail = {
   couponDescription: string;
   storeImg: string;
   storeUrl: string;
+  red: boolean;
+  hide: boolean;
 };
 
 export type Coupon = {
