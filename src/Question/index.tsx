@@ -127,7 +127,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
   const question = useSelector(s => s.question);
   console.log("question", question);
   const value = false;
-  console.log("labels", labels);
+  // console.log("labels", labels);
   const dispatch = useDispatch();
   const [newInteresting, setNI] = useState([
     // { key: "gourmet", label: "グルメ" },
@@ -135,6 +135,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // { key: "fashion", label: "おしゃれ" },
     // { key: "car", label: "車" },
   ]);
+  console.log("newInteresting2", newInteresting);
   // useEffect(() => {
   //   dispatch(updateQuestion({ interesting: newInteresting }));
   // }, []);
@@ -147,35 +148,25 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     const newValue = event.target.checked;
     console.log("newValue", newValue);
     const newArr = [...newInteresting];
-
+    console.log("newArr", newArr);
     const label = interestingLabels.filter(o => {
       return o.key === index;
     })[0].label;
-    console.log("label", label);
+    //クリックされたオブジェクトのlabelのファッションなど
+    console.log("label3", label);
 
     //   add obj
     if (event.target.checked) {
-      newArr.push({ key: index });
+      // newArr.push({ key: index });
+      newArr.push({ key: index, label: label });
+      setNI(newArr)
     } else {
-      newArr.pop({ key: "gourmet", label: "グルメ" });
+      // newArr.pop({ key: "gourmet", label: "グルメ" });
+      newArr.pop({ key: index, label: label });
+      setNI(newArr)
     }
 
     console.log("newArr", newArr);
-
-    dispatch(
-      updateQuestion({
-        // interesting: [newInterestingLabels[index]: newValue]
-        interesting: { [index]: newValue },
-      })
-      // updateQuestion({
-      //   interesting: labels.reduce((result, index) => {
-      //     return {
-      //       ...result,
-      //       [index]: newValue
-      //     };
-      //   }, {})
-      // })
-    );
 
     // let hoge = 4
     // const fuga = 2
@@ -213,6 +204,15 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // const num = 2
     // const str = "2"
   };
+
+  useEffect(() => {
+    dispatch(
+      updateQuestion({
+        // interesting: { [index]: newValue },
+        interesting: newInteresting,
+      })
+    );
+  }, [newInteresting]);
 
   return (
     <Box>
