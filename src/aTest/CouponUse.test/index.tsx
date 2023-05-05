@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 
-import TestComponent from "../../App";
+import TestComponent from "../../CouponUse";
+import Modal from "../../Modal";
 import { theme } from "../../styles/theme";
 import store from "../../stores";
 
@@ -55,7 +56,12 @@ const TestApp: React.FC = () => {
   //   };
   //   setTopState();
   // }, []);
-  return <TestComponent />;
+  return (
+    <>
+      <Modal />
+      <TestComponent />
+    </>
+  )
 };
 
 const Test: React.FC = () => {
