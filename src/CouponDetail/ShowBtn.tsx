@@ -26,9 +26,11 @@ const styles = {
 const ShowBtn: React.FC = () => {
   const topState = useSelector((s: Root) => s.topState);
   console.log("topState", topState);
-
+  let topStateButton = true;
   const dispatch = useDispatch();
+
   const handleClick = () => {
+   topStateButton = false;
     dispatch(
       updateTopState({
         view: "use"
@@ -37,7 +39,7 @@ const ShowBtn: React.FC = () => {
   };
 
   return (
-    <Button sx={styles.showBtn} onClick={handleClick}>クーポンを提示する</Button>
+    <Button sx={styles.showBtn} variant={topStateButton ? "contained" : "outlined"} onClick={handleClick}>クーポンを提示する</Button>
   );
 };
 

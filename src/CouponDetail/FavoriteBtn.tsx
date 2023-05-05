@@ -26,6 +26,9 @@ const styles = {
     borderRadius: "30px",
     whiteSpace: "nowrap",
     margin: "auto",
+    "&:hover":{
+      opacity: "1"
+    }
   },
   favoriteBtn: {
     color: "#fff",
@@ -42,6 +45,10 @@ const styles = {
     borderRadius: "30px",
     whiteSpace: "nowrap",
     margin: "auto",
+    "&:hover":{
+      color: "#fff",
+      bgcolor: "accent.p",
+    }
   },
   iconImg: {
     width: "12px",
@@ -76,6 +83,8 @@ const FavoriteBtn: React.FC = () => {
     <Box sx={styles.btnWrapper}>
       <Button
         variant={coupon.favorite ? "contained" : "outlined"}
+        sx={!coupon.favorite ? styles.favoriteBtnBefore : styles.favoriteBtn}
+        color="inherit"
         onClick={handleClick}
       >
         <img
@@ -90,4 +99,3 @@ const FavoriteBtn: React.FC = () => {
 };
 
 export default FavoriteBtn;
-// sx={!coupon.favorite ? styles.favoriteBtnBefore : styles.favoriteBtn}
