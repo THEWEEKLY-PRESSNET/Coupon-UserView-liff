@@ -7,7 +7,7 @@ import { useSpring, animated } from "@react-spring/web";
 import WinCase from "./WinCase";
 import theme from "../styles/theme";
 import type { Root } from "../stores";
-import covor from "../images/start.png";
+import covor from "../images/start-dev.png";
 import video from "../images/gsample.mp4";
 import "../styles/index.scss";
 import { delay } from "@reduxjs/toolkit/dist/utils";

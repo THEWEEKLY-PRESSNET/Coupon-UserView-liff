@@ -12,7 +12,7 @@ import type { Root } from "../../stores";
 
 const mockData: Root = {
   topState: {
-    view: "top",
+    view: "lotto",
     isStop: false,
     lottered: false,
   },
@@ -63,6 +63,7 @@ const TestApp: React.FC = () => {
 };
 
 const Test: React.FC = () => {
+  console.log("lotto test");
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
