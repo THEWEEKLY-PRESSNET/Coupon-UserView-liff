@@ -30,13 +30,20 @@ type Props = {
 };
 
 const ModalIndex: React.FC<Props> = ({ setOpen }) => {
-  const handleClose = () => {};
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Box sx={styles.container}>
       <Typography variant="subtitle">クーポンを使用しました！</Typography>
       <Box sx={styles.buttonBox}>
-        <Button color="primary" variant="contained" sx={styles.button}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={handleClose}
+          sx={styles.button}
+        >
           OK
         </Button>
       </Box>
