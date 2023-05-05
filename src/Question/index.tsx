@@ -45,6 +45,8 @@ const styles = {
   },
 };
 
+// てすと
+
 type props = {
   children: ReactNode;
 };
@@ -190,8 +192,6 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // const str = "2"
 
   };
-
-  // テスト
 
   return (
     <Box>
