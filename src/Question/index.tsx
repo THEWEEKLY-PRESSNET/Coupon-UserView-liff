@@ -103,7 +103,7 @@ const Selects = ({ labels, value, setValue, index }) => {
     const newValue = event.target.value;
     dispatch(
       updateQuestion({
-        [index]: newValue
+        [index]: newValue,
       })
     );
   };
@@ -129,19 +129,43 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
   const value = false;
   console.log("labels", labels);
   const dispatch = useDispatch();
+  const [newInteresting, setNI] = useState([
+    // { key: "gourmet", label: "グルメ" },
+    // { key: "shoping", label: "ショッピング" },
+    // { key: "fashion", label: "おしゃれ" },
+    // { key: "car", label: "車" },
+  ]);
+  // useEffect(() => {
+  //   dispatch(updateQuestion({ interesting: newInteresting }));
+  // }, []);
 
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
     console.log("event2", event);
     console.log("key tag", index);
-    const newArr = setValue((event.target as HTMLInputElement).checked);
-    console.log("newArr", newArr);
+    // const newArr = setValue((event.target as HTMLInputElement).checked);
+    // console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
+    const newArr = [...newInteresting];
+
+    const label = interestingLabels.filter(o => {
+      return o.key === index;
+    })[0].label;
+    console.log("label", label);
+
+    //   add obj
+    if (event.target.checked) {
+      newArr.push({ key: index });
+    } else {
+      newArr.pop({ key: "gourmet", label: "グルメ" });
+    }
+
+    console.log("newArr", newArr);
 
     dispatch(
       updateQuestion({
         // interesting: [newInterestingLabels[index]: newValue]
-        interesting: { [index]: newValue, }
+        interesting: { [index]: newValue },
       })
       // updateQuestion({
       //   interesting: labels.reduce((result, index) => {
@@ -166,12 +190,10 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // console.log(hoge4)
 
     // const res1 = hoge + fuga
-    // const res2  = 4 
-
+    // const res2  = 4
 
     // const answer = res == res2  => true
     // const answer2 = res === res2 => false
-
 
     // const hoge = ["a", {"b": 4}]
     // hoge[1] === {"b": 4}
@@ -190,7 +212,6 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
 
     // const num = 2
     // const str = "2"
-
   };
 
   return (
@@ -204,7 +225,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
           control={
             <Checkbox
               onChange={(e, b) => handleChange2(e, checkbox.key)}
-            // checked={checkbox.checked}
+              // checked={checkbox.checked}
             />
           }
         />
@@ -287,7 +308,7 @@ const Question: React.FC<props> = () => {
           <Checks
             labels={newInterestingLabels}
             setValue={setInteresting}
-          // index="interesting"
+            // index="interesting"
           />
         </Box>
       </Paper>
