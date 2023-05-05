@@ -101,7 +101,7 @@ const Selects = ({ labels, value, setValue, index }) => {
     const newValue = event.target.value;
     dispatch(
       updateQuestion({
-          [index]: newValue
+        [index]: newValue
       })
     );
   };
@@ -121,7 +121,7 @@ const Selects = ({ labels, value, setValue, index }) => {
   );
 };
 
-const Checks = ({ labels, setValue }) => {
+const Checks = ({ labels, setValue, newInterestingLabels }) => {
   const question = useSelector(s => s.question);
   console.log("question", question);
   const value = false;
@@ -135,54 +135,60 @@ const Checks = ({ labels, setValue }) => {
     console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
-    
-
-    let hoge = 4
-    const fuga = 2
-
-    const hoge2 = hoge
-
-    const hoge3 = Number(hoge)
-    console.log(hoge3)
-    hoge = 3
-
-    const hoge4 = Number(hoge)
-    console.log(hoge4)
-
-    const res1 = hoge + fuga
-    const res2  = 4 
-
-
-    const answer = res == res2  => true
-    const answer2 = res === res2 => false
-
-
-    const hoge = ["a", {"b": 4}]
-    hoge[1] === {"b": 4}
-
-    const obj = {
-      key: "val1",
-      high: {
-        highkey: "val2"
-      }
-    }
-
-    obj.high.highkey = "val"
-    obj.high === {
-
-    }
-
-    const num = 2
-    const str = "2"
-
 
     dispatch(
       updateQuestion({
-        interesting:{
-          [index]: newValue,
-        }
+        // interesting: [newInterestingLabels[index]: newValue]
+        interesting: { [index]: newValue, }
       })
+      // updateQuestion({
+      //   interesting: labels.reduce((result, index) => {
+      //     return {
+      //       ...result,
+      //       [index]: newValue
+      //     };
+      //   }, {})
+      // })
     );
+
+    // let hoge = 4
+    // const fuga = 2
+
+    // const hoge2 = hoge
+
+    // const hoge3 = Number(hoge)
+    // console.log(hoge3)
+    // hoge = 3
+
+    // const hoge4 = Number(hoge)
+    // console.log(hoge4)
+
+    // const res1 = hoge + fuga
+    // const res2  = 4 
+
+
+    // const answer = res == res2  => true
+    // const answer2 = res === res2 => false
+
+
+    // const hoge = ["a", {"b": 4}]
+    // hoge[1] === {"b": 4}
+
+    // const obj = {
+    //   key: "val1",
+    //   high: {
+    //     highkey: "val2"
+    //   }
+    // }
+
+    // obj.high.highkey = "val"
+    // obj.high === {
+
+    // }
+
+    // const num = 2
+    // const str = "2"
+
   };
 
   // テスト
@@ -279,7 +285,7 @@ const Question: React.FC<props> = () => {
         </Typography>
         <Box>
           <Checks
-            // labels={interestingLabels}
+            labels={newInterestingLabels}
             setValue={setInteresting}
           // index="interesting"
           />
