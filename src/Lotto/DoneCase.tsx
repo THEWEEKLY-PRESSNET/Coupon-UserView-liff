@@ -50,7 +50,7 @@ const WinCase: React.FC = () => {
   const { opacity } = springValue;
 
   return (
-    <Box className="lotto-win" sx={styles.body}>
+    <Box className="lotto-next" sx={styles.body}>
       <animated.div
         style={{
           opacity,
@@ -58,7 +58,7 @@ const WinCase: React.FC = () => {
         }}
       >
         <StaticImage
-          src="../images/win.png"
+          src="../images/next-dev.png"
           loading="eager"
           width={600}
           quality={95}

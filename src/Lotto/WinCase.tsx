@@ -52,7 +52,7 @@ const WinCase: React.FC = () => {
         }}
       >
         <StaticImage
-          src="../images/win.png"
+          src="../images/win-dev.png"
           loading="eager"
           width={600}
           quality={95}

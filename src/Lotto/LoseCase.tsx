@@ -59,7 +59,7 @@ const LoseCase: React.FC = () => {
         }}
       >
         <StaticImage
-          src="../images/lose.png"
+          src="../images/lose-dev.png"
           loading="eager"
           width={600}
           quality={95}
