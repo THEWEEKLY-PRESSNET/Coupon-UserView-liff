@@ -30,7 +30,6 @@ const ModalUse: React.FC = () => {
   const { body, isModal } = useSelector((s: Root) => s.modal);
   // console.log("body", "isModal", body, isModal);
   const dispatch = useDispatch();
-  console.log("open", open);
   const setOpen = () => {
     dispatch(
       updateModal({
