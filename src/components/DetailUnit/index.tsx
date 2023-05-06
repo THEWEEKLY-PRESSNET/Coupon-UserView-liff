@@ -74,16 +74,23 @@ const Test: React.FC<Detail> = ({
   storeImg,
   storeUrl,
   red,
-  hide
+  hide,
 }) => {
   const startStr = dateTrance(validStart);
   const valiedStr = dateTrance(validEnd);
+
   return (
     <Box sx={styles.container}>
       <Box sx={styles.ticket}>
         <Coupon couponTitleBig={couponTitleBig} />
       </Box>
-      {hide ? "" : <Typography sx={styles.start} >{`${startStr}からご利用いただけます。`}</Typography> }
+      {hide ? (
+        ""
+      ) : (
+        <Typography
+          sx={styles.start}
+        >{`${startStr}からご利用いただけます。`}</Typography>
+      )}
       <Typography sx={styles.store}>{storeName || "description"}</Typography>
       {red ? (
         <Typography
