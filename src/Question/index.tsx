@@ -126,19 +126,17 @@ const Selects = ({ labels, value, setValue, index }) => {
 const Checks = ({ labels, setValue, newInterestingLabels }) => {
   const question = useSelector(s => s.question);
   console.log("question", question);
+  const questionInteresting = question.interesting;
+  console.log("questionInteresting", questionInteresting);
   const value = false;
-  // console.log("labels", labels);
   const dispatch = useDispatch();
-  const [newInteresting, setNI] = useState([
-    // { key: "gourmet", label: "グルメ" },
-    // { key: "shoping", label: "ショッピング" },
-    // { key: "fashion", label: "おしゃれ" },
-    // { key: "car", label: "車" },
-  ]);
-  console.log("newInteresting2", newInteresting);
-  // useEffect(() => {
-  //   dispatch(updateQuestion({ interesting: newInteresting }));
-  // }, []);
+  // const [newInteresting, setNI] = useState([
+  //   // { key: "gourmet", label: "グルメ" },
+  //   // { key: "shoping", label: "ショッピング" },
+  //   // { key: "fashion", label: "おしゃれ" },
+  //   // { key: "car", label: "車" },
+  // ]);
+  // console.log("newInteresting2", newInteresting);
 
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
     console.log("event2", event);
@@ -147,8 +145,8 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
-    const newArr = [...newInteresting];
-    console.log("newArr", newArr);
+    const newArr = [...questionInteresting];
+    console.log("newArr1", newArr);
     const label = interestingLabels.filter(o => {
       return o.key === index;
     })[0].label;
@@ -159,14 +157,21 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     if (event.target.checked) {
       // newArr.push({ key: index });
       newArr.push({ key: index, label: label });
-      setNI(newArr)
+      // setNI(newArr)
     } else {
       // newArr.pop({ key: "gourmet", label: "グルメ" });
       newArr.pop({ key: index, label: label });
-      setNI(newArr)
+      // setNI(newArr)
     }
 
-    console.log("newArr", newArr);
+    // console.log("newArr", newArr);
+
+      dispatch(
+        updateQuestion({
+          // interesting: { [index]: newValue },
+          interesting: newArr,
+        })
+      );
     
     // let hoge = 4
     // const fuga = 2
@@ -205,14 +210,14 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // const str = "2"
   };
 
-  useEffect(() => {
-    dispatch(
-      updateQuestion({
-        // interesting: { [index]: newValue },
-        interesting: newInteresting,
-      })
-    );
-  }, [newInteresting]);
+  // useEffect(() => {
+  //   dispatch(
+  //     updateQuestion({
+  //       // interesting: { [index]: newValue },
+  //       interesting: newInteresting,
+  //     })
+  //   );
+  // }, [newInteresting]);
 
   return (
     <Box>
