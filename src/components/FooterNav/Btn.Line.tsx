@@ -22,12 +22,8 @@ const styles = {
 };
 
 const LineBtn = () => {
-  const handleClick = () => {
-    window.location.href = "https://lin.ee/f62Smod";
-  };
-
   return (
-    <Box className="linebtn" onClick={handleClick} sx={styles.container}>
+    <Box className="linebtn" sx={styles.container}>
       <Box sx={styles.img}>
         <StaticImage
           src="../../images/line.png"

@@ -16,6 +16,7 @@ const styles = {
     maxWidth: "380px",
     px: "3px",
     py: "8px",
+    cursor: "pointer",
   },
   ellipseR: {
     position: "absolute",

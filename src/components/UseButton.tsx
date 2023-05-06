@@ -69,14 +69,10 @@ const UseBtn = () => {
           },
           onClick: undefined,
         };
-
       default:
         break;
     }
   }, [view]);
-  const handleClick = () => {
-    window.location.href = "https://lin.ee/f62Smod";
-  };
 
   return (
     <Paper

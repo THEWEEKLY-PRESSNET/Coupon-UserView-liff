@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 import Detail from "../components/DetailUnit";
 import FavoriteBtn from "./FavoriteBtn";
-import ShowBtn from "./ShowBtn";
+import UseBtn from "../components/UseButton";
 import CouponNote from "./CouponNote";
 import type { Root } from "../stores";
 
@@ -14,6 +14,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     px: "auto",
+    mb: 10,
   },
   title: {
     position: "fixed",
@@ -46,21 +47,12 @@ const CouponDetail: React.FC = () => {
   console.log("coupon", coupon);
 
   return (
-    <>
-      <Detail {...coupon} />
+    <Box sx={styles.container}>
+      <Detail {...coupon} red hide />
       <FavoriteBtn />
       <CouponNote />
-      <ShowBtn />
-    </>
-    // <Box sx={styles.container}>
-    //   クーポン詳細
-    //   <Typography sx={styles.title}>お持ちのクーポン一覧</Typography>
-    //   <Box sx={styles.coupons}>
-    //     {coupons.map(coupon => (
-    //       <CouponUnit {...coupon} />
-    //     ))}
-    //   </Box>
-    // </Box>
+      <UseBtn />
+    </Box>
   );
 };
 

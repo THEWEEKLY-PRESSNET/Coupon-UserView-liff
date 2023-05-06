@@ -15,6 +15,7 @@ const styles = {
     left: "3px",
     borderRadius: "5px",
     bgcolor: "#8B8B8BD9",
+    cursor: "auto",
   },
 
   label: {

@@ -1,8 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Typography } from "@mui/material";
-import { updateTopState } from "../../stores/topState";
 
 const styles = {
   container: {
@@ -24,18 +22,9 @@ const styles = {
 };
 
 const CouponBtn = () => {
-  const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(
-      updateTopState({
-        view: "top",
-      })
-    );
-  };
-
   return (
     <Box className="couponbtn" sx={styles.container}>
-      <Box onClick={handleClick} sx={styles.img}>
+      <Box sx={styles.img}>
         <StaticImage
           src="../../images/coupon.png"
           loading="eager"
