@@ -85,9 +85,9 @@ const TestApp: React.FC = () => {
     <Wrapper>
       <TestComponent
         couponTitleBig="10%OFFクーポン"
-        valiedStart="20230429"
+        validStart="20230429"
         storeName="【24】スイーツ専門無人販売所　西条店"
-        valiedEnd="20230505"
+        validEnd="20230505"
         couponDescription="東広島市西条大坪町に「24（トゥエンティフォー）スイーツ専門無人販売所西条店」がオープン。24時間営業の無人販売所で、アイスやケーキなどのテイクアウトスイーツを販売しています。"
         storeUrl="https://www.instagram.com/24_sweetsshop3/"
         storeImg="https://www.higashihiroshima-digital.com/wp-content/uploads/2023/04/24-tennai-1-720x480.jpg"

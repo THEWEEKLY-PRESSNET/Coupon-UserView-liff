@@ -11,7 +11,8 @@ export type TopState = {
     | "coupons"
     | "top"
     | "detail"
-    | "use";
+    | "use"
+    | "used";
   isStop: boolean;
   lottered: boolean;
 };
