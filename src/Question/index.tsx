@@ -167,7 +167,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     }
 
     console.log("newArr", newArr);
-
+    // テスト
     // let hoge = 4
     // const fuga = 2
 
