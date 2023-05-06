@@ -1,5 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
+
+import { updateTopState } from "../stores/topState";
 
 const styles = {
   container: {
@@ -30,8 +33,14 @@ type Props = {
 };
 
 const ModalIndex: React.FC<Props> = ({ setOpen }) => {
+  const dispatch = useDispatch();
   const handleClose = () => {
     setOpen(false);
+    dispatch(
+      updateTopState({
+        view: "top",
+      })
+    );
   };
 
   return (
