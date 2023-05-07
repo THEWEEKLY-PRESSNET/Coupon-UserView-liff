@@ -4,6 +4,7 @@ import { Button, Box } from "@mui/material";
 import FavoriteIcon from "../images/favorite.png";
 import FavoriteIconBefore from "../images/favoriteBefore.png";
 import { updateCoupon } from "../stores/coupon";
+import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
 
 const styles = {
@@ -58,10 +59,19 @@ const styles = {
 
 const FavoriteBtn: React.FC = () => {
   const coupon = useSelector((s: Root) => s.coupon);
-  // console.log("coupons", coupon);
+  const coupons = useSelector((s: Root) => s.coupons);
+  console.log("coupon", coupon);
+  console.log("coupons", coupons);
+
+  const favoriteObject = coupons.filter((o) => o.issuedCouponId === coupon.issuedCouponId)
+  console.log("favoriteObject", favoriteObject);
 
   const dispatch = useDispatch();
-  const favorite = true;
+  // const favorite = true;
+
+  // if (){
+    
+  // }
 
   const handleClick = () => {
     if (!coupon.favorite) {
