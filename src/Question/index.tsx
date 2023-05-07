@@ -160,64 +160,21 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
       // setNI(newArr)
     } else {
       // newArr.pop({ key: "gourmet", label: "グルメ" });
-      newArr.pop({ key: index, label: label });
+      // newArr.pop({ key: index, label: label });
       // setNI(newArr)
+      const popedArr = newArr.filter(o => o.key != index);
+      console.log("popedArr", popedArr);
     }
 
     // console.log("newArr", newArr);
 
-      dispatch(
-        updateQuestion({
-          // interesting: { [index]: newValue },
-          interesting: newArr,
-        })
-      );
-    
-    // let hoge = 4
-    // const fuga = 2
-
-    // const hoge2 = hoge
-
-    // const hoge3 = Number(hoge)
-    // console.log(hoge3)
-    // hoge = 3
-
-    // const hoge4 = Number(hoge)
-    // console.log(hoge4)
-
-    // const res1 = hoge + fuga
-    // const res2  = 4
-
-    // const answer = res == res2  => true
-    // const answer2 = res === res2 => false
-
-    // const hoge = ["a", {"b": 4}]
-    // hoge[1] === {"b": 4}
-
-    // const obj = {
-    //   key: "val1",
-    //   high: {
-    //     highkey: "val2"
-    //   }
-    // }
-
-    // obj.high.highkey = "val"
-    // obj.high === {
-
-    // }
-
-    // const num = 2
-    // const str = "2"
+    dispatch(
+      updateQuestion({
+        // interesting: { [index]: newValue },
+        interesting: newArr,
+      })
+    );
   };
-
-  // useEffect(() => {
-  //   dispatch(
-  //     updateQuestion({
-  //       // interesting: { [index]: newValue },
-  //       interesting: newInteresting,
-  //     })
-  //   );
-  // }, [newInteresting]);
 
   return (
     <Box>
