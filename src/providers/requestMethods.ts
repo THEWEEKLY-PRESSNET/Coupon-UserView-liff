@@ -11,6 +11,12 @@ type authRequest = {
   headerParams?: {};
 };
 
+export type RequestParam = {
+  url: string;
+  urlParams?: object;
+  bodyParams?: object;
+};
+
 export const authGet = ({
   url,
   token,
@@ -31,7 +37,7 @@ export const authGet = ({
 };
 
 export const authPost = ({ url, token, urlParams, params }: authRequest) => {
-  const requestUrl = _appendUrlParams({ url, urlParams });
+  const requestUrl = (urlParams && _appendUrlParams({ url, urlParams })) || url;
   return axios.post(requestUrl, params, {
     headers: {
       Accept: "application/json",
@@ -88,8 +94,9 @@ export const requestPost = ({ url, params }: typeRequest) => {
   });
 };
 
-export const requestPatch = ({ url, params }: typeRequest) => {
-  return axios.put(url, params, {
+export const requestPatch = ({ url, urlParams, bodyParams }: RequestParam) => {
+  const requestUrl = (urlParams && _appendUrlParams({ url, urlParams })) || url;
+  return axios.patch(requestUrl, bodyParams, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

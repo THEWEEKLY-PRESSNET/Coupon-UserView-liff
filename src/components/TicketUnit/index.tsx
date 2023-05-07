@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
@@ -6,6 +7,8 @@ import Badge from "./Ticket.Badge";
 import Flag from "./Ticket.Flag";
 import Shadow from "./Ticket.Shadow";
 import { dateTrance, strToDate } from "../../utils/formatter";
+import { updateCoupon } from "../../stores/coupon";
+import type { Root } from "../../stores";
 
 const styles = {
   container: {
@@ -158,7 +161,7 @@ type Props = {
   used?: boolean;
 };
 
-const Test: React.FC<Props> = ({
+const TicketUnit: React.FC<Props> = ({
   handleClick,
   couponTitleBig,
   couponTitleSmall,
@@ -169,9 +172,10 @@ const Test: React.FC<Props> = ({
   favored,
   used,
 }) => {
+  const coupon = useSelector((s: Root) => s.coupon);
   const startStr = dateTrance(validStart);
   const validStr = dateTrance(validEnd);
-  console.log("used", used);
+  // console.log("used", used);
   const isFlag = useMemo(() => {
     const now = new Date();
     const past = strToDate(validStart);
@@ -179,7 +183,7 @@ const Test: React.FC<Props> = ({
   }, [validStart]);
   const expired = useMemo(() => {
     const now = new Date();
-    console.log(now);
+    // console.log(now);
     const past = strToDate(validEnd);
     return now > past;
   }, [validEnd]);
@@ -221,4 +225,4 @@ const Test: React.FC<Props> = ({
   );
 };
 
-export default Test;
+export default TicketUnit;

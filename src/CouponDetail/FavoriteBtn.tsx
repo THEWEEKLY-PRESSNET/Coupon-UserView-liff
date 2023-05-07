@@ -1,10 +1,20 @@
-import React, { useState, useEffect, useCallback, useReducer } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useReducer,
+  useMemo,
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Box } from "@mui/material";
 import FavoriteIcon from "../images/favorite.png";
 import FavoriteIconBefore from "../images/favoriteBefore.png";
 import { updateCoupon } from "../stores/coupon";
+import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
+import { patchIssued } from "../providers/PatchIssued";
+
+const userId = "test";
 
 const styles = {
   btnWrapper: {
@@ -26,9 +36,9 @@ const styles = {
     borderRadius: "30px",
     whiteSpace: "nowrap",
     margin: "auto",
-    "&:hover":{
-      opacity: "1"
-    }
+    "&:hover": {
+      opacity: "1",
+    },
   },
   favoriteBtn: {
     color: "#fff",
@@ -45,10 +55,10 @@ const styles = {
     borderRadius: "30px",
     whiteSpace: "nowrap",
     margin: "auto",
-    "&:hover":{
+    "&:hover": {
       color: "#fff",
       bgcolor: "accent.p",
-    }
+    },
   },
   iconImg: {
     width: "12px",
@@ -57,39 +67,49 @@ const styles = {
 };
 
 const FavoriteBtn: React.FC = () => {
-  const coupon = useSelector((s: Root) => s.coupon);
-  // console.log("coupons", coupon);
+  const coupons = useSelector((s: Root) => s.coupons);
+  const { favored, issuedCouponId } = useSelector((s: Root) => s.coupon);
+
+  const newArr = useMemo(() => {
+    return coupons.map(coupon => {
+      if (coupon.issuedCouponId === issuedCouponId) {
+        console.log("iss", coupon.issuedCouponId);
+        const newCoupon = { ...coupon };
+        newCoupon.favored = !favored;
+        return newCoupon;
+      }
+      return coupon;
+    });
+  }, [favored, issuedCouponId, coupons]);
 
   const dispatch = useDispatch();
-  const favorite = true;
-
-  const handleClick = () => {
-    if (!coupon.favorite) {
-      dispatch(
-        updateCoupon({
-          favorite: true,
-        })
-      );
-      return;
-    } else {
-      dispatch(
-        updateCoupon({
-          favorite: false,
-        })
-      );
+  const handleClick = async () => {
+    dispatch(
+      updateCoupon({
+        favored: !favored,
+      })
+    );
+    const res = await patchIssued({
+      issuedCouponId,
+      userId,
+      favored: !favored,
+    });
+    if (res.result) {
+      dispatch(updateCoupons(newArr));
     }
   };
+
   return (
     <Box sx={styles.btnWrapper}>
       <Button
-        variant={coupon.favorite ? "contained" : "outlined"}
-        sx={!coupon.favorite ? styles.favoriteBtnBefore : styles.favoriteBtn}
+        variant={favored ? "contained" : "outlined"}
+        sx={!favored ? styles.favoriteBtnBefore : styles.favoriteBtn}
         color="inherit"
         onClick={handleClick}
       >
         <img
           style={styles.iconImg}
-          src={!coupon.favorite ? FavoriteIconBefore : FavoriteIcon}
+          src={!favored ? FavoriteIconBefore : FavoriteIcon}
           alt=""
         />
         お気に入り
