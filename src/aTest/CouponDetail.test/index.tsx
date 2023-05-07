@@ -21,7 +21,7 @@ const mockData: Root = {
     couponTitleSmall: "週末限定割引券",
     createdAt: 1683161210,
     expired: false,
-    favorite: false,
+    favored: false,
     issueEnd: "20230701",
     issueStart: "20230601",
     issuedCouponId: 5950627578380288,

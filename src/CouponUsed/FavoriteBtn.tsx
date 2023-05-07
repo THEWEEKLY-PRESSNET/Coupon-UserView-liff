@@ -64,17 +64,17 @@ const FavoriteBtn: React.FC = () => {
   const favorite = true;
 
   const handleClick = () => {
-    if (!coupon.favorite) {
+    if (!coupon.favored) {
       dispatch(
         updateCoupon({
-          favorite: true,
+          favored: true,
         })
       );
       return;
     } else {
       dispatch(
         updateCoupon({
-          favorite: false,
+          favored: false,
         })
       );
     }
@@ -82,14 +82,14 @@ const FavoriteBtn: React.FC = () => {
   return (
     <Box sx={styles.btnWrapper}>
       <Button
-        variant={coupon.favorite ? "contained" : "outlined"}
-        sx={!coupon.favorite ? styles.favoriteBtnBefore : styles.favoriteBtn}
+        variant={coupon.favored ? "contained" : "outlined"}
+        sx={!coupon.favored ? styles.favoriteBtnBefore : styles.favoriteBtn}
         color="inherit"
         onClick={handleClick}
       >
         <img
           style={styles.iconImg}
-          src={!coupon.favorite ? FavoriteIconBefore : FavoriteIcon}
+          src={!coupon.favored ? FavoriteIconBefore : FavoriteIcon}
           alt=""
         />
         お気に入り

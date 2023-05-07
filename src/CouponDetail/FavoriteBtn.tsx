@@ -4,6 +4,7 @@ import { Button, Box } from "@mui/material";
 import FavoriteIcon from "../images/favorite.png";
 import FavoriteIconBefore from "../images/favoriteBefore.png";
 import { updateCoupon } from "../stores/coupon";
+import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
 
 const styles = {
@@ -58,23 +59,39 @@ const styles = {
 
 const FavoriteBtn: React.FC = () => {
   const coupon = useSelector((s: Root) => s.coupon);
-  // console.log("coupons", coupon);
+  const coupons = useSelector((s: Root) => s.coupons);
+  console.log("coupon", coupon);
+  // console.log("coupons", coupons);
+  const newArr = coupon;
+  // const newArr = [...newArr0];
+
+  //クーポンリストの中のどのクーポンか
+  const favoriteObject = coupons.filter((o) => o.issuedCouponId === coupon.issuedCouponId)
+  console.log("favoriteObject", favoriteObject);
 
   const dispatch = useDispatch();
-  const favorite = true;
+  // const favorite = true;
+
+  if (coupon.favored) {
+    // newArr.push({ key: index });
+    favoriteObject.favored = true
+  } else {
+    // newArr.pop({ key: "gourmet", label: "グルメ" });
+    favoriteObject.favored = false
+  }
 
   const handleClick = () => {
-    if (!coupon.favorite) {
+    if (!coupon.favored) {
       dispatch(
         updateCoupon({
-          favorite: true,
+          favored: true,
         })
       );
       return;
     } else {
       dispatch(
         updateCoupon({
-          favorite: false,
+          favored: false,
         })
       );
     }
@@ -82,14 +99,14 @@ const FavoriteBtn: React.FC = () => {
   return (
     <Box sx={styles.btnWrapper}>
       <Button
-        variant={coupon.favorite ? "contained" : "outlined"}
-        sx={!coupon.favorite ? styles.favoriteBtnBefore : styles.favoriteBtn}
+        variant={coupon.favored ? "contained" : "outlined"}
+        sx={!coupon.favored ? styles.favoriteBtnBefore : styles.favoriteBtn}
         color="inherit"
         onClick={handleClick}
       >
         <img
           style={styles.iconImg}
-          src={!coupon.favorite ? FavoriteIconBefore : FavoriteIcon}
+          src={!coupon.favored ? FavoriteIconBefore : FavoriteIcon}
           alt=""
         />
         お気に入り
