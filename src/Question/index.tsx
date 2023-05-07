@@ -170,15 +170,16 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
 
     const newNewArr = () => {
       if (event.target.checked) {
-        return newArr
+        return newArr;
       }
       return newArr.filter(o => o.key !== index);
     };
 
     dispatch(
       updateQuestion({
-        // interesting: { [index]: newValue },
-        interesting: newNewArr(),
+        interesting:
+          (event.target.checked && newArr) ||
+          newArr.filter(o => o.key !== index),
       })
     );
   };
@@ -194,7 +195,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
           control={
             <Checkbox
               onChange={(e, b) => handleChange2(e, checkbox.key)}
-            // checked={checkbox.checked}
+              // checked={checkbox.checked}
             />
           }
         />
@@ -277,7 +278,7 @@ const Question: React.FC<props> = () => {
           <Checks
             labels={newInterestingLabels}
             setValue={setInteresting}
-          // index="interesting"
+            // index="interesting"
           />
         </Box>
       </Paper>
