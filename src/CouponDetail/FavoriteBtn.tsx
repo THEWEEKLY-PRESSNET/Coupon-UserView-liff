@@ -61,17 +61,24 @@ const FavoriteBtn: React.FC = () => {
   const coupon = useSelector((s: Root) => s.coupon);
   const coupons = useSelector((s: Root) => s.coupons);
   console.log("coupon", coupon);
-  console.log("coupons", coupons);
+  // console.log("coupons", coupons);
+  const newArr = coupon;
+  // const newArr = [...newArr0];
 
+  //クーポンリストの中のどのクーポンか
   const favoriteObject = coupons.filter((o) => o.issuedCouponId === coupon.issuedCouponId)
   console.log("favoriteObject", favoriteObject);
 
   const dispatch = useDispatch();
   // const favorite = true;
 
-  // if (){
-    
-  // }
+  if (coupon.favorite) {
+    // newArr.push({ key: index });
+    favoriteObject.favorite = true
+  } else {
+    // newArr.pop({ key: "gourmet", label: "グルメ" });
+    favoriteObject.favorite = false
+  }
 
   const handleClick = () => {
     if (!coupon.favorite) {
