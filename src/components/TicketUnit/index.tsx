@@ -10,7 +10,6 @@ import { dateTrance, strToDate } from "../../utils/formatter";
 import { updateCoupon } from "../../stores/coupon";
 import type { Root } from "../../stores";
 
-
 const styles = {
   container: {
     position: "relative",
@@ -162,7 +161,7 @@ type Props = {
   used?: boolean;
 };
 
-const Test: React.FC<Props> = ({
+const TicketUnit: React.FC<Props> = ({
   handleClick,
   couponTitleBig,
   couponTitleSmall,
@@ -176,7 +175,7 @@ const Test: React.FC<Props> = ({
   const coupon = useSelector((s: Root) => s.coupon);
   const startStr = dateTrance(validStart);
   const validStr = dateTrance(validEnd);
-  console.log("used", used);
+  // console.log("used", used);
   const isFlag = useMemo(() => {
     const now = new Date();
     const past = strToDate(validStart);
@@ -184,7 +183,7 @@ const Test: React.FC<Props> = ({
   }, [validStart]);
   const expired = useMemo(() => {
     const now = new Date();
-    console.log(now);
+    // console.log(now);
     const past = strToDate(validEnd);
     return now > past;
   }, [validEnd]);
@@ -203,7 +202,7 @@ const Test: React.FC<Props> = ({
       <Typography sx={styles.subtitle}>{couponTitleSmall}</Typography>
       <Typography sx={styles.name}>{storeName}</Typography>
       <Typography sx={styles.limit}>{`有効期限　${validStr}まで`}</Typography>
-      {coupon.favored && (
+      {favored && (
         <Box sx={styles.favor}>
           <StarIcon sx={styles.favorIcon} />
           <Typography sx={styles.favorText}>お気に入り</Typography>
@@ -226,4 +225,4 @@ const Test: React.FC<Props> = ({
   );
 };
 
-export default Test;
+export default TicketUnit;

@@ -44,7 +44,7 @@ const styles = {
 
 const CouponDetail: React.FC = () => {
   const coupon = useSelector((s: Root) => s.coupon);
-  console.log("coupon", coupon);
+  // console.log("coupon", coupon);
 
   return (
     <Box sx={styles.container}>

@@ -18,7 +18,7 @@ type props = {
 const App: React.FC = () => {
   const { view } = useSelector((s: Root) => s.topState);
   const coupons = useSelector((s: Root) => s.coupons);
-  console.log("coupons", coupons);
+  // console.log("coupons", coupons);
   return (
     <>
       <Layout>
