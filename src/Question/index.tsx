@@ -19,8 +19,6 @@ import {
   Button,
 } from "@mui/material";
 
-// tesuto
-
 import type { Gender, Age, Living, Interesting } from "src/stores/question";
 
 import { updateQuestion } from "../stores/question";
