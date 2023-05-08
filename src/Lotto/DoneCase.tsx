@@ -1,27 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { StaticImage } from "gatsby-plugin-image";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useSpring, animated } from "@react-spring/web";
 
-import TicketUnit from "../components/TicketUnit";
+import { updateTopState } from "../stores/topState";
 import type { Root } from "../stores";
-import covor from "../images/win.png";
-import video from "../images/gsample.mp4";
-import "../styles/index.scss";
-import { delay } from "@reduxjs/toolkit/dist/utils";
 
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100vw",
-    minHeight: "100vh",
-    mx: "auto",
-    p: 0,
-  },
-  body: {
     position: "relative",
     display: "flex",
     flexDirection: "column",
@@ -29,16 +16,41 @@ const styles = {
     width: "100vw",
     minHeight: "100vh",
   },
-  ticket: {
-    position: "absolute",
-    width: "300px",
-    // zIndex: 10,
-    top: "70%",
-  },
   img: {
     width: "100%",
-    height: "100%",
+    aspectRatio: 1290 / 1780,
     objectFit: "cover",
+  },
+  button: {
+    position: "absolute",
+    top: "70%",
+    height: "60px",
+    px: 8,
+    borderRadius: "30px",
+    fontWeight: 600,
+    fontSize: "20px",
+    lineHeight: "30px",
+    letterSpacing: "20%",
+    "&:active": {
+      boxShadow: 0,
+      transform: "translate(0,1px)",
+    },
+  },
+  button2: {
+    position: "absolute",
+    top: "80%",
+    height: "60px",
+    px: 8,
+    borderRadius: "30px",
+    fontWeight: 600,
+    fontSize: "20px",
+    lineHeight: "30px",
+    letterSpacing: "20%",
+    "&:active": {
+      boxShadow: 0,
+      transform: "translate(0,1px)",
+    },
+    bgcolor: "gray",
   },
 };
 
@@ -49,8 +61,13 @@ const WinCase: React.FC = () => {
   }));
   const { opacity } = springValue;
 
+  const dispatch = useDispatch();
+  const retryClick = () => {
+    dispatch(updateTopState({ view: "lotto" }));
+  };
+
   return (
-    <Box className="lotto-next" sx={styles.body}>
+    <Box className="lotto-next" sx={styles.container}>
       <animated.div
         style={{
           opacity,
@@ -67,9 +84,9 @@ const WinCase: React.FC = () => {
           style={{ marginBottom: `var(--space-3)` }}
         />
       </animated.div>
-      <Box sx={styles.ticket}>
-        <TicketUnit {...coupon} />
-      </Box>
+      <Button variant="contained" onClick={retryClick} sx={styles.button}>
+        もう一度引く
+      </Button>
     </Box>
   );
 };

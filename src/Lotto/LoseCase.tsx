@@ -18,7 +18,7 @@ const styles = {
   },
   img: {
     width: "100%",
-    height: "100%",
+    aspectRatio: 1290 / 1780,
     objectFit: "cover",
   },
   button: {
@@ -36,6 +36,22 @@ const styles = {
       transform: "translate(0,1px)",
     },
   },
+  button2: {
+    position: "absolute",
+    top: "80%",
+    height: "60px",
+    px: 8,
+    borderRadius: "30px",
+    fontWeight: 600,
+    fontSize: "20px",
+    lineHeight: "30px",
+    letterSpacing: "20%",
+    "&:active": {
+      boxShadow: 0,
+      transform: "translate(0,1px)",
+    },
+    bgcolor: "gray",
+  },
 };
 
 const LoseCase: React.FC = () => {
@@ -45,10 +61,17 @@ const LoseCase: React.FC = () => {
   const { opacity } = springValue;
 
   const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(updateTopState({ view: "coupons" }));
-    navigate("/");
+  const retryClick = () => {
+    dispatch(updateTopState({ view: "lotto" }));
   };
+  const quitClick = () => {
+    dispatch(updateTopState({ view: "lotted" }));
+  };
+
+  // const handleClick = () => {
+  //   dispatch(updateTopState({ view: "coupons" }));
+  //   navigate("/");
+  // };
 
   return (
     <Box className="lotto-win" sx={styles.container}>
@@ -68,8 +91,11 @@ const LoseCase: React.FC = () => {
           style={{ marginBottom: `var(--space-3)` }}
         />
       </animated.div>
-      <Button variant="contained" onClick={handleClick} sx={styles.button}>
-        スタート
+      <Button variant="contained" onClick={retryClick} sx={styles.button}>
+        もう一度引く
+      </Button>
+      <Button variant="contained" onClick={quitClick} sx={styles.button2}>
+        辞める
       </Button>
     </Box>
   );

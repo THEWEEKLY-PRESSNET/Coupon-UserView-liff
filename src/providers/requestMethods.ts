@@ -85,8 +85,9 @@ export const requestGet = ({ url, params }: typeRequest) => {
   });
 };
 
-export const requestPost = ({ url, params }: typeRequest) => {
-  return axios.post(url, params, {
+export const requestPost = ({ url, urlParams, bodyParams }: RequestParam) => {
+  const requestUrl = (urlParams && _appendUrlParams({ url, urlParams })) || url;
+  return axios.post(url, bodyParams, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
