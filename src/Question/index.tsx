@@ -127,16 +127,9 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
   const question = useSelector(s => s.question);
   console.log("question", question);
   const questionInteresting = question.interesting;
-  console.log("questionInteresting", questionInteresting);
-  const value = false;
+  console.log("questionInteresting1", questionInteresting);
+  // const value = false;
   const dispatch = useDispatch();
-  // const [newInteresting, setNI] = useState([
-  //   // { key: "gourmet", label: "グルメ" },
-  //   // { key: "shoping", label: "ショッピング" },
-  //   // { key: "fashion", label: "おしゃれ" },
-  //   // { key: "car", label: "車" },
-  // ]);
-  // console.log("newInteresting2", newInteresting);
 
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
     console.log("event2", event);
@@ -154,48 +147,48 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     console.log("label3", label);
 
     //   add obj
-    if (event.target.checked) {
-      // newArr.push({ key: index });
-      newArr.push({ key: index, label: label });
-      // setNI(newArr)
-    } else {
-      // newArr.pop({ key: "gourmet", label: "グルメ" });
-      // newArr.pop({ key: index, label: label });
-      // setNI(newArr)
-      const popedArr = newArr.filter(o => o.key !== index);
-      console.log("popedArr", popedArr);
-    }
-
-    // console.log("newArr", newArr);
-
-    const newNewArr = () => {
+    // const newNewArr = () => {
       if (event.target.checked) {
-        return newArr;
+        // return newArr;
+       newArr.push({ key: index, label: label });
+      } else {
+       newArr.filter(o => o.key !== index);
       }
-      return newArr.filter(o => o.key !== index);
-    };
+    // }
+    
+      console.log("newNew2", newArr)
 
-    dispatch(
-      updateQuestion({
-        interesting:
-          (event.target.checked && newArr) ||
-          newArr.filter(o => o.key !== index),
-      })
-    );
+    // if (event.target.checked) {
+    //   newArr.push({ key: index, label: label });
+    // } else {
+    //   const popedArr = newArr.filter(o => o.key !== index);
+    //   console.log("popedArr", popedArr);
+
+      dispatch(
+        updateQuestion({
+          interesting: newArr
+        })
+      );
+
+  //   dispatch(
+  //     updateQuestion({
+  //       interesting:
+  //         (event.target.checked && newArr) ||
+  //         newArr.filter(o => o.key !== index),
+  //     })
+  //   );
   };
+
 
   return (
     <Box>
       {interestingLabels.map(checkbox => (
         <FormControlLabel
-          // value={checkbox.key}
-          // index="interesting"
           // ラベルの文字
           label={checkbox.label}
           control={
             <Checkbox
               onChange={(e, b) => handleChange2(e, checkbox.key)}
-              // checked={checkbox.checked}
             />
           }
         />
@@ -278,7 +271,7 @@ const Question: React.FC<props> = () => {
           <Checks
             labels={newInterestingLabels}
             setValue={setInteresting}
-            // index="interesting"
+          // index="interesting"
           />
         </Box>
       </Paper>
