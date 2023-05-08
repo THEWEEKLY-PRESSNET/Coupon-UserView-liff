@@ -1,5 +1,4 @@
 import React from "react";
-import { navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Button } from "@mui/material";
