@@ -138,7 +138,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
-    const newArr = [...questionInteresting];
+    let newArr = [...questionInteresting];
     console.log("newArr1", newArr);
     const label = interestingLabels.filter(o => {
       return o.key === index;
@@ -147,13 +147,22 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     console.log("label3", label);
 
     //   add obj
-    // テスト
     // const newNewArr = () => {
       if (event.target.checked) {
         // return newArr;
        newArr.push({ key: index, label: label });
+       dispatch(
+        updateQuestion({
+          interesting: newArr
+        })
+      );
       } else {
-       newArr.filter(o => o.key !== index);
+        const hoge2 = newArr.filter(o => o.key !== index);
+        dispatch(
+          updateQuestion({
+            interesting: hoge2
+          })
+        );
       }
     // }
     
@@ -165,11 +174,11 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     //   const popedArr = newArr.filter(o => o.key !== index);
     //   console.log("popedArr", popedArr);
 
-      dispatch(
-        updateQuestion({
-          interesting: newArr
-        })
-      );
+      // dispatch(
+      //   updateQuestion({
+      //     interesting: newArr
+      //   })
+      // );
 
   //   dispatch(
   //     updateQuestion({
