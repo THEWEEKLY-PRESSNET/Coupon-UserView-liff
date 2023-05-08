@@ -147,6 +147,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     console.log("label3", label);
 
     //   add obj
+    // テスト
     // const newNewArr = () => {
       if (event.target.checked) {
         // return newArr;
