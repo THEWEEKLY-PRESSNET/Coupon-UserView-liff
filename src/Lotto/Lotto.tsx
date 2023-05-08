@@ -1,29 +1,16 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { ThemeProvider } from "@mui/material/styles";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useSpring, animated } from "@react-spring/web";
 
-import WinCase from "./WinCase";
-import theme from "../styles/theme";
-import type { Root } from "../stores";
+import { updateTopState } from "../stores/topState";
 import covor from "../images/start-dev.png";
 import video from "../images/gsample.mp4";
-import "../styles/index.scss";
-import { delay } from "@reduxjs/toolkit/dist/utils";
-import { updateTopState } from "../stores/topState";
+import postLotto from "../providers/PostLotto";
+import { updateCoupon } from "../stores/coupon";
 
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100vw",
-    minHeight: "100vh",
-    mx: "auto",
-    p: 0,
-  },
-  body: {
     position: "relative",
     display: "flex",
     flexDirection: "column",
@@ -40,7 +27,7 @@ const styles = {
     position: "absolute",
     top: 0,
     width: "100%",
-    height: "100vh",
+    aspectRatio: 1290 / 1780,
   },
   button: {
     position: "absolute",
@@ -58,11 +45,21 @@ const styles = {
       transform: "translate(0,1px)",
     },
   },
-  easing: {
-    width: "100%",
-    height: "100%",
-    bgcolor: "#FFF",
-    opacity: 0,
+  button2: {
+    position: "absolute",
+    top: "80%",
+    height: "60px",
+    px: 8,
+    borderRadius: "30px",
+    fontWeight: 600,
+    fontSize: "20px",
+    lineHeight: "30px",
+    letterSpacing: "20%",
+    "&:active": {
+      boxShadow: 0,
+      transform: "translate(0,1px)",
+    },
+    bgcolor: "gray",
   },
 };
 
@@ -80,7 +77,7 @@ const Lotto: React.FC = () => {
     return Math.floor(Math.random() * 2);
   };
 
-  const handleClick = async () => {
+  const dummyClick = async () => {
     setIsButton(false);
     if (videoRef.current !== null) {
       videoRef.current.play();
@@ -97,33 +94,48 @@ const Lotto: React.FC = () => {
     }
   };
 
+  const handleClick = async () => {
+    setIsButton(false);
+    if (videoRef.current !== null) {
+      videoRef.current.play();
+    }
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    await set({ opacity: 0 });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const result = await postLotto({ userId: "test" });
+    if (result.payload.result === "win") {
+      dispatch(updateTopState({ view: "win" }));
+      dispatch(updateCoupon(result.payload.coupon));
+    } else {
+      dispatch(updateTopState({ view: "lose" }));
+    }
+  };
+
   return (
-    <ThemeProvider theme={theme}>
-      <Container className="layout-container" sx={styles.container}>
-        <Box className="layout-" sx={styles.body}>
-          <animated.div
-            onClick={handleClick}
-            style={{
-              opacity,
-              ...styles.animation,
-            }}
-          >
-            <video muted poster={covor} style={styles.video} ref={videoRef}>
-              <source src={video} type="video/mp4" />
-            </video>
-          </animated.div>
-          {isButton && (
-            <Button
-              variant="contained"
-              onClick={handleClick}
-              sx={styles.button}
-            >
-              スタート
-            </Button>
-          )}
-        </Box>
-      </Container>
-    </ThemeProvider>
+    <Box className="layout-" sx={styles.container}>
+      <animated.div
+        onClick={handleClick}
+        style={{
+          opacity,
+          ...styles.animation,
+        }}
+      >
+        <video muted poster={covor} style={styles.video} ref={videoRef}>
+          <source src={video} type="video/mp4" />
+        </video>
+      </animated.div>
+      {isButton && (
+        <Button variant="contained" onClick={dummyClick} sx={styles.button}>
+          スタート
+        </Button>
+      )}
+      {isButton && (
+        <Button variant="contained" onClick={handleClick} sx={styles.button2}>
+          通信（実際に抽選）
+        </Button>
+      )}
+    </Box>
   );
 };
 
