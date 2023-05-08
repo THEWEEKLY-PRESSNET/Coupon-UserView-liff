@@ -3,7 +3,7 @@ import { Provider, useSelector } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 
 import GetCoupons from "../providers/GetCoupons";
-import Comp from "../App";
+import Comp from "../App/ytest";
 import store from "../stores";
 import { theme } from "../styles/theme";
 import GetArticles from "../providers/GetArticle";
