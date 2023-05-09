@@ -39,6 +39,7 @@ export type Coupon = {
   issuedCouponId: number;
   userId: number;
   usedAt: number | null;
+  used: boolean;
   favored: boolean;
   expired: boolean;
   couponId: number;
@@ -67,6 +68,7 @@ const initialState: Coupon = {
   issuedCouponId: 0,
   userId: 0,
   usedAt: null,
+  used: false,
   favored: false,
   expired: false,
   couponId: 0,
