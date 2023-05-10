@@ -1,10 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Paper, Typography } from "@mui/material";
 
 import CouponUnit from "../components/TicketUnit";
 import type { Root } from "../stores";
 import { Ticket, updateCoupon } from "../stores/coupon";
+import { updateCoupons } from "../stores/coupons";
 import { updateTopState } from "../stores/topState";
 
 const styles = {
@@ -62,6 +63,16 @@ const Test: React.FC<Props> = ({ coupons }) => {
     );
   }, []);
 
+  const hogeFunc = () => {
+    dispatch(
+      updateCoupons(finalArr)
+    )
+  }
+
+  useEffect(
+    hogeFunc, []
+  )
+
   //usedがfalseだけをもった配列を作る = 使われていないクーポンの配列
   const usedItem = coupons.filter(o => {
     console.log(o); return o.used
@@ -80,33 +91,23 @@ const Test: React.FC<Props> = ({ coupons }) => {
   const goalItem = coupons.filter(o => { return o.used === false && o.favored === true });
   console.log("goalItem", goalItem);
   
-// sortを使ってみる。goalItemの配列を上に、その他のクーポンを下に合体
-  const goalItem2 = coupons.sort((a, b) => {
-    if (used === false && favored === true) {
+  const couponsArr = [...coupons]
+  console.log("couponsArr", couponsArr);
+  // const goalItemOpo = coupons.filter(o => { return !(o.used === false && o.favored === true )});
+
+  // const goalItemArr = goalItem.concat(goalItemOpo) 
+  // console.log("goalItemArr", goalItemArr);
+
+//validEndが小さい値(string)が先に来る配列を作る = 有効期限が近いクーポンの配列
+  const goalItem3 = couponsArr.sort((a, b) => {
+    if (a.validEnd < b.validEnd) {
       return 1;
     }
-    return;
+    return -1;
   });
+  console.log("goalItem3", goalItem3);
 
-
-
-    console.log("goalItem2", goalItem2);
-
-  // numbers.sort(function (a, b) {
-  //   if (a < b) {
-  //     return -1;
-  //   } else if (a > b) {
-  //     return 1;
-  //   } else {
-  //     return 0;
-  //   }
-  // });
-
-
-  //validEndが小さい値(string)が先に来る配列を作る = 有効期限が近いクーポンの配列
-  // const validEndItem = coupons.filter(o =>{return o.validEnd
-  //   === ""})
-  // console.log("usedItem",usedItem);
+  const finalArr = goalItem.concat(goalItem3)
 
 
   // const coupons = ["true", "true", "false", "true"]
