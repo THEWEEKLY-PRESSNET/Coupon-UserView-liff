@@ -108,7 +108,7 @@ const Test: React.FC<Props> = ({ coupons }) => {
   console.log("goalItem3", goalItem3);
 
   const finalArr = goalItem.concat(goalItem3)
-
+// テスト
 
   // const coupons = ["true", "true", "false", "true"]
 
