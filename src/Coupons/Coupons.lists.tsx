@@ -65,7 +65,7 @@ const Test: React.FC<Props> = ({ coupons }) => {
 
   const hogeFunc = () => {
     dispatch(
-      updateCoupons(finalArr)
+      updateCoupons(finalArr3)
     )
   }
 
@@ -73,42 +73,47 @@ const Test: React.FC<Props> = ({ coupons }) => {
     hogeFunc, []
   )
 
-  //usedがfalseだけをもった配列を作る = 使われていないクーポンの配列
-  const usedItem = coupons.filter(o => {
-    console.log(o); return o.used
-      === false
-  })
-  console.log("usedItem", usedItem);
-
-  //favoredがtrueだけをもった配列を作る = お気に入りされたクーポンの配列
-  const favoredItem = coupons.filter(o => {
-    return o.favored
-      === true
-  })
-  console.log("favoredItem", favoredItem);
-
-  //上2つを合体
-  const goalItem = coupons.filter(o => { return o.used === false && o.favored === true });
-  console.log("goalItem", goalItem);
-  
   const couponsArr = [...coupons]
   console.log("couponsArr", couponsArr);
-  // const goalItemOpo = coupons.filter(o => { return !(o.used === false && o.favored === true )});
 
-  // const goalItemArr = goalItem.concat(goalItemOpo) 
-  // console.log("goalItemArr", goalItemArr);
+  //お気に入りと、未使用のクーポンが入った新しい配列を作る
+  const goalItem = coupons.filter(o => { return o.used === false && o.favored === true });
+  console.log("goalItem", goalItem);
 
-//validEndが小さい値(string)が先に来る配列を作る = 有効期限が近いクーポンの配列
-  const goalItem3 = couponsArr.sort((a, b) => {
-    if (a.validEnd < b.validEnd) {
+   //goalItemOpo2の配列の中を入れ替える（有効期限が近いものを前にする）
+   goalItem.sort((a, b) => {
+    if (a.validEnd > b.validEnd) {
       return 1;
     }
     return -1;
   });
-  console.log("goalItem3", goalItem3);
+  console.log("goalItem2", goalItem);
 
-  const finalArr = goalItem.concat(goalItem3)
-// テスト
+  //上ですでに該当済みのクーポンを除いた新しい配列をつくる 
+  const goalItemOpo2 = coupons.filter(o => { return !(o.used === false && o.favored === true) });
+  console.log("goalItemOpo1", goalItemOpo2);
+
+  // goalItemOpo2から、使用済みを除いた新しい配列を作る
+  const goalItemOpo3 = goalItemOpo2.filter(o => { return !(o.used === true) });
+  console.log("goalItemOpo3-1", goalItemOpo3);
+
+  // goalItemOpo2から、使用済みのみ新しい配列を作る
+  const goalItemOpo4 = goalItemOpo2.filter(o => { return o.used === true});
+  console.log("goalItemOpo3-1", goalItemOpo3);
+  
+  //goalItemOpo2の配列の中を入れ替える（有効期限が近いものを前にする）
+  goalItemOpo3.sort((a, b) => {
+    if (a.validEnd > b.validEnd) {
+      return 1;
+    }
+    return -1;
+  });
+  console.log("goalItemOpo3", goalItemOpo3);
+
+  const finalArr2 = goalItem.concat(goalItemOpo3);
+  const finalArr3 = finalArr2.concat(goalItemOpo4);
+
+  
 
   // const coupons = ["true", "true", "false", "true"]
 
