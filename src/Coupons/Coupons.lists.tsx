@@ -63,15 +63,6 @@ const Test: React.FC<Props> = ({ coupons }) => {
     );
   }, []);
 
-  const hogeFunc = () => {
-    dispatch(
-      updateCoupons(finalArr3)
-    )
-  }
-
-  useEffect(
-    hogeFunc, []
-  )
 
   const couponsArr = [...coupons]
   console.log("couponsArr", couponsArr);
@@ -99,7 +90,7 @@ const Test: React.FC<Props> = ({ coupons }) => {
 
   // goalItemOpo2から、使用済みのみ新しい配列を作る
   const goalItemOpo4 = goalItemOpo2.filter(o => { return o.used === true});
-  console.log("goalItemOpo3-1", goalItemOpo3);
+  // console.log("goalItemOpo3-1", goalItemOpo3);
   
   //goalItemOpo2の配列の中を入れ替える（有効期限が近いものを前にする）
   goalItemOpo3.sort((a, b) => {
@@ -113,7 +104,16 @@ const Test: React.FC<Props> = ({ coupons }) => {
   const finalArr2 = goalItem.concat(goalItemOpo3);
   const finalArr3 = finalArr2.concat(goalItemOpo4);
 
-  
+  const hogeFunc = () => {
+    dispatch(
+      updateCoupons(finalArr3)
+    )
+  }
+
+  useEffect(
+    hogeFunc, [goalItemOpo3]
+  )
+
 
   // const coupons = ["true", "true", "false", "true"]
 
