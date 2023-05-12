@@ -29,3 +29,17 @@ const Test: React.FC = () => {
 };
 
 export default Test;
+
+const sampleArr = ["a", "b", "c", 1, 2, 3, ["nest1"], { nest2: "2" }];
+
+const sampleObj = {
+  a: "a",
+  b: "b",
+  c: "c",
+  nest1: {
+    a: "a",
+    nest2: {
+      b: "b",
+    },
+  },
+};
