@@ -1,11 +1,11 @@
 import React from "react";
-import { navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Button } from "@mui/material";
 import { useSpring, animated } from "@react-spring/web";
 
 import { updateTopState } from "../stores/topState";
+import img from "../images/lose.png";
 
 const styles = {
   container: {
@@ -18,7 +18,8 @@ const styles = {
   },
   img: {
     width: "100%",
-    aspectRatio: 1290 / 1780,
+    height: "100%",
+    // aspectRatio: 1290 / 1780,
     objectFit: "cover",
   },
   button: {
@@ -81,15 +82,7 @@ const LoseCase: React.FC = () => {
           ...styles.img,
         }}
       >
-        <StaticImage
-          src="../images/lose-dev.png"
-          loading="eager"
-          width={600}
-          quality={95}
-          formats={["auto", "webp", "avif"]}
-          alt=""
-          style={{ marginBottom: `var(--space-3)` }}
-        />
+        <img src={img} style={styles.img} />
       </animated.div>
       <Button variant="contained" onClick={retryClick} sx={styles.button}>
         もう一度引く

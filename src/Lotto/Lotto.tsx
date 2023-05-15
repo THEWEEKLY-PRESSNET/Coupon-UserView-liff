@@ -4,10 +4,10 @@ import { Box, Button } from "@mui/material";
 import { useSpring, animated } from "@react-spring/web";
 
 import { updateTopState } from "../stores/topState";
-import covor from "../images/start-dev.png";
-import video from "../images/gsample.mp4";
 import postLotto from "../providers/PostLotto";
 import { updateCoupon } from "../stores/coupon";
+import covor from "../images/open.png";
+import video from "../images/movie.mp4";
 
 const styles = {
   container: {
@@ -19,8 +19,10 @@ const styles = {
     minHeight: "100vh",
   },
   video: {
-    width: "100%",
-    height: "100%",
+    // width: "100%",
+    // height: "100%",
+    width: "100vw",
+    height: "100vh",
     objectFit: "cover",
   },
   animation: {
@@ -82,7 +84,7 @@ const Lotto: React.FC = () => {
     if (videoRef.current !== null) {
       videoRef.current.play();
     }
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 3900));
     await set({ opacity: 0 });
     await new Promise(resolve => setTimeout(resolve, 1000));
     const result = lotto();
