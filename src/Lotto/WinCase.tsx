@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { navigate } from "gatsby";
 import { useSelector, useDispatch } from "react-redux";
 import { StaticImage } from "gatsby-plugin-image";
@@ -7,6 +7,7 @@ import { useSpring, animated } from "@react-spring/web";
 
 import TicketUnit from "../components/TicketUnit";
 import { updateTopState } from "../stores/topState";
+import img from "../images/win.png";
 import type { Root } from "../stores";
 
 const styles = {
@@ -24,8 +25,12 @@ const styles = {
     top: "70%",
   },
   img: {
-    width: "100%",
-    aspectRatio: 1290 / 1780,
+    width: "100vw",
+    height: "100vh",
+    // height: "100%",
+
+    // height: "100vh",
+    // aspectRatio: "calc(100vw / 100vh)",
     objectFit: "cover",
   },
   button2: {
@@ -49,6 +54,10 @@ const styles = {
 const WinCase: React.FC = () => {
   const coupon = useSelector((s: Root) => s.coupon);
   console.log("coupon", coupon);
+  const [size, setSize] = useState({
+    width: 600,
+    height: 1950,
+  });
   const [springValue, set] = useSpring(() => ({
     opacity: 1,
   }));
@@ -66,6 +75,13 @@ const WinCase: React.FC = () => {
     // navigate("/");
   };
 
+  useEffect(() => {
+    setSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  }, []);
+
   return (
     <Box className="lotto-win" sx={styles.container}>
       <animated.div
@@ -74,15 +90,7 @@ const WinCase: React.FC = () => {
           ...styles.img,
         }}
       >
-        <StaticImage
-          src="../images/win-dev.png"
-          loading="eager"
-          width={600}
-          quality={95}
-          formats={["auto", "webp", "avif"]}
-          alt=""
-          style={{ marginBottom: `var(--space-3)` }}
-        />
+        <img src={img} style={styles.img} />
       </animated.div>
       <Box sx={styles.ticket}>
         <TicketUnit {...coupon} handleClick={handleClick} />

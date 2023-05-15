@@ -5,6 +5,7 @@ import { Box, Button } from "@mui/material";
 import { useSpring, animated } from "@react-spring/web";
 
 import { updateTopState } from "../stores/topState";
+import img from "../images/next-dev.png";
 import type { Root } from "../stores";
 
 const styles = {
@@ -17,8 +18,8 @@ const styles = {
     minHeight: "100vh",
   },
   img: {
-    width: "100%",
-    aspectRatio: 1290 / 1780,
+    width: "100vw",
+    height: "100vh",
     objectFit: "cover",
   },
   button: {
@@ -74,15 +75,7 @@ const WinCase: React.FC = () => {
           ...styles.img,
         }}
       >
-        <StaticImage
-          src="../images/next-dev.png"
-          loading="eager"
-          width={600}
-          quality={95}
-          formats={["auto", "webp", "avif"]}
-          alt=""
-          style={{ marginBottom: `var(--space-3)` }}
-        />
+        <img src={img} style={styles.img} />
       </animated.div>
       <Button variant="contained" onClick={retryClick} sx={styles.button}>
         もう一度引く
