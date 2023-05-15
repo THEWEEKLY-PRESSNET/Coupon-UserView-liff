@@ -4,8 +4,8 @@ import { Box, Button } from "@mui/material";
 import { useSpring, animated } from "@react-spring/web";
 
 import { updateTopState } from "../stores/topState";
-import covor from "../images/start-dev.png";
-import video from "../images/gsample.mp4";
+import covor from "../images/open.png";
+import video from "../images/movie.mp4";
 import postLotto from "../providers/PostLotto";
 import { updateCoupon } from "../stores/coupon";
 
@@ -19,8 +19,8 @@ const styles = {
     minHeight: "100vh",
   },
   video: {
-    width: "100%",
-    height: "100%",
+    width: "100vh",
+    height: "100vw",
     objectFit: "cover",
   },
   animation: {

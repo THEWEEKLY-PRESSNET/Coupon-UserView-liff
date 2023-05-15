@@ -2,14 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 
-import TestComponent from "../../App";
+import TestComponent from "../../Lotto/DoneCase";
 import { theme } from "../../styles/theme";
 import store from "../../stores";
 import { updateTopState } from "../../stores/topState";
 import { updateArticles } from "../../stores/articles";
 
 import type { Root } from "../../stores";
-import { getArticle } from "../../providers/GetArticle";
 
 const mockData: Root = {
   topState: {
@@ -40,19 +39,26 @@ const TestApp: React.FC = () => {
   // console.log("rst", rState);
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(updateTopState(mockData.topState));
-  //   dispatch(updateArticles(mockData.articles));
-  // }, []);
   useEffect(() => {
-    const setState = async () => {
-      const { result, payload } = await getArticle({ userId: "" });
-      if (result) {
-        dispatch(updateArticles(result.payload));
-      }
-    };
-    setState();
+    dispatch(updateTopState(mockData.topState));
+    dispatch(updateArticles(mockData.articles));
   }, []);
+  // useEffect(() => {
+  //   const setTopState = async () => {
+  //     const { result, payload } = await useLogin();
+  //     if (result) {
+  //       dispatch(
+  //         updateTopState({
+  //           login: {
+  //             logged: true,
+  //             ...payload,
+  //           },
+  //         })
+  //       );
+  //     }
+  //   };
+  //   setTopState();
+  // }, []);
   return <TestComponent />;
 };
 
