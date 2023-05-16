@@ -27,6 +27,7 @@ const styles = {
   img: {
     width: "100vw",
     height: "100vh",
+    maxWidth: "600px",
     // height: "100%",
 
     // height: "100vh",

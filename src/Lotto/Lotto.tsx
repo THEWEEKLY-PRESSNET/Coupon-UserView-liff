@@ -22,15 +22,17 @@ const styles = {
     // width: "100%",
     // height: "100%",
     width: "100vw",
+    maxWidth: "600px",
     height: "100vh",
+    // maxHeight: "600px",
     objectFit: "cover",
   },
-  animation: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    aspectRatio: 1290 / 1780,
-  },
+  // animation: {
+  //   position: "absolute",
+  //   top: 0,
+  //   width: "100%",
+  //   aspectRatio: 1290 / 1780,
+  // },
   button: {
     position: "absolute",
     top: "70%",
@@ -120,7 +122,7 @@ const Lotto: React.FC = () => {
         onClick={handleClick}
         style={{
           opacity,
-          ...styles.animation,
+          ...styles.video,
         }}
       >
         <video muted poster={covor} style={styles.video} ref={videoRef}>
