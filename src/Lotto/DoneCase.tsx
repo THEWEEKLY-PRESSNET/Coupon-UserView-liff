@@ -5,7 +5,7 @@ import { Box, Button } from "@mui/material";
 import { useSpring, animated } from "@react-spring/web";
 
 import { updateTopState } from "../stores/topState";
-import img from "../images/next-dev.png";
+import img from "../images/next.png";
 import type { Root } from "../stores";
 
 const styles = {
