@@ -85,6 +85,14 @@ const Header: React.FC = () => {
   ];
   // console.log("article", articles);
 
+  const randomArticle = articles[Math.floor(Math.random() * articles.length)];
+  console.log("randomArticle", randomArticle);
+
+  const updatedRandomArticle = articles.filter(article => article !== randomArticle);
+  console.log("updatedRandomArticle",updatedRandomArticle);
+
+  const finalRandomArticle = updatedRandomArticle[Math.floor(Math.random() * articles.length)];
+
   return (
     <Box className="footernav" sx={styles.container}>
       <Box sx={styles.titleBox}>
@@ -95,17 +103,17 @@ const Header: React.FC = () => {
       </Box>
       <Box sx={styles.body}>
         <Box sx={styles.img}>
-          {<ImgBox width={80} height={54} size="cover" img={articleImg} /> || (
+          {<ImgBox width={80} height={54} size="cover" img={finalRandomArticle && finalRandomArticle.articleImg} /> || (
             <Box sx={styles.dummy} />
           )}
         </Box>
         <Box sx={styles.article}>
           <Typography variant="note" sx={styles.artText}>
-            {articleTitle}
+            {finalRandomArticle && finalRandomArticle.articleTitle}
           </Typography>
           <Typography
             component="a"
-            href={articleUrl || "https://www.higashihiroshima-digital.com/"}
+            href={finalRandomArticle && finalRandomArticle.articleUrl || "https://www.higashihiroshima-digital.com/"}
             sx={styles.link}
           >
             記事を読む ＞
