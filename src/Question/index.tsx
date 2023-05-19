@@ -148,25 +148,25 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
 
     //   add obj
     // const newNewArr = () => {
-      if (event.target.checked) {
-        // return newArr;
-       newArr.push({ key: index, label: label });
-       dispatch(
+    if (event.target.checked) {
+      // return newArr;
+      newArr.push({ key: index, label: label });
+      dispatch(
         updateQuestion({
           interesting: newArr
         })
       );
-      } else {
-        const hoge2 = newArr.filter(o => o.key !== index);
-        dispatch(
-          updateQuestion({
-            interesting: hoge2
-          })
-        );
-      }
+    } else {
+      const hoge2 = newArr.filter(o => o.key !== index);
+      dispatch(
+        updateQuestion({
+          interesting: hoge2
+        })
+      );
+    }
     // }
-    
-      console.log("newNew2", newArr)
+
+    console.log("newNew2", newArr)
 
     // if (event.target.checked) {
     //   newArr.push({ key: index, label: label });
@@ -174,19 +174,19 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     //   const popedArr = newArr.filter(o => o.key !== index);
     //   console.log("popedArr", popedArr);
 
-      // dispatch(
-      //   updateQuestion({
-      //     interesting: newArr
-      //   })
-      // );
+    // dispatch(
+    //   updateQuestion({
+    //     interesting: newArr
+    //   })
+    // );
 
-  //   dispatch(
-  //     updateQuestion({
-  //       interesting:
-  //         (event.target.checked && newArr) ||
-  //         newArr.filter(o => o.key !== index),
-  //     })
-  //   );
+    //   dispatch(
+    //     updateQuestion({
+    //       interesting:
+    //         (event.target.checked && newArr) ||
+    //         newArr.filter(o => o.key !== index),
+    //     })
+    //   );
   };
 
 
@@ -232,6 +232,12 @@ const Question: React.FC<props> = () => {
       return true;
     }
   })();
+
+
+  const handleClick = () =>{
+
+  }
+
 
   return (
     <Box sx={styles.container}>
@@ -288,6 +294,7 @@ const Question: React.FC<props> = () => {
       <Button variant="contained" disabled={allChecked}>
         ボタン
       </Button>
+      <Button onClick={handleClick} disabled={allChecked}>Submit</Button>
     </Box>
   );
 };
