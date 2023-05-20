@@ -45,8 +45,6 @@ const styles = {
   },
 };
 
-// てすと
-
 type props = {
   children: ReactNode;
 };
@@ -125,8 +123,8 @@ const Selects = ({ labels, value, setValue, index }) => {
 
 const Checks = ({ labels, setValue, newInterestingLabels }) => {
   const question = useSelector(s => s.question);
-  console.log("question", question);
   const questionInteresting = question.interesting;
+  console.log("question", question);
   console.log("questionInteresting1", questionInteresting);
   // const value = false;
   const dispatch = useDispatch();
@@ -222,6 +220,7 @@ const Question: React.FC<props> = () => {
   console.log("interesting1", interesting);
 
   const question = useSelector(s => s.question);
+  const questionInteresting = question.interesting;
   console.log("question", question);
 
   const allChecked = (() => {
@@ -234,10 +233,20 @@ const Question: React.FC<props> = () => {
   })();
 
 
-  const handleClick = () =>{
-
-  }
-
+  const handleClick = (() => {
+    if (gender && age && living !== null) {
+      if (questionInteresting[0]) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+    else {
+      return true;
+    }
+  })();
+  console.log("handleClick", typeof handleClick);
 
   return (
     <Box sx={styles.container}>
@@ -294,7 +303,7 @@ const Question: React.FC<props> = () => {
       <Button variant="contained" disabled={allChecked}>
         ボタン
       </Button>
-      <Button onClick={handleClick} disabled={allChecked}>Submit</Button>
+      <Button disabled={handleClick}>Submit</Button>
     </Box>
   );
 };
