@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import type { Gender, Age, Living, Interesting } from "src/stores/question";
+import { Check } from "@mui/icons-material";
 
 const styles = {
   container: {
@@ -57,6 +58,7 @@ const interestingLabels = [
 
 const Selects = ({ labels, value, setValue }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log("checked1");
     setValue((event.target as HTMLInputElement).value);
   };
 
@@ -82,9 +84,18 @@ const Question: React.FC<props> = () => {
   const [interesting, setInteresting] = useState<Interesting | null>(null);
   console.log("gender", gender);
 
+  // const somethingChanged = () => {
+    if (gender || age || living || interesting != null) {
+      console.log("checked");
+    }
+    if (gender != null) {
+      console.log("gender-checked");
+    }
+  // };
+  
   return (
     <Box sx={styles.container}>
-      <Typography sx={styles.capTitle}>アンケート</Typography>
+      <Typography sx={styles.capTitle}>アンケート!!</Typography>
       <Paper sx={styles.body}>
         <Typography>
           お友達登録ありがとうございます。

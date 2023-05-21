@@ -105,6 +105,7 @@ export const requestPatch = ({ url, urlParams, bodyParams }: RequestParam) => {
   });
 };
 
+
 export const requestDelete = ({ url, params }: typeRequest) => {
   return axios.delete(url, {
     headers: {
