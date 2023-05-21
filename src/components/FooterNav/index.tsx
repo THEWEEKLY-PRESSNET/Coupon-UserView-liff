@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { Box, Divider } from "@mui/material";
 
 import HomeBtn from "./Btn.Home";
 import CouponBtn from "./Btn.Coupon";
 import LineBtn from "./Btn.Line";
+import { updateTopState } from "../../stores/topState";
 
 const styles = {
   container: {
@@ -18,22 +20,37 @@ const styles = {
   btnWrapper: {
     display: "flex",
     alignItems: "center",
+    flexGrow: 1,
     cursor: "pointer",
   },
 };
 
 const FooterNav: React.FC = () => {
+  const dispatch = useDispatch();
+  const couponsClick = () => {
+    dispatch(
+      updateTopState({
+        view: "top",
+      })
+    );
+  };
+  const homeClick = () => {
+    window.location.href = "https://www.higashihiroshima-digital.com/";
+  };
+  const lineClick = () => {
+    window.location.href = "https://lin.ee/f62Smod";
+  };
   return (
     <Box className="footernav" sx={styles.container}>
-      <Box sx={styles.btnWrapper}>
+      <Box onClick={homeClick} sx={styles.btnWrapper}>
         <HomeBtn />
       </Box>
       <Divider orientation="vertical" flexItem sx={styles.divider} />
-      <Box sx={styles.btnWrapper}>
+      <Box onClick={couponsClick} sx={styles.btnWrapper}>
         <CouponBtn />
       </Box>
       <Divider orientation="vertical" flexItem sx={styles.divider} />
-      <Box sx={styles.btnWrapper}>
+      <Box onClick={lineClick} sx={styles.btnWrapper}>
         <LineBtn />
       </Box>
     </Box>

@@ -105,14 +105,14 @@ export const requestPatch = ({ url, urlParams, bodyParams }: RequestParam) => {
   });
 };
 
-export const requestDelete = ({ url, urlParams, bodyParams }: RequestParam) => {
-  const requestUrl = (urlParams && _appendUrlParams({ url, urlParams })) || url;
-  return axios.delete(requestUrl, {
+
+export const requestDelete = ({ url, params }: typeRequest) => {
+  return axios.delete(url, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    data: bodyParams,
+    data: params,
   });
 };
 

@@ -5,13 +5,14 @@ export type TopState = {
     | "login"
     | "lotted"
     | "stoped"
-    | "lotte"
+    | "lotto"
     | "lose"
     | "win"
     | "coupons"
     | "top"
     | "detail"
-    | "use";
+    | "use"
+    | "used";
   isStop: boolean;
   lottered: boolean;
 };

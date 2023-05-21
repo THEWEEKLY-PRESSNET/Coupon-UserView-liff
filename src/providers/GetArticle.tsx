@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { requestGet, promiseResolver, typeRequest } from "./requestMethods";
-// import { updateArticles } from "../stores/articles";
+import { updateArticles } from "../stores/articles";
 // import { updateSnackBar } from "../../stores/snackBar";
 
 type Params = {
@@ -29,7 +29,7 @@ const GetArticles: React.FC<Params> = ({ userId }) => {
       const response = await getArticle({ userId });
       if (response.result) {
         console.log("success", response.payload);
-        // dispatch(updateArticles(response.payload));
+        dispatch(updateArticles(response.payload));
       } else {
         // dispatch(
         //   updateSnackBar({

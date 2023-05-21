@@ -96,7 +96,6 @@ const Selects = ({ labels, value, setValue, index }) => {
   console.log("value1", value);
   const dispatch = useDispatch();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("event", event);
     setValue((event.target as HTMLInputElement).value);
     const newValue = event.target.value;
     dispatch(
@@ -247,6 +246,10 @@ const Question: React.FC<props> = () => {
     }
   })();
   console.log("handleClick", typeof handleClick);
+
+  interestingLabels[0].checkbox = true;
+
+  console.log("inte", interestingLabels);
 
   return (
     <Box sx={styles.container}>

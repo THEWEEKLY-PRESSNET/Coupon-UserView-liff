@@ -22,12 +22,8 @@ const styles = {
 };
 
 const HomeBtn = () => {
-  const handleClick = () => {
-    window.location.href = "https://www.higashihiroshima-digital.com/";
-  };
-
   return (
-    <Box className="homebtn" onClick={handleClick} sx={styles.container}>
+    <Box className="homebtn" sx={styles.container}>
       <Box sx={styles.img}>
         <StaticImage
           src="../../images/home.png"

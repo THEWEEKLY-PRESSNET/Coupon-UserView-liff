@@ -5,7 +5,9 @@ import type { SxProps } from "@mui/system/styleFunctionSx/styleFunctionSx";
 import ModalBox from "./ModalBox";
 import Use from "./Body.use";
 import Used from "./Body.used";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { updateModal } from "../stores/modal";
 import { Root } from "../stores";
 
 const styles = {
@@ -24,13 +26,16 @@ type Props = {
   sx?: SxProps;
 };
 
-const ModalUse: React.FC<Props> = () => {
+const ModalUse: React.FC = () => {
   const { body, isModal } = useSelector((s: Root) => s.modal);
-  console.log("body", "isModal", body, isModal);
-  const [open, setOpen] = useState(isModal);
-  console.log("open", open);
-  const handleClose = () => {
-    setOpen(false);
+  // console.log("body", "isModal", body, isModal);
+  const dispatch = useDispatch();
+  const setOpen = () => {
+    dispatch(
+      updateModal({
+        isModal: !isModal,
+      })
+    );
   };
 
   return (

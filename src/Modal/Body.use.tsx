@@ -1,5 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
+
+import { updateModal } from "../stores/modal";
 
 const styles = {
   container: {
@@ -30,7 +33,14 @@ type Props = {
 };
 
 const ModalIndex: React.FC<Props> = ({ setOpen }) => {
-  const handleClose = () => {};
+  const dispatch = useDispatch();
+  const handleUse = () => {
+    dispatch(
+      updateModal({
+        body: "used",
+      })
+    );
+  };
 
   return (
     <Box sx={styles.container}>
@@ -41,7 +51,12 @@ const ModalIndex: React.FC<Props> = ({ setOpen }) => {
         店舗の指示がある場合は、ご自身で使用済みにしてください。
       </Typography>
       <Box sx={styles.buttonBox}>
-        <Button color="primary" variant="contained" sx={styles.button}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={handleUse}
+          sx={styles.button}
+        >
           使用済みにする
         </Button>
         <Button

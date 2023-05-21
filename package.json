@@ -1,15 +1,16 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "東広島デジタル　クーポンガチャ",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "1日１回クーポンガチャ 東広島のお得をゲット",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "uniwork <uniwork.contact@gmail.com>",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@line/liff": "^2.22.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.1",
+    "@react-spring/web": "^9.7.2",
     "@reduxjs/toolkit": "^1.9.4",
     "gatsby": "^5.8.1",
     "gatsby-plugin-image": "^3.8.0",
@@ -48,9 +49,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/THEWEEKLY-PRESSNET/Coupon-UserView-dev"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/THEWEEKLY-PRESSNET/Coupon-UserView-dev/issues"
   }
 }

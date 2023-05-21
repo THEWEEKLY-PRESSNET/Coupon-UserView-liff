@@ -1,10 +1,11 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Box, Typography } from "@mui/material";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Paper, Typography } from "@mui/material";
 
 import CouponUnit from "../components/TicketUnit";
 import type { Root } from "../stores";
-import type { Ticket } from "../stores/coupon";
+import { Ticket, updateCoupon } from "../stores/coupon";
+import { updateTopState } from "../stores/topState";
 
 const styles = {
   container: {
@@ -12,13 +13,17 @@ const styles = {
     flexDirection: "column",
     // justifyContent: "center",
     alignItems: "center",
-    // pt: 4,
-    px: "auto",
+    width: "100%",
   },
-  title: {
+  titleBody: {
     position: "fixed",
     width: "100%",
     maxWidth: "600px",
+    pb: 2,
+    zIndex: 5,
+    borderRadius: 0,
+  },
+  title: {
     textAlign: "center",
     fontSize: "12px",
     fontWeight: 600,
@@ -36,7 +41,7 @@ const styles = {
     width: "100%",
     boxSizing: "border-box",
     p: "10px",
-    mt: 5,
+    mt: 7,
     mb: 10,
   },
 };
@@ -46,13 +51,32 @@ type Props = {
 };
 
 const Test: React.FC<Props> = ({ coupons }) => {
+  const dispatch = useDispatch();
+  const handleClick = useCallback(coupon => {
+    dispatch(updateCoupon({ ...coupon }));
+    dispatch(
+      updateTopState({
+        view: "detail",
+      })
+    );
+  }, []);
+
   return (
-    <Box sx={styles.container}>
-      <Typography sx={styles.title}>お持ちのクーポン一覧</Typography>
+    <Box className="coupons-list" sx={styles.container}>
+      <Paper elevation={2} sx={styles.titleBody}>
+        <Typography sx={styles.title}>お持ちのクーポン一覧</Typography>
+      </Paper>
       <Box sx={styles.coupons}>
-        {coupons.map(coupon => (
-          <CouponUnit {...coupon} />
-        ))}
+        {coupons.map(coupon => {
+          // console.log("co", coupon);
+          return (
+            <CouponUnit
+              {...coupon}
+              handleClick={() => handleClick(coupon)}
+              key={coupon.issuedCouponId}
+            />
+          );
+        })}
       </Box>
     </Box>
   );

@@ -1,7 +1,8 @@
-export default {
+module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true,
     },
     "extends": [
         "eslint:recommended",
@@ -23,7 +24,7 @@ export default {
     ],
     "rules": {
         "no-use-before-define": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        'no-multiple-empty-lines': [3, { "max": 3 }]
+        "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
+        'no-multiple-empty-lines': [2, { "max": 2 }]
     }
 }

@@ -37,6 +37,12 @@ const styles = {
     fontSize: "12px",
     lineHeight: "18px",
   },
+  limitRed: {
+    color: "#E74343",
+    fontWeight: 600,
+    fontSize: "12px",
+    lineHeight: "18px",
+  },
   description: {
     py: 1,
   },
@@ -56,35 +62,50 @@ const styles = {
 //   couponDescription: string;
 //   storeImg: string;
 //   storeUrl: string;
+
 // };
 
 const Test: React.FC<Detail> = ({
   couponTitleBig,
-  valiedStart,
+  validStart,
   storeName,
-  valiedEnd,
+  validEnd,
   couponDescription,
   storeImg,
   storeUrl,
+  red,
+  hide,
 }) => {
-  const startStr = dateTrance(valiedStart);
-  const valiedStr = dateTrance(valiedEnd);
+  const startStr = dateTrance(validStart);
+  const valiedStr = dateTrance(validEnd);
 
   return (
     <Box sx={styles.container}>
       <Box sx={styles.ticket}>
         <Coupon couponTitleBig={couponTitleBig} />
       </Box>
-      <Typography
-        sx={styles.start}
-      >{`${startStr}からご利用いただけます。`}</Typography>
+      {hide ? (
+        ""
+      ) : (
+        <Typography
+          sx={styles.start}
+        >{`${startStr}からご利用いただけます。`}</Typography>
+      )}
       <Typography sx={styles.store}>{storeName || "description"}</Typography>
-      <Typography sx={styles.limit}>{`有効期限　${valiedStr}まで`}</Typography>
+      {red ? (
+        <Typography
+          sx={styles.limitRed}
+        >{`有効期限　${valiedStr}まで`}</Typography>
+      ) : (
+        <Typography
+          sx={styles.limit}
+        >{`有効期限　${valiedStr}まで`}</Typography>
+      )}
       <Typography sx={styles.description}>
         {couponDescription || "description"}
       </Typography>
       <Box>
-        <ImgBox img={storeImg} width={100} height={100} />
+        <ImgBox img={storeImg} width={100} height={100} size="contain" />
       </Box>
       <Typography
         component="a"

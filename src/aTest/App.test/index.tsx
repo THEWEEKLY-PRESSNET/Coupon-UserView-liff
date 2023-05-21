@@ -9,6 +9,7 @@ import { updateTopState } from "../../stores/topState";
 import { updateArticles } from "../../stores/articles";
 
 import type { Root } from "../../stores";
+import { getArticle } from "../../providers/GetArticle";
 
 const mockData: Root = {
   topState: {
@@ -39,26 +40,19 @@ const TestApp: React.FC = () => {
   // console.log("rst", rState);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(updateTopState(mockData.topState));
-    dispatch(updateArticles(mockData.articles));
-  }, []);
   // useEffect(() => {
-  //   const setTopState = async () => {
-  //     const { result, payload } = await useLogin();
-  //     if (result) {
-  //       dispatch(
-  //         updateTopState({
-  //           login: {
-  //             logged: true,
-  //             ...payload,
-  //           },
-  //         })
-  //       );
-  //     }
-  //   };
-  //   setTopState();
+  //   dispatch(updateTopState(mockData.topState));
+  //   dispatch(updateArticles(mockData.articles));
   // }, []);
+  useEffect(() => {
+    const setState = async () => {
+      const { result, payload } = await getArticle({ userId: "" });
+      if (result) {
+        dispatch(updateArticles(result.payload));
+      }
+    };
+    setState();
+  }, []);
   return <TestComponent />;
 };
 

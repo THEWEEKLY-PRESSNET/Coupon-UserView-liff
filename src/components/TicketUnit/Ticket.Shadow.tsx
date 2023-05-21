@@ -13,10 +13,9 @@ const styles = {
     height: "calc(100% - 16px)",
     top: "8px",
     left: "3px",
-    // mx: "3px",
-    // my: "8px",
     borderRadius: "5px",
     bgcolor: "#8B8B8BD9",
+    cursor: "auto",
   },
 
   label: {
@@ -28,14 +27,14 @@ const styles = {
   },
 };
 
-const Flag = () => {
+const Flag: React.FC<{ text: string }> = ({ text }) => {
   const handleClick = () => {
     window.location.href = "https://lin.ee/f62Smod";
   };
 
   return (
     <Box className="flag-shadow" sx={styles.container}>
-      <Typography sx={styles.label}>使用済み</Typography>
+      <Typography sx={styles.label}>{text}</Typography>
     </Box>
   );
 };
