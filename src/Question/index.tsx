@@ -19,9 +19,12 @@ import {
   Button,
 } from "@mui/material";
 
-import type { Gender, Age, Living, Interesting } from "src/stores/question";
+import type { Gender, Age, Living, Interesting } from "../stores/question";
 
 import { updateQuestion } from "../stores/question";
+import { updateTopState } from "../stores/topState";
+import type { Root } from "../stores";
+import postQuestion from "../providers/PostQuestions";
 
 const styles = {
   container: {
@@ -135,55 +138,34 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     // console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
-    let newArr = [...questionInteresting];
-    console.log("newArr1", newArr);
+    //オブジェクトとして扱う そのためにどうする？
+
+    // let newArr = [...questionInteresting];
+    // console.log("newArr1", newArr);
     const label = interestingLabels.filter(o => {
       return o.key === index;
     })[0].label;
-    //クリックされたオブジェクトのlabelのファッションなど
-    console.log("label3", label);
+
 
     //   add obj
-    // const newNewArr = () => {
     if (event.target.checked) {
-      // return newArr;
-      newArr.push({ key: index, label: label });
+      const objItem = {...questionInteresting};
+      const newObj = Object.assign({}, { key: index, label: label });
+      // newArr.push({ key: index, label: label });
+      // const obj = Object.fromEntries(newArr);
       dispatch(
         updateQuestion({
-          interesting: newArr
+          interesting: newObj
         })
       );
     } else {
-      const hoge2 = newArr.filter(o => o.key !== index);
-      dispatch(
-        updateQuestion({
-          interesting: hoge2
-        })
-      );
+      // const updatedNewArr = newArr.filter(o => o.key !== index);
+      // dispatch(
+      //   updateQuestion({
+      //     interesting: updatedNewArr
+      //   })
+      // );
     }
-    // }
-
-    console.log("newNew2", newArr)
-
-    // if (event.target.checked) {
-    //   newArr.push({ key: index, label: label });
-    // } else {
-    //   const popedArr = newArr.filter(o => o.key !== index);
-    //   console.log("popedArr", popedArr);
-
-    // dispatch(
-    //   updateQuestion({
-    //     interesting: newArr
-    //   })
-    // );
-
-    //   dispatch(
-    //     updateQuestion({
-    //       interesting:
-    //         (event.target.checked && newArr) ||
-    //         newArr.filter(o => o.key !== index),
-    //     })
-    //   );
   };
 
 
@@ -221,6 +203,7 @@ const Question: React.FC<props> = () => {
   const question = useSelector(s => s.question);
   const questionInteresting = question.interesting;
   console.log("question", question);
+  const dispatch = useDispatch();
 
   const allChecked = (() => {
     if (gender && age && living && interesting !== null) {
@@ -250,6 +233,42 @@ const Question: React.FC<props> = () => {
   interestingLabels[0].checkbox = true;
 
   console.log("inte", interestingLabels);
+
+  //sliceの答えを格納 JSON形式に直す
+  // const allAnswers = [...question];
+  // console.log("allAnswers", allAnswers);
+  // const jsonAllAnswers = JSON.stringify(allAnswers);
+  // console.log(jsonAllAnswers);
+
+  // const questionData = 
+
+  //postQuestionを実行、引数にjsonAllAnswersを格納する
+
+  const { view } = useSelector((s: Root) => s.topState);
+
+  const onClickSubmit = async () => {
+    const questionData = { ...question };
+    const interestingArr = questionData.interesting;
+    const interestingObj = interestingArr.reduce((obj, item) => {
+      obj[item.key] = item.label;
+      return obj;
+    }, {});
+    console.log("interestingObj", interestingObj);
+    //interestingObjをquestionData.interestingへ格納
+    dispatch(
+      updateQuestion({
+        interesting: interestingObj
+      })
+    );
+    const returnData = await postQuestion(questionData);
+    if (resultData.result) {
+      dispatch(
+        updateTopState({
+          view: "top"
+        })
+      )
+    }
+  };
 
   return (
     <Box sx={styles.container}>
@@ -306,7 +325,7 @@ const Question: React.FC<props> = () => {
       <Button variant="contained" disabled={allChecked}>
         ボタン
       </Button>
-      <Button disabled={handleClick}>Submit</Button>
+      <Button disabled={handleClick} onClick={() => onClickSubmit()}>Submit</Button>
     </Box>
   );
 };

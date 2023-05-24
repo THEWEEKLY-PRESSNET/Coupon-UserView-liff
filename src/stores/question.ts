@@ -49,7 +49,7 @@ const initialState: Question = {
   gender: "",
   age: "",
   living: "",
-  interesting: [],
+  interesting: {},
 };
 console.log("initialState1",initialState);
 
