@@ -25,24 +25,45 @@ import { updateQuestion } from "../stores/question";
 
 const styles = {
   container: {
-    bgcolor: "#F5F5F5",
+    bgcolor: "#FFFEE8",
+    padding: "40px 15px"
   },
   body: {
     width: "100%",
+    bgcolor: "white",
+    color: "#404040",
+    borderRadius: "20px"
   },
   title: {
-    width: "100%",
-    pl: 2,
+    display: "block",
+    padding: "2px 20px",
     bgcolor: "#FFFEE8",
+    width: 'calc(100% - 40px)',
+    margin: "auto",
+    fontSize: "12px",
+    fontWeight: 600,
+    lineHeight: "1",
   },
   selects: {
     display: "flex",
     flexDirection: "row",
   },
+  lead: {
+    padding: "20px 22px"
+  },
   capTitle: {
     fontSize: "18px",
     fontWeight: 600,
+    textAlign: "center",
+    mb: "20px"
   },
+  capText: {
+    fontSize: "12px",
+    lineHeight: "18px"
+  },
+  inputs: {
+    padding: "10px 30px",
+  }
 };
 
 type props = {
@@ -252,17 +273,19 @@ const Question: React.FC<props> = () => {
   console.log("inte", interestingLabels);
 
   return (
-    <Box sx={styles.container}>
-      <Typography sx={styles.capTitle}>アンケートです</Typography>
+    <Box sx={styles.container} className="question">
       <Paper sx={styles.body}>
-        <Typography>
-          お友達登録ありがとうございます。
-          クーポン企画に参加していただくために、初回だけアンケートにご協力ください。
-        </Typography>
+        <Box sx={styles.lead}>
+          <Typography sx={styles.capTitle}>アンケート</Typography>
+          <Typography sx={styles.capText}>
+            お友達登録ありがとうございます。<br />
+            クーポン企画に参加していただくために、初回だけアンケートにご協力ください。
+          </Typography>
+        </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
           性別
         </Typography>
-        <Box>
+        <Box sx={styles.inputs}>
           <Selects
             labels={genderLabels}
             value={gender}
@@ -273,7 +296,7 @@ const Question: React.FC<props> = () => {
         <Typography component="p" variant="subtitle" sx={styles.title}>
           年代
         </Typography>
-        <Box>
+        <Box sx={styles.inputs}>
           <Selects
             labels={ageLabels}
             value={age}
@@ -284,7 +307,7 @@ const Question: React.FC<props> = () => {
         <Typography component="p" variant="subtitle" sx={styles.title}>
           居住地
         </Typography>
-        <Box>
+        <Box sx={styles.inputs}>
           <Selects
             labels={livingLabels}
             value={living}
@@ -295,7 +318,7 @@ const Question: React.FC<props> = () => {
         <Typography component="p" variant="subtitle" sx={styles.title}>
           興味・関心があるジャンル
         </Typography>
-        <Box>
+        <Box sx={styles.inputs}>
           <Checks
             labels={newInterestingLabels}
             setValue={setInteresting}
@@ -307,7 +330,7 @@ const Question: React.FC<props> = () => {
         ボタン
       </Button>
       <Button disabled={handleClick}>Submit</Button>
-    </Box>
+    </Box >
   );
 };
 
