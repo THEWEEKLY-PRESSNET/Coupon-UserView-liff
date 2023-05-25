@@ -51,7 +51,6 @@ const initialState: Question = {
   living: "",
   interesting: {},
 };
-console.log("initialState1",initialState);
 
 const slice = createSlice({
   name: "question",

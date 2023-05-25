@@ -25,6 +25,7 @@ import { updateQuestion } from "../stores/question";
 import { updateTopState } from "../stores/topState";
 import type { Root } from "../stores";
 import postQuestion from "../providers/PostQuestions";
+import { Key } from "@mui/icons-material";
 
 const styles = {
   container: {
@@ -123,9 +124,9 @@ const Selects = ({ labels, value, setValue, index }) => {
   );
 };
 
-const Checks = ({ labels, setValue, newInterestingLabels }) => {
+const Checks = ({ value, setValue, index }) => {
   const question = useSelector(s => s.question);
-  const questionInteresting = question.interesting;
+  const questionInteresting = { ...question.interesting };
   console.log("question", question);
   console.log("questionInteresting1", questionInteresting);
   // const value = false;
@@ -134,23 +135,30 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
     console.log("event2", event);
     console.log("key tag", index);
-    // const newArr = setValue((event.target as HTMLInputElement).checked);
+    const newArr = setValue((event.target as HTMLInputElement).checked);
     // console.log("newArr", newArr);
     const newValue = event.target.checked;
     console.log("newValue", newValue);
     //オブジェクトとして扱う そのためにどうする？
 
-    // let newArr = [...questionInteresting];
-    // console.log("newArr1", newArr);
+    //データにある日本語のラベル（これはOK）
     const label = interestingLabels.filter(o => {
       return o.key === index;
     })[0].label;
 
+    console.log("questionInteresting2", questionInteresting);
 
-    //   add obj
+    //今チェックされた一つの項目
+    // const objItem = {...questionInteresting};
+    // console.log("objItem", objItem);
+
     if (event.target.checked) {
-      const objItem = {...questionInteresting};
-      const newObj = Object.assign({}, { key: index, label: label });
+      const newData = { key: index, label: label };
+      //一番最後に押したチェックしかスライスに渡せない
+      //useEffect使う？
+      // const newObj = Object.assign(questionInteresting, newData);
+      const newObj = { ...questionInteresting, newData };
+      console.log("newObj", newObj);
       // newArr.push({ key: index, label: label });
       // const obj = Object.fromEntries(newArr);
       dispatch(
@@ -168,6 +176,7 @@ const Checks = ({ labels, setValue, newInterestingLabels }) => {
     }
   };
 
+  // const newObj = { gourmet: { key: "gourmet", label: "グルメ" }, shopping: { key: "shoping", label: "ショッピング" } }
 
   return (
     <Box>
@@ -190,59 +199,37 @@ const Question: React.FC<props> = () => {
   const [gender, setGender] = useState<Gender | null>(null);
   const [age, setAge] = useState<Age | null>(null);
   const [living, setLiving] = useState<Living | null>(null);
-  const newInterestingLabels = interestingLabels.map(i => {
-    i.checkbox = false;
-    return i;
-  });
-  const [interesting, setInteresting] = useState<Interesting | null>(
-    newInterestingLabels
-  );
-  console.log("gender", gender);
-  console.log("interesting1", interesting);
+  const [interesting, setInteresting] = useState<Interesting | null>(null);
+  // const newInterestingLabels = interestingLabels.map(i => {
+  //   i.checkbox = false;
+  //   return i;
+  // });
 
   const question = useSelector(s => s.question);
-  const questionInteresting = question.interesting;
+  // const questionInteresting = question.interesting;
   console.log("question", question);
   const dispatch = useDispatch();
 
-  const allChecked = (() => {
-    if (gender && age && living && interesting !== null) {
-      console.log("all-checked");
-      return false;
-    } else {
-      return true;
-    }
-  })();
+  // const allChecked = (() => {
+  //   if (gender && age && living && interesting !== null) {
+  //     console.log("all-checked");
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // })();
 
 
   const handleClick = (() => {
-    if (gender && age && living !== null) {
-      if (questionInteresting[0]) {
-        return false;
-      }
-      else {
-        return true;
-      }
+    if (gender && age && living && interesting !== null) {
+      return false;
     }
     else {
       return true;
     }
   })();
-  console.log("handleClick", typeof handleClick);
 
-  interestingLabels[0].checkbox = true;
-
-  console.log("inte", interestingLabels);
-
-  //sliceの答えを格納 JSON形式に直す
-  // const allAnswers = [...question];
-  // console.log("allAnswers", allAnswers);
-  // const jsonAllAnswers = JSON.stringify(allAnswers);
-  // console.log(jsonAllAnswers);
-
-  // const questionData = 
-
-  //postQuestionを実行、引数にjsonAllAnswersを格納する
+  // interestingLabels[0].checkbox = true;
 
   const { view } = useSelector((s: Root) => s.topState);
 
@@ -316,15 +303,16 @@ const Question: React.FC<props> = () => {
         </Typography>
         <Box>
           <Checks
-            labels={newInterestingLabels}
             setValue={setInteresting}
-          // index="interesting"
+            value={interesting}
+            index="interesting"
+          // labels={newInterestingLabels}
           />
         </Box>
       </Paper>
-      <Button variant="contained" disabled={allChecked}>
+      {/* <Button variant="contained" disabled={allChecked}>
         ボタン
-      </Button>
+      </Button> */}
       <Button disabled={handleClick} onClick={() => onClickSubmit()}>Submit</Button>
     </Box>
   );
