@@ -25,14 +25,15 @@ import { updateQuestion } from "../stores/question";
 
 const styles = {
   container: {
-    bgcolor: "#FFFEE8",
+    bgcolor: "#FCFAC7",
     padding: "40px 15px"
   },
   body: {
     width: "100%",
     bgcolor: "white",
     color: "#404040",
-    borderRadius: "20px"
+    borderRadius: "20px",
+    boxShadow: "none",
   },
   title: {
     display: "block",
@@ -63,6 +64,20 @@ const styles = {
   },
   inputs: {
     padding: "10px 30px",
+  },
+  submitBtn: {
+    display: "flex",
+    fontSize: "16px",
+    borderRadius: "30px",
+    width: "190px",
+    height: "60px",
+    margin: "20px auto 0",
+  },
+  genreMemo:{
+    display: "inline-block",
+    fontSize: "12px",
+    fontWeight: 300,
+    pl: "10px"
   }
 };
 
@@ -82,7 +97,7 @@ const ageLabels = [
   { key: "40s", label: "４０代" },
   { key: "50s", label: "５０代" },
   { key: "60s", label: "６０代" },
-  { key: "70s", label: "７０代" },
+  { key: "70s", label: "７０代〜" },
 ];
 const livingLabels = [
   { key: "saijo", label: "西条" },
@@ -316,7 +331,7 @@ const Question: React.FC<props> = () => {
           />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
-          興味・関心があるジャンル
+          興味・関心があるジャンル<Box sx={styles.genreMemo}>※複数チェック可</Box>
         </Typography>
         <Box sx={styles.inputs}>
           <Checks
@@ -326,10 +341,10 @@ const Question: React.FC<props> = () => {
           />
         </Box>
       </Paper>
-      <Button variant="contained" disabled={allChecked}>
+      {/* <Button variant="contained" disabled={allChecked}>
         ボタン
-      </Button>
-      <Button disabled={handleClick}>Submit</Button>
+      </Button> */}
+      <Button variant="contained" sx={styles.submitBtn} disabled={handleClick}>送信</Button>
     </Box >
   );
 };
