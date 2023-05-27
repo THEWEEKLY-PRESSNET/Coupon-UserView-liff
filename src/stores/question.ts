@@ -52,6 +52,8 @@ const initialState: Question = {
   interesting: {},
 };
 
+console.log("interesting22", initialState.interesting);
+
 const slice = createSlice({
   name: "question",
   initialState,

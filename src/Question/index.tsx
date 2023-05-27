@@ -124,59 +124,38 @@ const Selects = ({ labels, value, setValue, index }) => {
   );
 };
 
-const Checks = ({ value, setValue, index }) => {
+const Checks = ({setValue}) => {
   const question = useSelector(s => s.question);
-  const questionInteresting = { ...question.interesting };
   console.log("question", question);
-  console.log("questionInteresting1", questionInteresting);
-  // const value = false;
+
+  // const questionInteresting = { ...question.interesting };
+  // console.log("questionInteresting1", questionInteresting);
   const dispatch = useDispatch();
 
-  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>, index) => {
-    console.log("event2", event);
-    console.log("key tag", index);
-    const newArr = setValue((event.target as HTMLInputElement).checked);
-    // console.log("newArr", newArr);
-    const newValue = event.target.checked;
-    console.log("newValue", newValue);
-    //オブジェクトとして扱う そのためにどうする？
+  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>, key) => {
+    const checked = (e.target as HTMLInputElement).checked;
+    // setValue(checked);
+    const checkedObj = { ...question.interesting, [key]: checked };
+    console.log("checkedObj", checkedObj);
 
-    //データにある日本語のラベル（これはOK）
-    const label = interestingLabels.filter(o => {
-      return o.key === index;
-    })[0].label;
-
-    console.log("questionInteresting2", questionInteresting);
-
-    //今チェックされた一つの項目
-    // const objItem = {...questionInteresting};
-    // console.log("objItem", objItem);
-
-    if (event.target.checked) {
-      const newData = { key: index, label: label };
-      //一番最後に押したチェックしかスライスに渡せない
-      //useEffect使う？
-      // const newObj = Object.assign(questionInteresting, newData);
-      const newObj = { ...questionInteresting, newData };
-      console.log("newObj", newObj);
-      // newArr.push({ key: index, label: label });
-      // const obj = Object.fromEntries(newArr);
+    if (e.target.checked) {
       dispatch(
         updateQuestion({
-          interesting: newObj
+          interesting: checkedObj
+        })
+      )
+    }
+    else {
+      const filteredObj = Object.fromEntries(
+        Object.entries(checkedObj).filter(([key, value]) => value === true)
+      );
+      dispatch(
+        updateQuestion({
+          interesting: filteredObj
         })
       );
-    } else {
-      // const updatedNewArr = newArr.filter(o => o.key !== index);
-      // dispatch(
-      //   updateQuestion({
-      //     interesting: updatedNewArr
-      //   })
-      // );
-    }
+    };
   };
-
-  // const newObj = { gourmet: { key: "gourmet", label: "グルメ" }, shopping: { key: "shoping", label: "ショッピング" } }
 
   return (
     <Box>
@@ -210,26 +189,18 @@ const Question: React.FC<props> = () => {
   console.log("question", question);
   const dispatch = useDispatch();
 
-  // const allChecked = (() => {
-  //   if (gender && age && living && interesting !== null) {
-  //     console.log("all-checked");
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // })();
-
-
-  const handleClick = (() => {
-    if (gender && age && living && interesting !== null) {
-      return false;
+  const unClickable = (() => {
+    if (gender && age && living !== null) {
+      console.log("interesting3", interesting);
+      if (Object.keys(question.interesting).length !== 0) {
+        return false;
+      }
+      return true;
     }
     else {
       return true;
     }
   })();
-
-  // interestingLabels[0].checkbox = true;
 
   const { view } = useSelector((s: Root) => s.topState);
 
@@ -313,7 +284,7 @@ const Question: React.FC<props> = () => {
       {/* <Button variant="contained" disabled={allChecked}>
         ボタン
       </Button> */}
-      <Button disabled={handleClick} onClick={() => onClickSubmit()}>Submit</Button>
+      <Button disabled={unClickable} onClick={() => onClickSubmit()}>Submit</Button>
     </Box>
   );
 };
