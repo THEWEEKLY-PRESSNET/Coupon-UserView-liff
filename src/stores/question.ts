@@ -21,8 +21,7 @@ export type Living = {
     | "";
 };
 export type Interesting = {
-  interesting:
-    | "gourmet"
+    [ "gourmet"
     | "shoping"
     | "fashion"
     | "car"
@@ -35,7 +34,7 @@ export type Interesting = {
     | "work"
     | "jobchange"
     | "travel"
-    | "money";
+    | "money" ]: boolean;
 };
 
 export type Question = {
