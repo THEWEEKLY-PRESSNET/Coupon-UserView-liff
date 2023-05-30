@@ -21,8 +21,7 @@ export type Living = {
     | "";
 };
 export type Interesting = {
-  interesting:
-    | "gourmet"
+    [ "gourmet"
     | "shoping"
     | "fashion"
     | "car"
@@ -35,7 +34,7 @@ export type Interesting = {
     | "work"
     | "jobchange"
     | "travel"
-    | "money";
+    | "money" ]: boolean;
 };
 
 export type Question = {
@@ -49,9 +48,10 @@ const initialState: Question = {
   gender: "",
   age: "",
   living: "",
-  interesting: [],
+  interesting: {},
 };
-console.log("initialState1",initialState);
+
+console.log("interesting22", initialState.interesting);
 
 const slice = createSlice({
   name: "question",
