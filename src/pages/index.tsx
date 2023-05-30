@@ -20,7 +20,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
   useEffect(() => {
     if (!state && !hash) {
       // window.location.href = "https://www.higashihiroshima-digital.com/";
-      // navigate("/404");
+      navigate("/404");
       console.log("");
     }
   }, [state, hash]);
