@@ -95,7 +95,7 @@ const ageLabels = [
   { key: "40s", label: "４０代" },
   { key: "50s", label: "５０代" },
   { key: "60s", label: "６０代" },
-  { key: "70s", label: "７０代" },
+  { key: "70s", label: "７０代〜" },
 ];
 const livingLabels = [
   { key: "saijo", label: "西条" },
@@ -199,7 +199,7 @@ const Question: React.FC<Props> = () => {
           />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
-          興味・関心があるジャンル
+          興味・関心があるジャンル<Box sx={styles.genreMemo}>※複数チェック可</Box>
         </Typography>
         <Box sx={styles.inputs}>
           <Checks />
