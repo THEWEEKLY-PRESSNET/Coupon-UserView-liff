@@ -29,7 +29,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
     PreRender,
     <Provider store={store}>
       {state !== undefined && <Question />}
-      {hash === undefined && <Lotto />}
+      {hash !== undefined && <Lotto />}
     </Provider>
   );
 };
