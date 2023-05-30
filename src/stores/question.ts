@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type Gender = {
-  gender?: "male" | "femail" | "others";
+  gender: "male" | "female" | "others" | "";
 };
 export type Age = {
-  age: "10s" | "20s" | "30s" | "40s" | "50s" | "60s" | "70s";
+  age: "10s" | "20s" | "30s" | "40s" | "50s" | "60s" | "70s" | "";
 };
 export type Living = {
   living:
@@ -17,11 +17,11 @@ export type Living = {
     | "toyosaka"
     | "kouchi"
     | "akitu"
-    | "others";
+    | "others"
+    | "";
 };
 export type Interesting = {
-  interesting:
-    | "gourmet"
+    [ "gourmet"
     | "shoping"
     | "fashion"
     | "car"
@@ -34,7 +34,7 @@ export type Interesting = {
     | "work"
     | "jobchange"
     | "travel"
-    | "money";
+    | "money" ]: boolean;
 };
 
 export type Question = {
@@ -44,7 +44,14 @@ export type Question = {
   interesting?: Interesting;
 };
 
-const initialState: Question = {};
+const initialState: Question = {
+  gender: "",
+  age: "",
+  living: "",
+  interesting: {},
+};
+
+console.log("interesting22", initialState.interesting);
 
 const slice = createSlice({
   name: "question",

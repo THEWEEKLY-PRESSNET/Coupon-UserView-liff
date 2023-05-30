@@ -1,46 +1,91 @@
-import React, { useState, ReactNode } from "react";
+import React, {
+  useState,
+  ReactNode,
+} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   Typography,
   Paper,
+  Button,
 } from "@mui/material";
 
-import type { Gender, Age, Living, Interesting } from "src/stores/question";
+import type { Gender, Age, Living } from "../stores/question";
+import { updateQuestion } from "../stores/question";
+import { updateTopState } from "../stores/topState";
+import type { Root } from "../stores";
+import postQuestion from "../providers/PostQuestions";
+import Checks from "./Checks";
+import Selects from "./Selects";
 
 const styles = {
   container: {
-    bgcolor: "#F5F5F5",
+    bgcolor: "#FCFAC7",
+    padding: "40px 15px"
   },
   body: {
     width: "100%",
+    bgcolor: "white",
+    color: "#404040",
+    borderRadius: "20px",
+    boxShadow: "none",
   },
   title: {
-    width: "100%",
-    pl: 2,
+    display: "block",
+    padding: "2px 20px",
     bgcolor: "#FFFEE8",
+    width: 'calc(100% - 40px)',
+    margin: "auto",
+    fontSize: "12px",
+    fontWeight: 600,
+    lineHeight: "1",
   },
   selects: {
     display: "flex",
     flexDirection: "row",
   },
+  lead: {
+    padding: "20px 22px"
+  },
   capTitle: {
     fontSize: "18px",
     fontWeight: 600,
+    textAlign: "center",
+    mb: "20px"
   },
+  capText: {
+    fontSize: "12px",
+    lineHeight: "18px"
+  },
+  inputs: {
+    padding: "10px 30px",
+  },
+  submitBtn: {
+    display: "flex",
+    fontSize: "16px",
+    borderRadius: "30px",
+    width: "190px",
+    height: "60px",
+    margin: "20px auto 0",
+  },
+  genreMemo: {
+    display: "inline-block",
+    fontSize: "12px",
+    fontWeight: 300,
+    pl: "10px"
+  }
 };
 
-type props = {
-  children: ReactNode;
+export type Props = {
+  labels: any;
+  value: any;
+  setValue: any;
+  index: any;
 };
 
 const genderLabels = [
   { key: "male", label: "男性" },
-  { key: "femaile", label: "女性" },
+  { key: "female", label: "女性" },
   { key: "others", label: "その他" },
 ];
 const ageLabels = [
@@ -50,7 +95,7 @@ const ageLabels = [
   { key: "40s", label: "４０代" },
   { key: "50s", label: "５０代" },
   { key: "60s", label: "６０代" },
-  { key: "70s", label: "７０代" },
+  { key: "70s", label: "７０代〜" },
 ];
 const livingLabels = [
   { key: "saijo", label: "西条" },
@@ -64,100 +109,103 @@ const livingLabels = [
   { key: "akitu", label: "安芸津" },
   { key: "others", label: "その他" },
 ];
-const interestingLabels = [
-  { key: "gourmet", label: "グルメ" },
-  { key: "shoping", label: "ショッピング" },
-  { key: "fashion", label: "おしゃれ" },
-  { key: "car", label: "車" },
-  { key: "health", label: "健康" },
-  { key: "living", label: "住まい" },
-  { key: "study", label: "習い事（スキルアップ）" },
-  { key: "entertainment", label: "エンタメ" },
-  { key: "sports", label: "スポーツ" },
-  { key: "childcare", label: "子育て" },
-  { key: "work", label: "働く" },
-  { key: "jobchange", label: "転職" },
-  { key: "travel", label: "旅行" },
-  { key: "money", label: "マネー" },
-];
 
-const Selects = ({ labels, value, setValue }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("changed");
-    setValue((event.target as HTMLInputElement).value);
-  };
 
-  return (
-    <FormControl sx={styles.selects}>
-      <RadioGroup value={value} onChange={handleChange} sx={styles.selects}>
-        {labels.map(lb => (
-          <FormControlLabel
-            value={lb.key}
-            control={<Radio />}
-            label={lb.label}
-          />
-        ))}
-      </RadioGroup>
-    </FormControl>
-  );
-};
-
-// const Checks = ({}) => {
-//   const handleChange = () => {
-
-//   }
-//   return (
-//     <Box>
-
-// somthing.map((s) => <Check />)
-//     </Box>
-//   )
-// }
-
-const Question: React.FC<props> = () => {
+const Question: React.FC<Props> = () => {
   const [gender, setGender] = useState<Gender | null>(null);
   const [age, setAge] = useState<Age | null>(null);
   const [living, setLiving] = useState<Living | null>(null);
-  const [interesting, setInteresting] = useState<Interesting | null>(null);
-  console.log("gender", gender);
 
-  interestingLabels[0].checkbox = true;
+  const question = useSelector((s: Root) => s.question);
+  console.log("question", question);
+  const dispatch = useDispatch();
 
-  console.log("inte", interestingLabels);
+  //送信ボタンの有効化・無効化
+  const unClickable = (() => {
+    if (gender && age && living !== null) {
+      if (Object.keys(question.interesting).length !== 0) {
+        return false;
+      }
+      return true;
+    }
+    else {
+      return true;
+    }
+  })();
+
+  //送信ボタンのクリック後にバックエンドとの通信
+  const onClickSubmit = async () => {
+    const questionData = { ...question };
+    const interestingObj = questionData.interesting;
+    dispatch(
+      updateQuestion({
+        interesting: interestingObj
+      })
+    );
+    const returnData = await postQuestion(questionData);
+    if (returnData.result) {
+      dispatch(
+        updateTopState({
+          view: "top"
+        })
+      )
+    }
+  };
 
   return (
-    <Box sx={styles.container}>
+    <Box sx={styles.container} className="question">
       <Typography sx={styles.capTitle}>アンケート</Typography>
       <Paper sx={styles.body}>
-        <Typography>
-          お友達登録ありがとうございます。
-          クーポン企画に参加していただくために、初回だけアンケートにご協力ください。
-        </Typography>
+        <Box sx={styles.lead}>
+          <Typography sx={styles.capText}>
+            お友達登録ありがとうございます。<br />
+            クーポン企画に参加していただくために、初回だけアンケートにご協力ください。
+          </Typography>
+        </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
           性別
         </Typography>
-        <Box>
-          <Selects labels={genderLabels} value={gender} setValue={setGender} />
+        <Box sx={styles.inputs}>
+          <Selects
+            labels={genderLabels}
+            value={gender}
+            setValue={setGender}
+            index="gender"
+            sx={styles.selects}
+          />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
           年代
         </Typography>
-        <Box>
-          <Selects labels={ageLabels} value={age} setValue={setAge} />
+        <Box sx={styles.inputs}>
+          <Selects
+            labels={ageLabels}
+            value={age}
+            setValue={setAge}
+            index="age"
+            sx={styles.selects}
+          />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
           居住地
         </Typography>
-        <Box>
-          <Selects labels={livingLabels} value={living} setValue={setLiving} />
+        <Box sx={styles.inputs}>
+          <Selects
+            labels={livingLabels}
+            value={living}
+            setValue={setLiving}
+            index="living"
+            sx={styles.selects}
+          />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
-          興味・関心があるジャンル
+          興味・関心があるジャンル<Box sx={styles.genreMemo}>※複数チェック可</Box>
         </Typography>
-        <Box>
-          <Selects labels={interestingLabels} />
+        <Box sx={styles.inputs}>
+          <Checks />
         </Box>
       </Paper>
+      <Button variant="contained" sx={styles.submitBtn} disabled={unClickable} onClick={() => onClickSubmit()}>送信</Button>
     </Box>
   );
 };

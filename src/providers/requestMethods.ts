@@ -85,6 +85,7 @@ export const requestGet = ({ url, params }: typeRequest) => {
   });
 };
 
+//requestParamsを引数としてもらう
 export const requestPost = ({ url, urlParams, bodyParams }: RequestParam) => {
   const requestUrl = (urlParams && _appendUrlParams({ url, urlParams })) || url;
   return axios.post(url, bodyParams, {
@@ -105,6 +106,7 @@ export const requestPatch = ({ url, urlParams, bodyParams }: RequestParam) => {
   });
 };
 
+
 export const requestDelete = ({ url, params }: typeRequest) => {
   return axios.delete(url, {
     headers: {
@@ -118,6 +120,7 @@ export const requestDelete = ({ url, params }: typeRequest) => {
 /*   utils     */
 export const promiseResolver = (promise: any) => {
   const res = promise
+  // promiseは、requestPost(requestParams)で、その処理が終わったら
     .then((r: AxiosResponse) => r.data)
     .catch((e: AxiosError) => {
       console.log("fetch failed");
