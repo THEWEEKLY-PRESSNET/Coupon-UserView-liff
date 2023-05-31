@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { Box } from "@mui/material";
 
-import Seo from "../components/seo";
 import Question from "../Question";
 import Lotto from "../Lotto";
 
@@ -15,21 +13,23 @@ const PreRender: React.FC = () => <div>loading...</div>;
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   console.log("location", location);
-  console.log("state", serchQueryToOgj(location.search));
-  const { state, hash } = serchQueryToOgj(location.search);
-  useEffect(() => {
-    if (!state && !hash) {
-      // window.location.href = "https://www.higashihiroshima-digital.com/";
-      navigate("/404");
-      console.log("");
-    }
-  }, [state, hash]);
+  // console.log("state", serchQueryToOgj(location.state));
+  const { state, hash } = (location.state as {
+    state: string;
+    hash: string;
+  }) || { state: "", hash: "" };
+  // useEffect(() => {
+  //   if (state === "") {
+  //     window.location.href = "https://www.higashihiroshima-digital.com/";
+  //     navigate("/404");
+  //     console.log("");
+  //   }
+  // }, [state, hash]);
 
   return usePreRender(
     PreRender,
     <Provider store={store}>
-      {state !== undefined && <Question />}
-      {hash !== undefined && <Lotto />}
+      <Question />
     </Provider>
   );
 };

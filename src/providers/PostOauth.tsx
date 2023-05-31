@@ -2,28 +2,21 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { requestPost, promiseResolver, RequestParam } from "./requestMethods";
-import type { Question } from "../stores/question";
 
 type Params = {
-  userId: string;
-  genreName: string;
+  state: string;
+  hash: string;
 };
 
-//postQuestionが実行される時に引数のparamsの内容がきまる
-export const postQuestion = async (params: Params & { userId: string }) => {
+export const postOauth = async (params: Params) => {
   const url =
-    "https://asia-northeast2-coupon-proj.cloudfunctions.net/Question-dev";
-
-  //引数として使われる変数の定義
+    "https://asia-northeast2-coupon-proj.cloudfunctions.net/LineOauth-dev";
   const requestParams: RequestParam = {
     url,
     bodyParams: params,
   };
-
-  // promiseResolverに引数にrequestPostの結果を渡す
-  // requestPostに引数のrequestParamsを渡す
   const response = await promiseResolver(requestPost(requestParams));
-  console.log("post question response", response);
+  console.log("post oauth response", response);
   return response;
 };
 
@@ -51,4 +44,4 @@ export const postQuestion = async (params: Params & { userId: string }) => {
 //   return <></>;
 // };
 
-export default postQuestion;
+export default postOauth;
