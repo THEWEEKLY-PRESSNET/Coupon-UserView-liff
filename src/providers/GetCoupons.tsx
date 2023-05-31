@@ -6,7 +6,7 @@ import { updateCoupons } from "../stores/coupons";
 // import { updateSnackBar } from "../../stores/snackBar";
 
 type Params = {
-  userId: string;
+  state: string;
 };
 
 export const getCoupons = async (params: Params) => {
@@ -21,12 +21,12 @@ export const getCoupons = async (params: Params) => {
   return response;
 };
 
-const GetCoupons: React.FC<Params> = ({ userId }) => {
+const GetCoupons: React.FC<Params> = ({ state }) => {
   console.log("get coupons");
   const dispatch = useDispatch();
   useEffect(() => {
     const resolvePromise = async () => {
-      const response = await getCoupons({ userId });
+      const response = await getCoupons({ state });
       if (response.result) {
         console.log("success", response.payload);
         dispatch(updateCoupons(response.payload));

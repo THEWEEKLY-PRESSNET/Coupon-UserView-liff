@@ -13,7 +13,7 @@ type Params = {
 };
 
 export const patchIssued = async (params: Params) => {
-  console.log("patchi");
+  // console.log("patchi");
   const url =
     "https://asia-northeast2-coupon-proj.cloudfunctions.net/Issued-dev";
   const urlParams = { userId: params.userId };

@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { useSelector } from "react-redux";
 
 import GetCoupons from "../providers/GetCoupons";
+import GetArticles from "../providers/GetArticle";
 import Layout from "../components/Layout";
 import Coupons from "../Coupons";
 import Detail from "../CouponDetail";
@@ -18,12 +19,13 @@ type props = {
 
 const List: React.FC = () => {
   const { view } = useSelector((s: Root) => s.topState);
-  const coupons = useSelector((s: Root) => s.coupons);
+  // const coupons = useSelector((s: Root) => s.coupons);
   const [state] = useLocalStorage("state");
-  // console.log("coupons", coupons);
+  console.log("state", state);
   return (
     <>
       <GetCoupons state={state} />
+      <GetArticles userId={""} />
       <Layout>
         {view === "top" && <Coupons />}
         {view === "detail" && <Detail />}
