@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
+import { Box, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 // import TestComponent from "../../Lotto";
@@ -7,9 +8,11 @@ import { theme } from "../styles/theme";
 import store from "../stores";
 import { updateTopState } from "../stores/topState";
 import { updateArticles } from "../stores/articles";
+import { useLocalStorage } from "../hooks/useLocalstorage";
+import { postOauth } from "../providers/PostOauth";
 
 import type { Root } from "../stores";
-import { Button } from "@mui/material";
+import { navigate } from "gatsby";
 
 const mockData: Root = {
   topState: {
@@ -29,6 +32,17 @@ const mockData: Root = {
       createdAt: 1234567,
     },
   ],
+};
+
+const styles = {
+  box: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100vw",
+    height: "100vh",
+    gap: 2,
+  },
 };
 
 const TestApp: React.FC = () => {
@@ -61,18 +75,58 @@ const TestApp: React.FC = () => {
   //   setTopState();
   // }, []);
   // return <TestComponent />;
-  const baseUrl =
-    "https://access.line.me/oauth2/v2.1/authorize?response_type=code";
-  const clientId = "1660941787";
-  const callbackUrl =
-    "https%3A%2F%2Fasia-northeast2-coupon-proj.cloudfunctions.net%2FLineLogin-dev";
-  const state = "test";
-  const scope = "profile%20openid";
-  const redirect = `${baseUrl}&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${state}&scope=${scope}&bot_prompt=aggressive`;
-  const handleClick = () => {
+  const [hash, setHash] = useLocalStorage("hash");
+  const [state, setState] = useLocalStorage("state");
+  console.log("hash", hash);
+  console.log("state", state);
+
+  //  INIT case
+  const init = () => {
+    const initState = Math.random().toString(32).substring(2);
+    setState(initState);
+    const baseUrl =
+      "https://access.line.me/oauth2/v2.1/authorize?response_type=code";
+    const clientId = "1660941787";
+    const callbackUrl =
+      "https%3A%2F%2Fasia-northeast2-coupon-proj.cloudfunctions.net%2FLineLogin-dev";
+    // const state = "test";
+    const scope = "profile%20openid";
+    const redirect = `${baseUrl}&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${initState}&scope=${scope}&bot_prompt=aggressive`;
     window.location.href = redirect;
   };
-  return <Button onClick={handleClick}>Lotto Loyyo</Button>;
+
+  //  oauth case
+  const oauth = async (params: { state: string; hash: string }) => {
+    const res = await postOauth(params);
+    if (res.result) {
+      setHash(res.payload.hash);
+      setState(res.payload.state);
+      navigate("/lotto", {
+        state: {
+          state,
+          hash,
+        },
+      });
+    } else {
+      setState("");
+    }
+  };
+
+  const handleClick = () => {
+    if (state === "") {
+      init();
+    } else {
+      oauth({ hash, state });
+    }
+  };
+
+  return (
+    <Box sx={styles.box}>
+      <Button variant="contained" onClick={handleClick}>
+        くじを引く(初回ログイン)
+      </Button>
+    </Box>
+  );
 };
 
 const Test: React.FC = () => {

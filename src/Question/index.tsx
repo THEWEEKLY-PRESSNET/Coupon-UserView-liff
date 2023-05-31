@@ -1,27 +1,20 @@
-import React, {
-  useState,
-  ReactNode,
-} from "react";
+import React, { useState, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Typography,
-  Paper,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Paper, Button } from "@mui/material";
 
-import type { Gender, Age, Living } from "../stores/question";
-import { updateQuestion } from "../stores/question";
-import { updateTopState } from "../stores/topState";
-import type { Root } from "../stores";
 import postQuestion from "../providers/PostQuestions";
 import Checks from "./Checks";
 import Selects from "./Selects";
+import { useLocalStorage } from "../hooks/useLocalstorage";
+import { updateQuestion } from "../stores/question";
+import { updateTopState } from "../stores/topState";
+import type { Gender, Age, Living } from "../stores/question";
+import type { Root } from "../stores";
 
 const styles = {
   container: {
     bgcolor: "#FCFAC7",
-    padding: "40px 15px"
+    padding: "40px 15px",
   },
   body: {
     width: "100%",
@@ -34,7 +27,7 @@ const styles = {
     display: "block",
     padding: "2px 20px",
     bgcolor: "#FFFEE8",
-    width: 'calc(100% - 40px)',
+    width: "calc(100% - 40px)",
     margin: "auto",
     fontSize: "12px",
     fontWeight: 600,
@@ -45,17 +38,17 @@ const styles = {
     flexDirection: "row",
   },
   lead: {
-    padding: "20px 22px"
+    padding: "20px 22px",
   },
   capTitle: {
     fontSize: "18px",
     fontWeight: 600,
     textAlign: "center",
-    mb: "20px"
+    mb: "20px",
   },
   capText: {
     fontSize: "12px",
-    lineHeight: "18px"
+    lineHeight: "18px",
   },
   inputs: {
     padding: "10px 30px",
@@ -72,8 +65,8 @@ const styles = {
     display: "inline-block",
     fontSize: "12px",
     fontWeight: 300,
-    pl: "10px"
-  }
+    pl: "10px",
+  },
 };
 
 export type Props = {
@@ -110,14 +103,15 @@ const livingLabels = [
   { key: "others", label: "その他" },
 ];
 
-
-const Question: React.FC<Props> = () => {
+const Question: React.FC = () => {
   const [gender, setGender] = useState<Gender | null>(null);
   const [age, setAge] = useState<Age | null>(null);
   const [living, setLiving] = useState<Living | null>(null);
 
   const question = useSelector((s: Root) => s.question);
   console.log("question", question);
+  const [state] = useLocalStorage("state");
+  console.log("state", state);
   const dispatch = useDispatch();
 
   //送信ボタンの有効化・無効化
@@ -127,28 +121,27 @@ const Question: React.FC<Props> = () => {
         return false;
       }
       return true;
-    }
-    else {
+    } else {
       return true;
     }
   })();
 
   //送信ボタンのクリック後にバックエンドとの通信
   const onClickSubmit = async () => {
-    const questionData = { ...question };
+    const questionData = { ...question, state };
     const interestingObj = questionData.interesting;
     dispatch(
       updateQuestion({
-        interesting: interestingObj
+        interesting: interestingObj,
       })
     );
     const returnData = await postQuestion(questionData);
     if (returnData.result) {
       dispatch(
         updateTopState({
-          view: "top"
+          view: "top",
         })
-      )
+      );
     }
   };
 
@@ -158,7 +151,8 @@ const Question: React.FC<Props> = () => {
       <Paper sx={styles.body}>
         <Box sx={styles.lead}>
           <Typography sx={styles.capText}>
-            お友達登録ありがとうございます。<br />
+            お友達登録ありがとうございます。
+            <br />
             クーポン企画に参加していただくために、初回だけアンケートにご協力ください。
           </Typography>
         </Box>
@@ -199,13 +193,21 @@ const Question: React.FC<Props> = () => {
           />
         </Box>
         <Typography component="p" variant="subtitle" sx={styles.title}>
-          興味・関心があるジャンル<Box sx={styles.genreMemo}>※複数チェック可</Box>
+          興味・関心があるジャンル
+          <Box sx={styles.genreMemo}>※複数チェック可</Box>
         </Typography>
         <Box sx={styles.inputs}>
           <Checks />
         </Box>
       </Paper>
-      <Button variant="contained" sx={styles.submitBtn} disabled={unClickable} onClick={() => onClickSubmit()}>送信</Button>
+      <Button
+        variant="contained"
+        sx={styles.submitBtn}
+        disabled={unClickable}
+        onClick={() => onClickSubmit()}
+      >
+        送信
+      </Button>
     </Box>
   );
 };
