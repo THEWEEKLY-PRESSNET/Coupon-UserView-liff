@@ -91,7 +91,7 @@ const TestApp: React.FC = () => {
       "https%3A%2F%2Fasia-northeast2-coupon-proj.cloudfunctions.net%2FLineLogin-dev";
     // const state = "test";
     const scope = "profile%20openid";
-    const redirect = `${baseUrl}&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${initState}&scope=${scope}&bot_prompt=aggressive`;
+    const redirect = `${baseUrl}&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${initState}&bot_prompt=aggressive&scope=${scope}`;
     window.location.href = redirect;
   };
 
