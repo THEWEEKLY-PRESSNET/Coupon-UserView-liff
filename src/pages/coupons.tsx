@@ -2,7 +2,7 @@ import React from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 
 import Seo from "../components/seo";
-import Coupons from "../Coupons";
+import Coupons from "../List";
 import { usePreRender } from "../hooks/usePreRender";
 import store from "../stores";
 
