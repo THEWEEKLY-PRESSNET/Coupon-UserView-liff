@@ -36,6 +36,7 @@ const styles = {
 const LottoIndex: React.FC = () => {
   console.log("Lotto");
   const { view } = useSelector((s: Root) => s.topState);
+  console.log("top view", view);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(updateTopState({ view: "lotto" }));

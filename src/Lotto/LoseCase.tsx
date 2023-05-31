@@ -6,6 +6,7 @@ import { useSpring, animated } from "@react-spring/web";
 
 import { updateTopState } from "../stores/topState";
 import img from "../images/lose.png";
+import { navigate } from "gatsby";
 
 const styles = {
   container: {
@@ -62,8 +63,9 @@ const LoseCase: React.FC = () => {
   const { opacity } = springValue;
 
   const dispatch = useDispatch();
-  const retryClick = () => {
-    dispatch(updateTopState({ view: "lotto" }));
+  const handleClick = () => {
+    navigate("/coupons");
+    // dispatch(updateTopState({ view: "top" }));
   };
   const quitClick = () => {
     dispatch(updateTopState({ view: "lotted" }));
@@ -84,12 +86,12 @@ const LoseCase: React.FC = () => {
       >
         <img src={img} style={styles.img} />
       </animated.div>
-      <Button variant="contained" onClick={retryClick} sx={styles.button}>
-        もう一度引く
+      <Button variant="contained" onClick={handleClick} sx={styles.button}>
+        クーポン一覧へ
       </Button>
-      <Button variant="contained" onClick={quitClick} sx={styles.button2}>
+      {/* <Button variant="contained" onClick={quitClick} sx={styles.button2}>
         辞める
-      </Button>
+      </Button> */}
     </Box>
   );
 };

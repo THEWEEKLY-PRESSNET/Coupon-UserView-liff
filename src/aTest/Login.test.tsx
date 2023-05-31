@@ -118,7 +118,7 @@ const TestApp: React.FC = () => {
       init();
     } else {
       console.log("oauth", oauth);
-      // oauth({ hash, state });
+      oauth({ hash, state });
     }
   };
 
