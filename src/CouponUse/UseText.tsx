@@ -21,7 +21,8 @@ const UseText = () => {
   return (
     <Box sx={styles.container}>
       <Typography sx={styles.text}>
-        このクーポンを店舗に提示してください
+        この画面をお店に確認後、<br />
+        下の「クーポンを使う」ボタンを押してください
       </Typography>
     </Box>
   );

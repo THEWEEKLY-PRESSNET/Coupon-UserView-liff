@@ -6,7 +6,7 @@ import React, {
   useMemo,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import FavoriteIcon from "../images/favorite.png";
 import FavoriteIconBefore from "../images/favoriteBefore.png";
 import { updateCoupon } from "../stores/coupon";
@@ -19,6 +19,7 @@ const userId = "test";
 const styles = {
   btnWrapper: {
     pt: "20px",
+    textAlign: "center",
   },
   favoriteBtnBefore: {
     color: "accent.p",
@@ -63,6 +64,9 @@ const styles = {
   iconImg: {
     width: "12px",
     height: "12px",
+  },
+  noteSml: {
+    fontSize: "12px",
   },
 };
 
@@ -114,6 +118,12 @@ const FavoriteBtn: React.FC = () => {
         />
         お気に入り
       </Button>
+      <Typography sx={styles.noteSml} variant="note">
+        お気に入りを押すと<br />
+        クーポン一覧の上部に掲載されます。
+      </Typography>
+
+
     </Box>
   );
 };
