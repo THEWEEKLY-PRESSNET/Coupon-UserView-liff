@@ -2,21 +2,19 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { requestPost, promiseResolver, RequestParam } from "./requestMethods";
-// import { updateCoupons } from "../stores/coupons";
-// import { updateSnackBar } from "../../stores/snackBar";
 
 type Params = {
-  userId: string;
+  state: string;
 };
 
 export const postLotto = async (params: Params) => {
   const url =
     "https://asia-northeast2-coupon-proj.cloudfunctions.net/Lotto-dev";
-  const urlParams = { userId: params.userId };
-  const bodyParams = params;
+  // const urlParams = { userId: params.userId };
+  // const bodyParams = params;
   const requestParams: RequestParam = {
     url,
-    urlParams: { userId: params.userId },
+    // urlParams: { userId: params.userId },
     bodyParams: params,
   };
   const response = await promiseResolver(requestPost(requestParams));

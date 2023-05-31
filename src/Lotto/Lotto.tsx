@@ -8,6 +8,7 @@ import postLotto from "../providers/PostLotto";
 import { updateCoupon } from "../stores/coupon";
 import covor from "../images/open.png";
 import video from "../images/movie.mp4";
+import { useLocalStorage } from "../hooks/useLocalstorage";
 
 const styles = {
   container: {
@@ -70,6 +71,7 @@ const styles = {
 const Lotto: React.FC = () => {
   const [isButton, setIsButton] = useState(true);
   // const coupons = useSelector((s: Root) => s.coupons);
+  const [state] = useLocalStorage("state");
   const [springValue, set] = useSpring(() => ({
     opacity: 1,
   }));
@@ -81,22 +83,22 @@ const Lotto: React.FC = () => {
     return Math.floor(Math.random() * 2);
   };
 
-  const dummyClick = async () => {
-    setIsButton(false);
-    if (videoRef.current !== null) {
-      videoRef.current.play();
-    }
-    await new Promise(resolve => setTimeout(resolve, 3900));
-    await set({ opacity: 0 });
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    const result = lotto();
-    if (result === 0) {
-      await dispatch(updateTopState({ view: "win" }));
-    }
-    if (result === 1) {
-      await dispatch(updateTopState({ view: "lose" }));
-    }
-  };
+  // const dummyClick = async () => {
+  //   setIsButton(false);
+  //   if (videoRef.current !== null) {
+  //     videoRef.current.play();
+  //   }
+  //   await new Promise(resolve => setTimeout(resolve, 3900));
+  //   await set({ opacity: 0 });
+  //   await new Promise(resolve => setTimeout(resolve, 1000));
+  //   const result = lotto();
+  //   if (result === 0) {
+  //     await dispatch(updateTopState({ view: "win" }));
+  //   }
+  //   if (result === 1) {
+  //     await dispatch(updateTopState({ view: "lose" }));
+  //   }
+  // };
 
   const handleClick = async () => {
     setIsButton(false);
@@ -106,8 +108,7 @@ const Lotto: React.FC = () => {
     await new Promise(resolve => setTimeout(resolve, 2000));
     await set({ opacity: 0 });
     await new Promise(resolve => setTimeout(resolve, 1000));
-
-    const result = await postLotto({ userId: "test" });
+    const result = await postLotto({ state });
     if (result.payload.result === "win") {
       dispatch(updateTopState({ view: "win" }));
       dispatch(updateCoupon(result.payload.coupon));
@@ -130,13 +131,8 @@ const Lotto: React.FC = () => {
         </video>
       </animated.div>
       {isButton && (
-        <Button variant="contained" onClick={dummyClick} sx={styles.button}>
+        <Button variant="contained" onClick={handleClick} sx={styles.button}>
           スタート
-        </Button>
-      )}
-      {isButton && (
-        <Button variant="contained" onClick={handleClick} sx={styles.button2}>
-          通信（実際に抽選）
         </Button>
       )}
     </Box>
