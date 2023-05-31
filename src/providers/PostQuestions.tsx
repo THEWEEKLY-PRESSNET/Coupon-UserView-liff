@@ -4,13 +4,12 @@ import { useDispatch } from "react-redux";
 import { requestPost, promiseResolver, RequestParam } from "./requestMethods";
 import type { Question } from "../stores/question";
 
-type Params = {
-  userId: string;
-  genreName: string;
+type Params = Question & {
+  state: string;
 };
 
 //postQuestionが実行される時に引数のparamsの内容がきまる
-export const postQuestion = async (params: Params & { userId: string }) => {
+export const postQuestion = async (params: Params) => {
   const url =
     "https://asia-northeast2-coupon-proj.cloudfunctions.net/Question-dev";
 

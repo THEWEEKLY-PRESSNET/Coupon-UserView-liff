@@ -2,12 +2,12 @@ import React, { useState, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography, Paper, Button } from "@mui/material";
 
-import { updateQuestion } from "../stores/question";
-import { updateTopState } from "../stores/topState";
-
 import postQuestion from "../providers/PostQuestions";
 import Checks from "./Checks";
 import Selects from "./Selects";
+import { useLocalStorage } from "../hooks/useLocalstorage";
+import { updateQuestion } from "../stores/question";
+import { updateTopState } from "../stores/topState";
 import type { Gender, Age, Living } from "../stores/question";
 import type { Root } from "../stores";
 
@@ -110,6 +110,8 @@ const Question: React.FC = () => {
 
   const question = useSelector((s: Root) => s.question);
   console.log("question", question);
+  const [state] = useLocalStorage("state");
+  console.log("state", state);
   const dispatch = useDispatch();
 
   //送信ボタンの有効化・無効化
@@ -126,7 +128,7 @@ const Question: React.FC = () => {
 
   //送信ボタンのクリック後にバックエンドとの通信
   const onClickSubmit = async () => {
-    const questionData = { ...question, userId: "test" };
+    const questionData = { ...question, state };
     const interestingObj = questionData.interesting;
     dispatch(
       updateQuestion({
