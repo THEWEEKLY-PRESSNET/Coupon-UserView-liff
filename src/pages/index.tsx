@@ -20,7 +20,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
   console.log("urlstate", state);
   const [storageState] = useLocalStorage("state");
   console.log("state", state);
-  if (typeof window !== "undefined" && storageState !== state) {
+  if (typeof window !== "undefined" && !state) {
     window.location.href = homeUrl;
   }
 
