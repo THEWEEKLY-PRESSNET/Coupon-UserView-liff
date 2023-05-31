@@ -1,8 +1,10 @@
 import { useState, useCallback } from "react";
 
 const getLocalStorageValue = (key: string) => {
+  if (window === undefined) {
+    return "";
+  }
   const item = localStorage.getItem(key);
-
   return item || "";
 };
 
