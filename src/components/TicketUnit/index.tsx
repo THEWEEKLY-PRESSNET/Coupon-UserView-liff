@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
@@ -7,8 +6,6 @@ import Badge from "./Ticket.Badge";
 import Flag from "./Ticket.Flag";
 import Shadow from "./Ticket.Shadow";
 import { dateTrance, strToDate } from "../../utils/formatter";
-import { updateCoupon } from "../../stores/coupon";
-import type { Root } from "../../stores";
 
 const styles = {
   container: {
@@ -121,15 +118,12 @@ const styles = {
   favorIcon: {
     color: "#FFF",
     height: "12px",
-    // pt: "1px",
   },
   ticket: {
     background: "#FFF",
     boxShadow: "0px 4px 4px rgba(64, 64, 64, 0.25)",
     borderRadius: "5px",
-    // width: "345px",
     height: "128px",
-    // filter: "drop-shadow(0px 4px 4px #404040)",
   },
   badge: {
     position: "absolute",
@@ -161,10 +155,8 @@ const TicketUnit: React.FC<Props> = ({
   favored,
   used,
 }) => {
-  const coupon = useSelector((s: Root) => s.coupon);
   const startStr = dateTrance(validStart);
   const validStr = dateTrance(validEnd);
-  // console.log("used", used);
   const isFlag = useMemo(() => {
     const now = new Date();
     const past = strToDate(validStart);
@@ -172,7 +164,6 @@ const TicketUnit: React.FC<Props> = ({
   }, [validStart]);
   const expired = useMemo(() => {
     const now = new Date();
-    // console.log(now);
     const past = strToDate(validEnd);
     return now > past;
   }, [validEnd]);

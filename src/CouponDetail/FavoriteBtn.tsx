@@ -1,20 +1,13 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useReducer,
-  useMemo,
-} from "react";
+import React, { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Box, Typography } from "@mui/material";
 import FavoriteIcon from "../images/favorite.png";
 import FavoriteIconBefore from "../images/favoriteBefore.png";
+import { patchIssued } from "../providers/PatchIssued";
+import { useLocalStorage } from "../hooks/useLocalstorage";
 import { updateCoupon } from "../stores/coupon";
 import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
-import { patchIssued } from "../providers/PatchIssued";
-
-const userId = "test";
 
 const styles = {
   btnWrapper: {
@@ -23,7 +16,6 @@ const styles = {
   },
   favoriteBtnBefore: {
     color: "accent.p",
-    // bgcolor: "accent.p",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -71,13 +63,13 @@ const styles = {
 };
 
 const FavoriteBtn: React.FC = () => {
+  const [state] = useLocalStorage("state");
   const coupons = useSelector((s: Root) => s.coupons);
   const { favored, issuedCouponId } = useSelector((s: Root) => s.coupon);
 
   const newArr = useMemo(() => {
     return coupons.map(coupon => {
       if (coupon.issuedCouponId === issuedCouponId) {
-        console.log("iss", coupon.issuedCouponId);
         const newCoupon = { ...coupon };
         newCoupon.favored = !favored;
         return newCoupon;
@@ -94,8 +86,8 @@ const FavoriteBtn: React.FC = () => {
       })
     );
     const res = await patchIssued({
+      state,
       issuedCouponId,
-      userId,
       favored: !favored,
     });
     if (res.result) {
@@ -119,11 +111,10 @@ const FavoriteBtn: React.FC = () => {
         お気に入り
       </Button>
       <Typography sx={styles.noteSml} variant="note">
-        お気に入りを押すと<br />
+        お気に入りを押すと
+        <br />
         クーポン一覧の上部に掲載されます。
       </Typography>
-
-
     </Box>
   );
 };
