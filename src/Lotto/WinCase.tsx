@@ -21,8 +21,8 @@ const styles = {
   },
   ticket: {
     position: "absolute",
-    width: "300px",
-    top: "70%",
+    width: "calc(100% - 20px)",
+    bottom: "9%",
   },
   img: {
     width: "100vw",
@@ -68,7 +68,7 @@ const WinCase: React.FC = () => {
 
   const handleClick = () => {
     dispatch(updateTopState({ view: "detail" }));
-    navigate("/");
+    navigate("/coupons", { state: { isCoupon: true } });
   };
 
   const retryClick = () => {
@@ -96,9 +96,9 @@ const WinCase: React.FC = () => {
       <Box sx={styles.ticket}>
         <TicketUnit {...coupon} handleClick={handleClick} />
       </Box>
-      <Button variant="contained" onClick={retryClick} sx={styles.button2}>
+      {/* <Button variant="contained" onClick={retryClick} sx={styles.button2}>
         もう一度引く
-      </Button>
+      </Button> */}
     </Box>
   );
 };
