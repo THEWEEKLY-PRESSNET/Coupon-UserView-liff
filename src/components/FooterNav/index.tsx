@@ -33,6 +33,7 @@ const FooterNav: React.FC = () => {
         view: "top",
       })
     );
+    window.scroll(0, 0);
   };
   const homeClick = () => {
     window.location.href = "https://www.higashihiroshima-digital.com/";

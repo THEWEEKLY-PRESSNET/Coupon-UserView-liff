@@ -1,9 +1,8 @@
 import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Box, Paper, Typography } from "@mui/material";
 
 import CouponUnit from "../components/TicketUnit";
-import type { Root } from "../stores";
 import { Ticket, updateCoupon } from "../stores/coupon";
 import { updateTopState } from "../stores/topState";
 
@@ -52,14 +51,18 @@ type Props = {
 
 const Test: React.FC<Props> = ({ coupons }) => {
   const dispatch = useDispatch();
-  const handleClick = useCallback(coupon => {
-    dispatch(updateCoupon({ ...coupon }));
-    dispatch(
-      updateTopState({
-        view: "detail",
-      })
-    );
-  }, []);
+  const handleClick = useCallback(
+    coupon => {
+      dispatch(updateCoupon({ ...coupon }));
+      dispatch(
+        updateTopState({
+          view: "detail",
+        })
+      );
+      window.scroll(0, 0);
+    },
+    [dispatch]
+  );
 
   return (
     <Box className="coupons-list" sx={styles.container}>
@@ -68,7 +71,6 @@ const Test: React.FC<Props> = ({ coupons }) => {
       </Paper>
       <Box sx={styles.coupons}>
         {coupons.map(coupon => {
-          // console.log("co", coupon);
           return (
             <CouponUnit
               {...coupon}

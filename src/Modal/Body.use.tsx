@@ -1,8 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 
 import { updateModal } from "../stores/modal";
+import { updateCoupons } from "../stores/coupons";
+import patchIssued from "../providers/PatchIssued";
+import { getCoupons } from "../providers/GetCoupons";
+import { useLocalStorage } from "../hooks/useLocalstorage";
+import { Root } from "../stores";
 
 const styles = {
   container: {
@@ -33,13 +38,25 @@ type Props = {
 };
 
 const ModalIndex: React.FC<Props> = ({ setOpen }) => {
+  const { issuedCouponId } = useSelector((s: Root) => s.coupon);
+  const [state] = useLocalStorage("state");
   const dispatch = useDispatch();
-  const handleUse = () => {
-    dispatch(
-      updateModal({
-        body: "used",
-      })
-    );
+  const handleUse = async () => {
+    const res = await patchIssued({
+      issuedCouponId,
+      state,
+      used: true,
+    });
+    if (res.result) {
+      dispatch(
+        updateModal({
+          body: "used",
+        })
+      );
+      getCoupons({ state }).then(response => {
+        dispatch(updateCoupons(response.payload));
+      });
+    }
   };
 
   return (

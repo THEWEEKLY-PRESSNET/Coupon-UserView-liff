@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-import GetCoupons from "../providers/GetCoupons";
 import CouponList from "./Coupons.lists";
 import CouponEmpty from "./Coupns.empty";
 import type { Root } from "../stores";

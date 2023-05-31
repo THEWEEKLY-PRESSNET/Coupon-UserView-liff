@@ -128,7 +128,7 @@ const Lotto: React.FC = () => {
       </animated.div>
       {isButton && (
         <Button variant="contained" onClick={handleClick} sx={styles.button}>
-          スタート
+          ガチャを引く
         </Button>
       )}
     </Box>

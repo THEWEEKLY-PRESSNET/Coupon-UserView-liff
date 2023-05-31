@@ -7,7 +7,29 @@ const slice = createSlice({
   initialState,
   reducers: {
     updateCoupons: (_, action) => {
-      return [...action.payload];
+      const newArr = [...action.payload];
+      newArr.sort((a, b) => {
+        return (a.validEnd > b.validEnd && 1) || -1;
+      });
+      newArr.sort((a, b) => {
+        if (a.favored && !b.favored) {
+          return -1;
+        }
+        if (!a.favored && b.favored) {
+          return 1;
+        }
+        return 0;
+      });
+      newArr.sort((a, b) => {
+        if (a.used && !b.used) {
+          return 1;
+        }
+        if (!a.used && b.used) {
+          return -1;
+        }
+        return 0;
+      });
+      return newArr;
     },
   },
 });

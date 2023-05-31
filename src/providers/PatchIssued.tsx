@@ -6,8 +6,8 @@ import { requestPatch, promiseResolver, RequestParam } from "./requestMethods";
 // import { updateSnackBar } from "../../stores/snackBar";
 
 type Params = {
+  state: string;
   issuedCouponId: number;
-  userId: string;
   favored?: boolean;
   used?: boolean;
 };
@@ -16,11 +16,10 @@ export const patchIssued = async (params: Params) => {
   // console.log("patchi");
   const url =
     "https://asia-northeast2-coupon-proj.cloudfunctions.net/Issued-dev";
-  const urlParams = { userId: params.userId };
-  const bodyParams = params;
+  // const urlParams = { userId: params.userId };
+  // const bodyParams = params;
   const requestParams: RequestParam = {
     url,
-    urlParams: { userId: params.userId },
     bodyParams: params,
   };
   const response = await promiseResolver(requestPatch(requestParams));
