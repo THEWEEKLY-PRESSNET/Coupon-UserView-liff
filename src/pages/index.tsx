@@ -8,16 +8,26 @@ import { usePreRender } from "../hooks/usePreRender";
 import { serchQueryToOgj } from "../utils/handlePath";
 import store from "../stores";
 import { Link, PageProps, navigate } from "gatsby";
+import { useLocalStorage } from "../hooks/useLocalstorage";
+
+const homeUrl = "https://www.higashihiroshima-digital.com/";
 
 const PreRender: React.FC = () => <div>loading...</div>;
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   console.log("location", location);
-  // console.log("state", serchQueryToOgj(location.state));
-  const { state, hash } = (location.state as {
-    state: string;
-    hash: string;
-  }) || { state: "", hash: "" };
+  const { state } = serchQueryToOgj(location.search);
+  console.log("urlstate", state);
+  const [storageState] = useLocalStorage("state");
+  console.log("state", state);
+  if (typeof window !== "undefined" && storageState !== state) {
+    window.location.href = homeUrl;
+  }
+
+  // const { state, hash } = (location.state as {
+  //   state: string;
+  //   hash: string;
+  // }) || { state: "", hash: "" };
   // useEffect(() => {
   //   if (state === "") {
   //     window.location.href = "https://www.higashihiroshima-digital.com/";

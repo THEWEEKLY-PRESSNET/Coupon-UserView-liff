@@ -1,5 +1,6 @@
 import React, { useState, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { navigate } from "gatsby";
 import { Box, Typography, Paper, Button } from "@mui/material";
 
 import postQuestion from "../providers/PostQuestions";
@@ -111,13 +112,13 @@ const Question: React.FC = () => {
   const question = useSelector((s: Root) => s.question);
   console.log("question", question);
   const [state] = useLocalStorage("state");
-  console.log("state", state);
+  console.log("usestion state", state);
   const dispatch = useDispatch();
 
   //送信ボタンの有効化・無効化
   const unClickable = (() => {
     if (gender && age && living !== null) {
-      if (Object.keys(question.interesting).length !== 0) {
+      if (Object.keys(question.interesting as object).length !== 0) {
         return false;
       }
       return true;
@@ -137,11 +138,9 @@ const Question: React.FC = () => {
     );
     const returnData = await postQuestion(questionData);
     if (returnData.result) {
-      dispatch(
-        updateTopState({
-          view: "top",
-        })
-      );
+      navigate("/lotto");
+    } else {
+      window.location.href = "https://www.higashihiroshima-digital.com/";
     }
   };
 
@@ -152,7 +151,9 @@ const Question: React.FC = () => {
         <Box sx={styles.lead}>
           <Typography sx={styles.capText}>
             お友達登録ありがとうございます。
-            <br />
+          </Typography>
+          <br />
+          <Typography sx={styles.capText}>
             クーポン企画に参加していただくために、初回だけアンケートにご協力ください。
           </Typography>
         </Box>
