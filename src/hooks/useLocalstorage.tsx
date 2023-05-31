@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
 
 const getLocalStorageValue = (key: string) => {
-  if (typeof window === undefined) {
-    return "";
+  if (typeof window !== undefined) {
+    const item = localStorage.getItem(key);
+    return item || "";
   }
-  const item = localStorage.getItem(key);
-  return item || "";
+  return "";
 };
 
 export const useLocalStorage = (key: string) => {
@@ -23,8 +23,8 @@ export const useLocalStorage = (key: string) => {
     },
     [key, value]
   );
-  if (typeof window === undefined) {
-    return [value, setValue] as const;
+  if (typeof window !== undefined) {
+    return [value, setLocalStorageValue] as const;
   }
-  return [value, setLocalStorageValue] as const;
+  return [value, setValue] as const;
 };
