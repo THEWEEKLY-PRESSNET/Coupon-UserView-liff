@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 const getLocalStorageValue = (key: string) => {
-  if (window === undefined) {
+  if (typeof window === undefined) {
     return "";
   }
   const item = localStorage.getItem(key);
@@ -23,7 +23,7 @@ export const useLocalStorage = (key: string) => {
     },
     [key, value]
   );
-  if (window === undefined) {
+  if (typeof window === undefined) {
     return [value, setValue] as const;
   }
   return [value, setLocalStorageValue] as const;
