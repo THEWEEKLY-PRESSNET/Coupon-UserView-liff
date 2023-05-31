@@ -114,16 +114,18 @@ const TestApp: React.FC = () => {
 
   const handleClick = () => {
     if (state === "") {
+      console.log("state click init", state);
       init();
     } else {
-      oauth({ hash, state });
+      console.log("oauth", oauth);
+      // oauth({ hash, state });
     }
   };
 
   return (
     <Box sx={styles.box}>
       <Button variant="contained" onClick={handleClick}>
-        くじを引く(初回ログイン)
+        くじを引く
       </Button>
     </Box>
   );
