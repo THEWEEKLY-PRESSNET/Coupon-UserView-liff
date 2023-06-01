@@ -137,10 +137,12 @@ const Question: React.FC = () => {
       })
     );
     const returnData = await postQuestion(questionData);
+    console.log("res", returnData);
     if (returnData.result) {
       navigate("/lotto");
     } else {
-      window.location.href = "https://www.higashihiroshima-digital.com/";
+      navigate("/app");
+      //   // window.location.href = "https://www.higashihiroshima-digital.com/";
     }
   };
 
