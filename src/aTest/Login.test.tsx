@@ -4,6 +4,7 @@ import { Box, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 // import TestComponent from "../../Lotto";
+import ImgBox from "../components/ImgBox";
 import { theme } from "../styles/theme";
 import store from "../stores";
 import { updateTopState } from "../stores/topState";
@@ -13,6 +14,7 @@ import { postOauth } from "../providers/PostOauth";
 
 import type { Root } from "../stores";
 import { navigate } from "gatsby";
+import img from "../images/lottoButton.png";
 
 const mockData: Root = {
   topState: {
@@ -113,20 +115,19 @@ const TestApp: React.FC = () => {
   };
 
   const handleClick = () => {
-    if (state === "") {
-      console.log("state click init", state);
-      init();
-    } else {
-      console.log("oauth", oauth);
-      oauth({ hash, state });
-    }
+    navigate("/app");
+    // if (state === "") {
+    //   console.log("state click init", state);
+    //   init();
+    // } else {
+    //   console.log("oauth", oauth);
+    //   oauth({ hash, state });
+    // }
   };
 
   return (
-    <Box sx={styles.box}>
-      <Button variant="contained" onClick={handleClick}>
-        くじを引く
-      </Button>
+    <Box sx={styles.box} onClick={handleClick}>
+      <ImgBox img={img} width={200} height={60} size="contain" />
     </Box>
   );
 };

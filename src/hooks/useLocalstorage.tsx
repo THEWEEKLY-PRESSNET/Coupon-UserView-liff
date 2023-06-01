@@ -23,8 +23,13 @@ export const useLocalStorage = (key: string) => {
     },
     [key, value]
   );
+  const removeValue = useCallback(() => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(key);
+    }
+  }, [key]);
   if (typeof window !== "undefined") {
-    return [value, setLocalStorageValue] as const;
+    return [value, setLocalStorageValue, removeValue] as const;
   }
-  return [value, setValue] as const;
+  return [value, setValue, removeValue] as const;
 };
