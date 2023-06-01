@@ -59,26 +59,24 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       console.log("failed");
     }
   };
-
+  console.log("local", localStorage === null, localStorage.getItem("noth"));
   useEffect(() => {
     if (!state && !storageState) {
       init();
       // window.location.href = "https://www.higashihiroshima-digital.com/";
-    } else if (state && !localStorage && question) {
+    } else if (state && !storageState && question) {
       console.log("sec to lotto");
       setState(state);
       navigate("/lotto");
-    } else if (state && !localStorage && !question) {
+    } else if (state && !storageState && !question) {
       console.log("sec to q");
       setState(state);
       setElm(<Question />);
-    } else if (state && localStorage) {
+    } else {
       console.log("oauth challenge");
       console.log("q state", state);
       console.log("l state", storageState);
       tryOauth();
-    } else {
-      console.log("ever");
     }
   }, [state, storageState, question]);
 
