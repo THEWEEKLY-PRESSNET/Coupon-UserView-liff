@@ -109,7 +109,7 @@ const Lotto: React.FC = () => {
         updateModal({
           body: "error",
           isModal: true,
-          text: "抽選失敗です",
+          text: "発行可能なクーポンが有りません",
         })
       );
       // window.location.href = "https://www.higashihiroshima-digital.com/";
