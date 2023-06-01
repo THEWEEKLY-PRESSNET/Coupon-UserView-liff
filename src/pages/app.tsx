@@ -59,7 +59,6 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       console.log("failed");
     }
   };
-  console.log("local", localStorage === null, localStorage.getItem("noth"));
   useEffect(() => {
     if (!state && !storageState) {
       init();
