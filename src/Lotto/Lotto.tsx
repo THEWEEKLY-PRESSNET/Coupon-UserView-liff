@@ -9,6 +9,7 @@ import { updateCoupon } from "../stores/coupon";
 import covor from "../images/open.png";
 import video from "../images/movie.mp4";
 import { useLocalStorage } from "../hooks/useLocalstorage";
+import { updateModal } from "../stores/modal";
 
 const styles = {
   container: {
@@ -103,7 +104,15 @@ const Lotto: React.FC = () => {
         dispatch(updateTopState({ view: "lose" }));
       }
     } else {
-      window.location.href = "https://www.higashihiroshima-digital.com/";
+      console.log("failed");
+      dispatch(
+        updateModal({
+          body: "error",
+          isModal: true,
+          text: "発行可能なクーポンが有りません",
+        })
+      );
+      // window.location.href = "https://www.higashihiroshima-digital.com/";
     }
   };
 

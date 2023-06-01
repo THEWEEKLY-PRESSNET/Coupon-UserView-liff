@@ -7,6 +7,7 @@ import Lotto from "./Lotto";
 import WinCase from "./WinCase";
 import LoseCase from "./LoseCase";
 import DoneCase from "./DoneCase";
+import Modal from "../Modal";
 import theme from "../styles/theme";
 import type { Root } from "../stores";
 import "../styles/index.scss";
@@ -51,6 +52,7 @@ const LottoIndex: React.FC = () => {
           {view === "lose" && <LoseCase />}
           {view === "lotted" && <DoneCase />}
         </Box>
+        <Modal />
       </Container>
     </ThemeProvider>
   );
