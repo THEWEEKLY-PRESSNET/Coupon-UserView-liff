@@ -72,11 +72,13 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       console.log("sec to q");
       setState(state);
       setElm(<Question />);
-    } else {
+    } else if (state && localStorage) {
       console.log("oauth challenge");
       console.log("q state", state);
       console.log("l state", storageState);
       tryOauth();
+    } else {
+      console.log("ever");
     }
   }, [state, storageState, question]);
 
