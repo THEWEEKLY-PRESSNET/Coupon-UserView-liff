@@ -65,13 +65,17 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       init();
       // window.location.href = "https://www.higashihiroshima-digital.com/";
     } else if (state && !localStorage && question) {
+      console.log("sec to lotto");
       setState(state);
       navigate("/lotto");
     } else if (state && !localStorage && !question) {
+      console.log("sec to q");
       setState(state);
       setElm(<Question />);
     } else {
       console.log("oauth challenge");
+      console.log("q state", state);
+      console.log("l state", storageState);
       tryOauth();
     }
   }, [state, storageState, question]);
