@@ -5,6 +5,7 @@ import type { SxProps } from "@mui/system/styleFunctionSx/styleFunctionSx";
 import ModalBox from "./ModalBox";
 import Use from "./Body.use";
 import Used from "./Body.used";
+import Error from "./Body.error";
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateModal } from "../stores/modal";
@@ -27,8 +28,8 @@ type Props = {
 };
 
 const ModalUse: React.FC = () => {
-  const { body, isModal } = useSelector((s: Root) => s.modal);
-  // console.log("body", "isModal", body, isModal);
+  const { body, isModal, text } = useSelector((s: Root) => s.modal);
+  console.log("body", "isModal", body, isModal, text);
   const dispatch = useDispatch();
   const setOpen = () => {
     dispatch(
@@ -42,6 +43,7 @@ const ModalUse: React.FC = () => {
     <ModalBox open={isModal} setOpen={setOpen} actions={<div />}>
       {body === "use" && <Use setOpen={setOpen} />}
       {body === "used" && <Used setOpen={setOpen} />}
+      {body === "error" && <Error setOpen={setOpen} text={text} />}
     </ModalBox>
   );
 };
