@@ -67,6 +67,7 @@ const styles = {
 
 const Test: React.FC<Detail> = ({
   couponTitleBig,
+  couponTitleSmall,
   validStart,
   storeName,
   validEnd,
@@ -82,7 +83,7 @@ const Test: React.FC<Detail> = ({
   return (
     <Box sx={styles.container}>
       <Box sx={styles.ticket}>
-        <Coupon couponTitleBig={couponTitleBig} />
+        <Coupon couponTitleBig={couponTitleBig} couponTitleSmall={couponTitleSmall} />
       </Box>
       {hide ? (
         ""

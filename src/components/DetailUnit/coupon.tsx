@@ -70,12 +70,23 @@ const styles = {
     position: "absolute",
     textAlign: "center",
     width: "100%",
-    top: "50%",
+    top: "35%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     fontWeight: 600,
     fontSize: "16px",
     lineHeight: "24px",
+  },
+  titleSml: {
+    position: "absolute",
+    textAlign: "center",
+    top: "70%",
+    left: "50%",
+    width: "70%",
+    transform: "translate(-50%, -50%)",
+    fontWeight: 400,
+    fontSize: "12px",
+    
   },
 };
 
@@ -83,7 +94,7 @@ type Props = {
   couponTitleBig: string;
 };
 
-const Test: React.FC<Props> = ({ couponTitleBig }) => {
+const Test: React.FC<Props> = ({ couponTitleBig, couponTitleSmall }) => {
   return (
     <Box sx={styles.container}>
       <Box className="coupon-ticket" sx={styles.ticket} />
@@ -92,6 +103,7 @@ const Test: React.FC<Props> = ({ couponTitleBig }) => {
       <Box sx={styles.border} />
       <Typography sx={styles.copy}>Coupon</Typography>
       <Typography sx={styles.title}>{couponTitleBig}</Typography>
+      <Typography sx={styles.titleSml}>{couponTitleSmall}</Typography>
     </Box>
   );
 };
