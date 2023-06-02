@@ -62,10 +62,14 @@ const ModalIndex: React.FC<Props> = ({ setOpen }) => {
   return (
     <Box sx={styles.container}>
       <Typography variant="subtitle">クーポンを使用済みにしますか？</Typography>
-      <Typography>
-        この操作は取り消せません。
-        店舗スタッフに使用済みにするをタップしてもらってください。
-      </Typography>
+      <Box>
+        <Typography>
+          この操作は取り消せません。
+        </Typography>
+        <Typography>
+          店舗スタッフに使用済みにするをタップしてもらってください。
+        </Typography>
+      </Box>
       <Box sx={styles.buttonBox}>
         <Button
           color="primary"
