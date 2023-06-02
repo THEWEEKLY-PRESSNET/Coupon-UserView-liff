@@ -65,7 +65,6 @@ const ModalIndex: React.FC<Props> = ({ setOpen }) => {
       <Typography>
         この操作は取り消せません。
         店舗スタッフに使用済みにするをタップしてもらってください。
-        店舗の指示がある場合は、ご自身で使用済みにしてください。
       </Typography>
       <Box sx={styles.buttonBox}>
         <Button
