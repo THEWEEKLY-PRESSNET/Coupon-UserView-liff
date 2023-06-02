@@ -106,7 +106,7 @@ const Test: React.FC<Detail> = ({
         {couponDescription || "description"}
       </Typography>
       <Box>
-        <ImgBox img={storeImg} width={100} height={100} size="contain" />
+        {storeImg ? <ImgBox img={storeImg} width={100} height={100} size="contain" /> : null}
       </Box>
       <Typography
         component="a"
