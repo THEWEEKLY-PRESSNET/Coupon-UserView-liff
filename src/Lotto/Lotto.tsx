@@ -63,6 +63,7 @@ const styles = {
 const Lotto: React.FC = () => {
   const [isButton, setIsButton] = useState(true);
   const [state] = useLocalStorage("state");
+  console.log("lotto state");
   const [springValue, set] = useSpring(() => ({
     opacity: 1,
   }));

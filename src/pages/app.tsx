@@ -19,7 +19,7 @@ const PreRender: React.FC = () => <div>loading...</div>;
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   //   console.log("location", location);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [Elm, setElm] = useState<ReactElement>(<PreRender />);
   const { state, question } = serchQueryToOgj(location.search);
   console.log("urlstate", state);
@@ -37,6 +37,8 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
     const clientId = "1660941787";
     const callbackUrl =
       "https%3A%2F%2Fasia-northeast2-coupon-proj.cloudfunctions.net%2FLineLogin-dev";
+    // "https%3A%2F%2Fasia-northeast2-coupon-proj.cloudfunctions.net%2FLineLogin-test";
+
     // const state = "test";
     const scope = "profile%20openid";
     const redirect = `${baseUrl}&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${initState}&bot_prompt=aggressive&scope=${scope}`;
@@ -78,16 +80,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       console.log("l state", storageState);
       tryOauth();
     }
-  }, [
-    state,
-    setState,
-    hash,
-    setHash,
-    removeState,
-    removeHash,
-    storageState,
-    question,
-  ]);
+  }, []);
 
   return usePreRender(
     PreRender,
