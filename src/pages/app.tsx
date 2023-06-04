@@ -44,22 +44,23 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
   };
   console.log("elm", Elm);
 
-  const tryOauth = async () => {
-    const res = await postOauth({ state: storageState, hash });
-    console.log("res oauth", res);
-
-    if (res.result) {
-      setState(res.payload.state);
-      setHash(res.payload.hash);
-      navigate("/lotto");
-    } else {
-      setElm(<Typography>認証ができませんでした</Typography>);
-      removeState();
-      removeHash();
-      console.log("failed");
-    }
-  };
   useEffect(() => {
+    const tryOauth = async () => {
+      const res = await postOauth({ state: storageState, hash });
+      console.log("res oauth", res);
+
+      if (res.result) {
+        setState(res.payload.state);
+        setHash(res.payload.hash);
+        navigate("/lotto");
+      } else {
+        setElm(<Typography>認証ができませんでした</Typography>);
+        removeState();
+        removeHash();
+        console.log("failed");
+        navigate("/test/login");
+      }
+    };
     if (!state && !storageState) {
       init();
       // window.location.href = "https://www.higashihiroshima-digital.com/";
@@ -77,7 +78,16 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       console.log("l state", storageState);
       tryOauth();
     }
-  }, [state, storageState, question]);
+  }, [
+    state,
+    setState,
+    hash,
+    setHash,
+    removeState,
+    removeHash,
+    storageState,
+    question,
+  ]);
 
   return usePreRender(
     PreRender,
