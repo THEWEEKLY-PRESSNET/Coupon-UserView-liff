@@ -92,9 +92,9 @@ const Lotto: React.FC = () => {
     if (videoRef.current !== null) {
       videoRef.current.play();
     }
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
     await set({ opacity: 0 });
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
     const res = await postLotto({ state });
     if (res.result) {
       if (res.payload.result === "win") {
@@ -105,6 +105,7 @@ const Lotto: React.FC = () => {
       }
     } else {
       console.log("failed");
+
       dispatch(
         updateModal({
           body: "error",
