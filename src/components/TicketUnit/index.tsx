@@ -6,6 +6,7 @@ import Badge from "./Ticket.Badge";
 import Flag from "./Ticket.Flag";
 import Shadow from "./Ticket.Shadow";
 import { dateTrance, strToDate } from "../../utils/formatter";
+import type { Coupon } from "../../stores/coupon";
 
 const styles = {
   container: {
@@ -133,7 +134,7 @@ const styles = {
 };
 
 type Props = {
-  handleClick: (coupon: any) => void;
+  handleClick: (coupon: Coupon) => void;
   couponTitleBig: string;
   couponTitleSmall: string;
   storeName: string;
@@ -155,6 +156,8 @@ const TicketUnit: React.FC<Props> = ({
   favored,
   used,
 }) => {
+  // console.log("couponUnit");
+  // console.log("valiedStart", validStart);
   const startStr = dateTrance(validStart);
   const validStr = dateTrance(validEnd);
   const isFlag = useMemo(() => {

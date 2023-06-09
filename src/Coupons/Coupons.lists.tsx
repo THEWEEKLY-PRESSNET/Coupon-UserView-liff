@@ -50,6 +50,8 @@ type Props = {
 };
 
 const Test: React.FC<Props> = ({ coupons }) => {
+  // console.log("Coupons");
+  // console.log("coupons", coupons);
   const dispatch = useDispatch();
   const handleClick = useCallback(
     coupon => {

@@ -14,6 +14,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     px: "auto",
+    mt: 4,
     mb: 10,
   },
   title: {
