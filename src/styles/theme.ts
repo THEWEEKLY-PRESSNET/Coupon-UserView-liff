@@ -114,6 +114,13 @@ export const theme = createTheme({
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          fontFamily: ['"Noto Sans JP"', "sans-serif", "Roboto"].join(","),
+        },
+      },
+    },
   },
 });
 
