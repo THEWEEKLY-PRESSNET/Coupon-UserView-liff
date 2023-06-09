@@ -15,11 +15,12 @@ export type Ticket = {
 
 export type Detail = {
   couponTitleBig: string;
+  couponTitleSmall: string;
   validStart: string;
   storeName: string;
   validEnd: string;
   couponDescription: string;
-  storeImg: string;
+  couponImg: string;
   storeUrl: string;
   red: boolean;
   hide: boolean;

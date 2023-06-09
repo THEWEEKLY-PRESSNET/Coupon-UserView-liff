@@ -20,8 +20,10 @@ type props = {
 const List: React.FC = () => {
   const { view } = useSelector((s: Root) => s.topState);
   const coupons = useSelector((s: Root) => s.coupons);
+  // console.log("view", view);
+  console.log("coupons", coupons);
   const [state] = useLocalStorage("state");
-  console.log("state", state);
+  // console.log("state", state);
   return (
     <>
       <GetCoupons state={state} />

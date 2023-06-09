@@ -95,7 +95,7 @@ const Header: React.FC = () => {
 
   const finalRandomArticle =
     updatedRandomArticle[Math.floor(Math.random() * articles.length)];
-  console.log("u@", updatedRandomArticle);
+  // console.log("u@", updatedRandomArticle);
   return (
     <Box className="footernav" sx={styles.container}>
       <Box sx={styles.titleBox}>

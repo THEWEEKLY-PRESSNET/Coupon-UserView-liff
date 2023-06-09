@@ -72,7 +72,7 @@ const Test: React.FC<Detail> = ({
   storeName,
   validEnd,
   couponDescription,
-  storeImg,
+  couponImg,
   storeUrl,
   red,
   hide,
@@ -83,7 +83,10 @@ const Test: React.FC<Detail> = ({
   return (
     <Box sx={styles.container}>
       <Box sx={styles.ticket}>
-        <Coupon couponTitleBig={couponTitleBig} couponTitleSmall={couponTitleSmall} />
+        <Coupon
+          couponTitleBig={couponTitleBig}
+          couponTitleSmall={couponTitleSmall}
+        />
       </Box>
       {hide ? (
         ""
@@ -106,7 +109,9 @@ const Test: React.FC<Detail> = ({
         {couponDescription || "description"}
       </Typography>
       <Box>
-        {storeImg ? <ImgBox img={storeImg} width={100} height={100} size="contain" /> : null}
+        {couponImg ? (
+          <ImgBox img={couponImg} width={100} height={100} size="contain" />
+        ) : null}
       </Box>
       <Typography
         component="a"
