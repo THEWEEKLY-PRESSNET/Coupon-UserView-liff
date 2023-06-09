@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export type Modal = {
   body: "use" | "used" | "error";
   isModal: boolean;
+  text: string;
 };
 
 const initialState: Modal = {
   body: "use",
   isModal: false,
+  text: "",
 };
 
 const slice = createSlice({

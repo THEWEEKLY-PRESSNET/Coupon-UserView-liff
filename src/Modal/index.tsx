@@ -1,6 +1,4 @@
-import React, { useState, ReactNode } from "react";
-import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-import type { SxProps } from "@mui/system/styleFunctionSx/styleFunctionSx";
+import React from "react";
 
 import ModalBox from "./ModalBox";
 import Use from "./Body.use";
@@ -19,17 +17,9 @@ const styles = {
   },
 };
 
-type Props = {
-  open: boolean;
-  setOpen: (e: boolean) => void;
-  children: ReactNode;
-  actions?: ReactNode;
-  sx?: SxProps;
-};
-
-const ModalUse: React.FC = () => {
+const ModalIndex: React.FC = () => {
   const { body, isModal, text } = useSelector((s: Root) => s.modal);
-  console.log("body", "isModal", body, isModal, text);
+  // console.log("body", "isModal", body, isModal, text);
   const dispatch = useDispatch();
   const setOpen = () => {
     dispatch(
@@ -48,4 +38,4 @@ const ModalUse: React.FC = () => {
   );
 };
 
-export default ModalUse;
+export default ModalIndex;

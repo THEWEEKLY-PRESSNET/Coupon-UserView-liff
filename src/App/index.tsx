@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { useSelector } from "react-redux";
 
-import GetCoupons from "../providers/GetCoupons";
+// import GetCoupons from "../providers/GetCoupons";
 import Layout from "../components/Layout";
 import Coupons from "../Coupons";
 import Detail from "../CouponDetail";
@@ -17,7 +17,7 @@ type props = {
 
 const App: React.FC = () => {
   const { view } = useSelector((s: Root) => s.topState);
-  const coupons = useSelector((s: Root) => s.coupons);
+  // const coupons = useSelector((s: Root) => s.coupons);
   // console.log("coupons", coupons);
   return (
     <>
