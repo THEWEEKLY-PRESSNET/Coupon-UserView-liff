@@ -18,28 +18,17 @@ const styles = {
     px: "3px",
     py: "8px",
     cursor: "pointer",
+    filter: "drop-shadow(0px 4px 4px rgba(64, 64, 64, 0.25))",
   },
-  ellipseR: {
-    position: "absolute",
-    width: "50px",
-    height: "50px",
-    top: "49px",
-    right: "-36px",
-    borderRadius: "50%",
-    bgcolor: "bg1.main",
-    boxShadow: "3px 4px 4px rgba(64, 64, 64, 0.25) inset",
-    zIndex: 2,
+  clipPathContainer: {
+    clipPath: "url(#coupon-path)",
   },
-  ellipseL: {
-    position: "absolute",
-    width: "50px",
-    height: "50px",
-    top: "46px",
-    left: "-36px",
-    borderRadius: "50%",
-    bgcolor: "bg1.main",
-    boxShadow: "-3px 4px 4px rgba(64, 64, 64, 0.25) inset",
-    zIndex: 2,
+  svgBox: {
+    height: 0,
+    width: 0,
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   border: {
     position: "absolute",
@@ -122,7 +111,6 @@ const styles = {
   },
   ticket: {
     background: "#FFF",
-    boxShadow: "0px 4px 4px rgba(64, 64, 64, 0.25)",
     borderRadius: "5px",
     height: "128px",
   },
@@ -172,39 +160,44 @@ const TicketUnit: React.FC<Props> = ({
   }, [validEnd]);
 
   return (
-    <Box
-      onClick={used || expired ? undefined : handleClick}
-      sx={styles.container}
-    >
-      <Box className="coupon-ticket" sx={styles.ticket} />
-      <Box sx={styles.ellipseR} />
-      <Box sx={styles.ellipseL} />
-      <Box sx={styles.border} />
-      <Typography sx={styles.copy}>Coupon</Typography>
-      <Typography sx={styles.title}>{couponTitleBig}</Typography>
-      <Typography sx={styles.subtitle}>{couponTitleSmall}</Typography>
-      <Typography sx={styles.name}>{storeName}</Typography>
-      <Typography sx={styles.limit}>{`有効期限　${validStr}まで`}</Typography>
-      {favored && (
-        <Box sx={styles.favor}>
-          <StarIcon sx={styles.favorIcon} />
-          <Typography sx={styles.favorText}>お気に入り</Typography>
+    <Box onClick={used || expired ? undefined : handleClick} sx={styles.container}>
+      <Box sx={styles.clipPathContainer}>
+        <Box className="coupon-ticket" sx={styles.ticket} />
+        <Box sx={styles.svgBox}>
+          <svg viewBox="0 0 374 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="coupon-path" clipPathUnits="objectBoundingBox">
+              <path transform="scale(0.002673,0.007812)" d="M0 5C0 2.23858 2.23858 0 5 0H369C371.761 0 374 2.23858 374 5V43.2872C366.807 47.7822 362.079 55.3818 362.079 64C362.079 72.6182 366.807 80.2178 374 84.7128V123C374 125.761 371.761 128 369 128H4.99999C2.23857 128 0 125.761 0 123V84.0061C6.58616 79.4453 10.8468 72.1816 10.8468 64C10.8468 55.8184 6.58616 48.5547 0 43.9939V5Z" />
+            </clipPath>
+          </svg>
         </Box>
-      )}
-      {badgeText && (
-        <Box sx={styles.badge}>
-          <Badge badgeText={badgeText} />
-        </Box>
-      )}
-      {isFlag && <Flag />}
-      {isFlag && (
-        <Typography
-          sx={styles.start}
-        >{`${startStr}からご利用いただけます。`}</Typography>
-      )}
-      {used && <Shadow text="使用済み" />}
-      {expired && <Shadow text="期限切れ" />}
-    </Box>
+        <Box sx={styles.border} />
+        <Typography sx={styles.copy}>Coupon</Typography>
+        <Typography sx={styles.title}>{couponTitleBig}</Typography>
+        <Typography sx={styles.subtitle}>{couponTitleSmall}</Typography>
+        <Typography sx={styles.name}>{storeName}</Typography>
+        <Typography sx={styles.limit}>{`有効期限　${validStr}まで`}</Typography>
+        {favored && (
+          <Box sx={styles.favor}>
+            <StarIcon sx={styles.favorIcon} />
+            <Typography sx={styles.favorText}>お気に入り</Typography>
+          </Box>
+        )}
+        {badgeText && (
+          <Box sx={styles.badge}>
+            <Badge badgeText={badgeText} />
+          </Box>
+        )}
+        {isFlag && <Flag />}
+
+        {isFlag && (
+          <Typography
+            sx={styles.start}
+          >{`${startStr}からご利用いただけます。`}</Typography>
+        )}
+        {used && <Shadow text="使用済み" />}
+        {expired && <Shadow text="期限切れ" />}
+      </Box>
+    </Box >
   );
 };
 
