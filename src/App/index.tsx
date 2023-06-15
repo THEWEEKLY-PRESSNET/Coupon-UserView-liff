@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import Coupons from "../Coupons";
 import Detail from "../CouponDetail";
 import CouponUse from "../CouponUse";
+import CouponUsed from "../CouponUsed";
 import Modal from "../Modal";
 import type { Root } from "../stores";
 
@@ -16,7 +17,9 @@ type props = {
 };
 
 const App: React.FC = () => {
+  console.log("App");
   const { view } = useSelector((s: Root) => s.topState);
+  console.log("view", view);
   // const coupons = useSelector((s: Root) => s.coupons);
   // console.log("coupons", coupons);
   return (
@@ -25,6 +28,7 @@ const App: React.FC = () => {
         {view === "top" && <Coupons />}
         {view === "detail" && <Detail />}
         {view === "use" && <CouponUse />}
+        {view === "used" && <CouponUsed />}
       </Layout>
       <Modal />
     </>

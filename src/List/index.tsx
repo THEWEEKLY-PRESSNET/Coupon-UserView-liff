@@ -7,6 +7,7 @@ import Layout from "../components/Layout";
 import Coupons from "../Coupons";
 import Detail from "../CouponDetail";
 import CouponUse from "../CouponUse";
+import CouponUsed from "../CouponUsed";
 import Modal from "../Modal";
 import type { Root } from "../stores";
 import { useLocalStorage } from "../hooks/useLocalstorage";
@@ -32,6 +33,7 @@ const List: React.FC = () => {
         {view === "top" && <Coupons />}
         {view === "detail" && <Detail />}
         {view === "use" && <CouponUse />}
+        {view === "used" && <CouponUsed />}
       </Layout>
       <Modal />
     </>

@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
@@ -6,6 +7,7 @@ import Badge from "./Ticket.Badge";
 import Flag from "./Ticket.Flag";
 import Shadow from "./Ticket.Shadow";
 import { dateTrance, strToDate } from "../../utils/formatter";
+import { updateTopState } from "../../stores/topState";
 import type { Coupon } from "../../stores/coupon";
 
 const styles = {
@@ -26,7 +28,7 @@ const styles = {
   svgBox: {
     height: 0,
     width: 0,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
   },
@@ -123,6 +125,7 @@ const styles = {
 
 type Props = {
   handleClick: (coupon: Coupon) => void;
+  handleUsed: (coupon: Coupon) => void;
   couponTitleBig: string;
   couponTitleSmall: string;
   storeName: string;
@@ -135,6 +138,7 @@ type Props = {
 
 const TicketUnit: React.FC<Props> = ({
   handleClick,
+  handleUsed,
   couponTitleBig,
   couponTitleSmall,
   storeName,
@@ -159,14 +163,27 @@ const TicketUnit: React.FC<Props> = ({
     return now > past;
   }, [validEnd]);
 
+  const dispatch = useDispatch();
+
   return (
-    <Box onClick={used || expired ? undefined : handleClick} sx={styles.container}>
+    <Box
+      onClick={used || expired ? undefined : handleClick}
+      sx={styles.container}
+    >
       <Box sx={styles.clipPathContainer}>
         <Box className="coupon-ticket" sx={styles.ticket} />
         <Box sx={styles.svgBox}>
-          <svg viewBox="0 0 374 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+          
+          <svg
+            viewBox="0 0 374 128"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <clipPath id="coupon-path" clipPathUnits="objectBoundingBox">
-              <path transform="scale(0.002673,0.007812)" d="M0 5C0 2.23858 2.23858 0 5 0H369C371.761 0 374 2.23858 374 5V43.2872C366.807 47.7822 362.079 55.3818 362.079 64C362.079 72.6182 366.807 80.2178 374 84.7128V123C374 125.761 371.761 128 369 128H4.99999C2.23857 128 0 125.761 0 123V84.0061C6.58616 79.4453 10.8468 72.1816 10.8468 64C10.8468 55.8184 6.58616 48.5547 0 43.9939V5Z" />
+              <path
+                transform="scale(0.002673,0.007812)"
+                d="M0 5C0 2.23858 2.23858 0 5 0H369C371.761 0 374 2.23858 374 5V43.2872C366.807 47.7822 362.079 55.3818 362.079 64C362.079 72.6182 366.807 80.2178 374 84.7128V123C374 125.761 371.761 128 369 128H4.99999C2.23857 128 0 125.761 0 123V84.0061C6.58616 79.4453 10.8468 72.1816 10.8468 64C10.8468 55.8184 6.58616 48.5547 0 43.9939V5Z"
+              />
             </clipPath>
           </svg>
         </Box>
@@ -194,10 +211,10 @@ const TicketUnit: React.FC<Props> = ({
             sx={styles.start}
           >{`${startStr}からご利用いただけます。`}</Typography>
         )}
-        {used && <Shadow text="使用済み" />}
+        {used && <Shadow text="使用済み" handleUsed={handleUsed} />}
         {expired && <Shadow text="期限切れ" />}
       </Box>
-    </Box >
+    </Box>
   );
 };
 
