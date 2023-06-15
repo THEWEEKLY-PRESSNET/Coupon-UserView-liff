@@ -10,12 +10,19 @@ import type { Root } from "../stores";
 
 const styles = {
   container: {
-    mb: 18,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    px: "auto",
+    mt: 4,
+    mb: 10,
   },
 };
 
-const CouponUse = () => {
+const CouponUsed = () => {
+  console.log("coupon used");
   const coupon = useSelector((s: Root) => s.coupon);
+  console.log("coupon", coupon);
 
   return (
     <Box sx={styles.container}>
@@ -27,4 +34,4 @@ const CouponUse = () => {
   );
 };
 
-export default CouponUse;
+export default CouponUsed;

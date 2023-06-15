@@ -1,7 +1,8 @@
 import React from "react";
-import { StaticImage } from "gatsby-plugin-image";
 import { Box, Typography } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
+
+import type { Coupon } from "../../stores/coupon";
+
 const styles = {
   container: {
     position: "absolute",
@@ -27,13 +28,14 @@ const styles = {
   },
 };
 
-const Flag: React.FC<{ text: string }> = ({ text }) => {
-  const handleClick = () => {
-    window.location.href = "https://lin.ee/f62Smod";
-  };
+type Props = {
+  text: string;
+  handleUsed: (coupon: Coupon) => void;
+};
 
+const Flag: React.FC<Props> = ({ text, handleUsed }) => {
   return (
-    <Box className="flag-shadow" sx={styles.container}>
+    <Box className="flag-shadow" onClick={handleUsed} sx={styles.container}>
       <Typography sx={styles.label}>{text}</Typography>
     </Box>
   );

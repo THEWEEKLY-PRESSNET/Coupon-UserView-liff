@@ -65,6 +65,18 @@ const Test: React.FC<Props> = ({ coupons }) => {
     },
     [dispatch]
   );
+  const handleUsed = useCallback(
+    coupon => {
+      dispatch(updateCoupon({ ...coupon }));
+      dispatch(
+        updateTopState({
+          view: "used",
+        })
+      );
+      window.scroll(0, 0);
+    },
+    [dispatch]
+  );
 
   return (
     <Box className="coupons-list" sx={styles.container}>
@@ -77,6 +89,7 @@ const Test: React.FC<Props> = ({ coupons }) => {
             <CouponUnit
               {...coupon}
               handleClick={() => handleClick(coupon)}
+              handleUsed={() => handleUsed(coupon)}
               key={coupon.issuedCouponId}
             />
           );

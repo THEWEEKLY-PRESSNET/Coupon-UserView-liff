@@ -38,7 +38,7 @@ const ModalIndex: React.FC<Props> = ({ setOpen }) => {
     setOpen(false);
     dispatch(
       updateTopState({
-        view: "top",
+        view: "used",
       })
     );
   };
