@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 
 import Coupon from "./coupon";
 import ImgBox from "../ImgBox";
-import { dateTrance } from "../../utils/formatter";
+import { dateTrance, strToDate } from "../../utils/formatter";
 import type { Detail } from "../../stores/coupon";
 
 const styles = {
@@ -79,11 +79,16 @@ const Test: React.FC<Detail> = ({
 }) => {
   const startStr = dateTrance(validStart);
   const valiedStr = dateTrance(validEnd);
+  const endDate = strToDate(validEnd);
+  console.log("endDate", endDate);
+  const isBadge = parseInt((endDate - new Date()) / 1000 / 60 / 60 / 24);
+  // console.log("isBadge", typeof isBadge, new Date(2023, 7, 1));
 
   return (
     <Box sx={styles.container}>
       <Box sx={styles.ticket}>
         <Coupon
+          isBadge={isBadge}
           couponTitleBig={couponTitleBig}
           couponTitleSmall={couponTitleSmall}
         />
