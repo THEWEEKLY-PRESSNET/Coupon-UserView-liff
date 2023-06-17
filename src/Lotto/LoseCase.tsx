@@ -71,11 +71,6 @@ const LoseCase: React.FC = () => {
     dispatch(updateTopState({ view: "lotted" }));
   };
 
-  // const handleClick = () => {
-  //   dispatch(updateTopState({ view: "coupons" }));
-  //   navigate("/");
-  // };
-
   return (
     <Box className="lotto-win" sx={styles.container}>
       <animated.div

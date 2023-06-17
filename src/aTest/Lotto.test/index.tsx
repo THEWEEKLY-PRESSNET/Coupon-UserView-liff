@@ -12,7 +12,7 @@ import type { Root } from "../../stores";
 
 const mockData: Root = {
   topState: {
-    view: "lotto",
+    view: "loading",
     isStop: false,
     lottered: false,
   },
