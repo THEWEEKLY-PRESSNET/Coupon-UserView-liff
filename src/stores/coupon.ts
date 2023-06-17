@@ -36,7 +36,6 @@ export type Coupon = {
   storeUrl: string;
   couponTitleSmall: string;
   storeId: number;
-
   issuedCouponId: number;
   userId: number;
   usedAt: number | null;

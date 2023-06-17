@@ -12,13 +12,14 @@ export type TopState = {
     | "top"
     | "detail"
     | "use"
-    | "used";
+    | "used"
+    | "loading";
   isStop: boolean;
   lottered: boolean;
 };
 
 const initialState: TopState = {
-  view: "top",
+  view: "loading",
   isStop: false,
   lottered: false,
 };
