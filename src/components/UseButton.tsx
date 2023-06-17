@@ -24,10 +24,24 @@ const styles = {
   },
 };
 
-const UseBtn = () => {
+type Props = {
+  isValied: boolean;
+};
+
+const UseBtn: React.FC<Props> = ({ isValied }) => {
   const { view } = useSelector((s: Root) => s.topState);
   const dispatch = useDispatch();
   const useBtn = useMemo(() => {
+    if (isValied) {
+      return {
+        value: "利用開始までお待ちください",
+        style: {
+          color: "#FFF",
+          bgcolor: "#B7B7B7",
+        },
+        onClick: () => "",
+      };
+    }
     switch (view) {
       case "detail":
         return {

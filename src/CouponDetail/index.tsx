@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import Detail from "../components/DetailUnit";
 import FavoriteBtn from "./FavoriteBtn";
 import UseBtn from "../components/UseButton";
 import CouponNote from "./CouponNote";
+import { strToDate } from "../utils/formatter";
 import type { Root } from "../stores";
 
 const styles = {
@@ -46,13 +47,23 @@ const styles = {
 const CouponDetail: React.FC = () => {
   const coupon = useSelector((s: Root) => s.coupon);
   // console.log("coupon", coupon);
+  const { validStart } = coupon;
+  const hide = useMemo(() => {
+    const startDate = strToDate(validStart);
+    const today = new Date();
+    if (today > startDate) {
+      return true;
+    }
+    return false;
+  }, [validStart]);
+  console.log("hide", hide);
 
   return (
     <Box sx={styles.container}>
-      <Detail {...coupon} red hide />
+      <Detail {...coupon} red hide={hide} />
       <FavoriteBtn />
       <CouponNote />
-      <UseBtn />
+      <UseBtn isValied={!hide} />
     </Box>
   );
 };

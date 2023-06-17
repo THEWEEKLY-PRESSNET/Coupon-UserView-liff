@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Box, Typography } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 
-import { dateTrance } from "../../utils/formatter";
+import ImgBox from "../ImgBox";
+import badge from "../../images/badge.png";
 
 const styles = {
   container: {
@@ -86,15 +86,39 @@ const styles = {
     transform: "translate(-50%, -50%)",
     fontWeight: 400,
     fontSize: "12px",
-    
+  },
+  badge: {
+    position: "absolute",
+    top: 10,
+    left: 6,
+  },
+  text1: {
+    position: "absolute",
+    top: 18,
+    left: 18,
+    fontWeight: 600,
+    color: "#FFF",
+  },
+  text2: {
+    position: "absolute",
+    top: 33,
+    left: 20,
+    fontWeight: 600,
+    color: "#FFF",
   },
 };
 
 type Props = {
+  isBadge: number;
   couponTitleBig: string;
+  couponTitleSmall: string;
 };
 
-const Test: React.FC<Props> = ({ couponTitleBig, couponTitleSmall }) => {
+const Test: React.FC<Props> = ({
+  isBadge,
+  couponTitleBig,
+  couponTitleSmall,
+}) => {
   return (
     <Box sx={styles.container}>
       <Box className="coupon-ticket" sx={styles.ticket} />
@@ -104,6 +128,19 @@ const Test: React.FC<Props> = ({ couponTitleBig, couponTitleSmall }) => {
       <Typography sx={styles.copy}>Coupon</Typography>
       <Typography sx={styles.title}>{couponTitleBig}</Typography>
       <Typography sx={styles.titleSml}>{couponTitleSmall}</Typography>
+      {isBadge < 6 && isBadge >= 0 && (
+        <>
+          <ImgBox
+            img={badge}
+            width={48}
+            height={48}
+            sx={styles.badge}
+            size="contain"
+          />
+          <Typography sx={styles.text1}>残り</Typography>
+          <Typography sx={styles.text2}>{isBadge}日</Typography>
+        </>
+      )}
     </Box>
   );
 };
