@@ -26,9 +26,9 @@ const styles = {
     borderRadius: "30px",
     whiteSpace: "nowrap",
     margin: "auto",
-    "&:hover":{
-      opacity: "1"
-    }
+    "&:hover": {
+      opacity: "1",
+    },
   },
   favoriteBtn: {
     color: "#fff",
@@ -45,10 +45,10 @@ const styles = {
     borderRadius: "30px",
     whiteSpace: "nowrap",
     margin: "auto",
-    "&:hover":{
+    "&:hover": {
       color: "#fff",
       bgcolor: "accent.p",
-    }
+    },
   },
   iconImg: {
     width: "12px",
@@ -61,7 +61,7 @@ const FavoriteBtn: React.FC = () => {
   // console.log("coupons", coupon);
 
   const dispatch = useDispatch();
-  const favorite = true;
+  // const favorite = true;
 
   const handleClick = () => {
     if (!coupon.favored) {

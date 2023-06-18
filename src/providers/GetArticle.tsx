@@ -22,7 +22,6 @@ export const getArticle = async (params: Params) => {
 };
 
 const GetArticles: React.FC<Params> = ({ userId }) => {
-  console.log("get coupons");
   const dispatch = useDispatch();
   useEffect(() => {
     const resolvePromise = async () => {

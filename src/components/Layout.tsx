@@ -55,20 +55,22 @@ type props = {
   children: ReactNode;
 };
 
-const Layout: React.FC<props> = ({ children }) => (
-  <ThemeProvider theme={theme}>
-    <Container className="layout-container" sx={styles.container}>
-      <Paper className="layout-header" elevation={5} sx={styles.header}>
-        <Header />
-      </Paper>
-      <Box className="layout-body" sx={styles.body}>
-        {children}
-      </Box>
-      <Paper className="layout-footer" elevation={5} sx={styles.footer}>
-        <FooterNav />
-      </Paper>
-    </Container>
-  </ThemeProvider>
-);
+const Layout: React.FC<props> = ({ children }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Container className="layout-container" sx={styles.container}>
+        <Paper className="layout-header" elevation={5} sx={styles.header}>
+          <Header />
+        </Paper>
+        <Box className="layout-body" sx={styles.body}>
+          {children}
+        </Box>
+        <Paper className="layout-footer" elevation={5} sx={styles.footer}>
+          <FooterNav />
+        </Paper>
+      </Container>
+    </ThemeProvider>
+  );
+};
 
 export default Layout;
