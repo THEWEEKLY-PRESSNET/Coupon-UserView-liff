@@ -8,6 +8,7 @@ const styles = {
     alignItems: "center",
     width: { sx: "100vw", sm: "600px" },
     height: "100%",
+    minHeight: "100%",
     color: "#FFF",
     bgcolor: "rgba(0,0,0,0.25)",
   },
