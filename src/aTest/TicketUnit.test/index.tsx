@@ -15,7 +15,7 @@ const mockData: Root = {
     issuedCouponId: 0,
     userId: 0,
     usedAt: null,
-    favorite: false,
+    favored: false,
     expired: false,
     couponId: 0,
     storeId: 0,

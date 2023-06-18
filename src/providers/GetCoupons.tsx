@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { requestGet, promiseResolver, typeRequest } from "./requestMethods";
 import { updateCoupons } from "../stores/coupons";
+import { updateTopState } from "../stores/topState";
 // import { updateSnackBar } from "../../stores/snackBar";
 
 type Params = {
@@ -25,11 +26,17 @@ const GetCoupons: React.FC<Params> = ({ state }) => {
   console.log("get coupons");
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(
+      updateTopState({
+        view: "loading",
+      })
+    );
     const resolvePromise = async () => {
       const response = await getCoupons({ state });
       if (response.result) {
         console.log("success", response.payload);
         dispatch(updateCoupons(response.payload));
+        dispatch(updateTopState({ view: "top" }));
       } else {
         // dispatch(
         //   updateSnackBar({
