@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
-// import { liff } from "@line/liff";
+import { liff } from "@line/liff";
 import { useLiff } from "react-liff";
 
 import { usePreRender } from "../hooks/usePreRender";
@@ -13,7 +13,7 @@ const PreRender: React.FC = () => <div>loading...</div>;
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   console.log("location", location);
-  const { error, isLoggedIn, isReady, liff } = useLiff();
+  const { error, isLoggedIn, isReady } = useLiff();
   // console.log("liff", liff);
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
