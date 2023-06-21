@@ -13,6 +13,8 @@ const PreRender: React.FC = () => <div>loading...</div>;
 
 const After: React.FC = () => {
   const [displayName, setDisplayName] = useState("");
+  const [profile, setProfile] = useState({});
+  const [friendship, setFriend] = useState(false);
   const { error, isLoggedIn, isReady, liff } = useLiff();
   // console.log("liff", liff);
   console.log("isLoggedIn", isLoggedIn);
@@ -24,7 +26,12 @@ const After: React.FC = () => {
     (async () => {
       const profile = await liff.getProfile();
       setDisplayName(profile.displayName);
+      console.log("profile", profile);
     })();
+    // (async () => {
+    //   const profile = await liff.getProfile();
+    //   setDisplayName(profile.displayName);
+    // })();
   }, [liff, isLoggedIn]);
 
   const showDisplayName = () => {
@@ -41,6 +48,9 @@ const After: React.FC = () => {
     return (
       <>
         <p>Welcome to the react-liff demo app, {displayName}!</p>
+        <p>state: {liff.state}</p>
+        <p>friendship: {friendship}</p>
+        <p></p>
         <button className="App-button" onClick={liff.logout}>
           Logout
         </button>
