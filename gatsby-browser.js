@@ -13,7 +13,7 @@ console.log("brouser stores", store)
 
 exports.wrapRootElement = ({ element }) => {
     return (
-        <Provider store={store.default}>
+        <Provider store={store}>
             {element}
         </Provider>
     )
