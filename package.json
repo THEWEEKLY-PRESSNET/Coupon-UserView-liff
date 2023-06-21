@@ -2,7 +2,7 @@
   "name": "東広島デジタル　クーポンガチャ",
   "private": true,
   "description": "1日１回クーポンガチャ 東広島のお得をゲット",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "uniwork <uniwork.contact@gmail.com>",
   "dependencies": {
     "@emotion/react": "^11.10.6",

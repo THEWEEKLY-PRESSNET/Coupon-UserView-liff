@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
-import { Provider, useDispatch, useSelector } from "react-redux";
-
-import Question from "../Question";
-import Lotto from "../Lotto";
+import { Provider } from "react-redux";
+import { liff } from "@line/liff";
+import { useLiff } from "react-liff";
 
 import { usePreRender } from "../hooks/usePreRender";
-import { serchQueryToOgj } from "../utils/handlePath";
 import store from "../stores";
 import { Link, PageProps, navigate } from "gatsby";
-import { useLocalStorage } from "../hooks/useLocalstorage";
 
 const homeUrl = "https://www.higashihiroshima-digital.com/";
 
@@ -16,30 +13,27 @@ const PreRender: React.FC = () => <div>loading...</div>;
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   console.log("location", location);
-  const { state } = serchQueryToOgj(location.search);
-  console.log("urlstate", state);
-  const [storageState] = useLocalStorage("state");
-  console.log("state", state);
-  // if (typeof window !== "undefined" && !state) {
-  //   window.location.href = homeUrl;
-  // }
+  const { error, isLoggedIn, isReady } = useLiff();
+  // console.log("liff", liff);
+  console.log("isLoggedIn", isLoggedIn);
 
-  // const { state, hash } = (location.state as {
-  //   state: string;
-  //   hash: string;
-  // }) || { state: "", hash: "" };
-  // useEffect(() => {
-  //   if (state === "") {
-  //     window.location.href = "https://www.higashihiroshima-digital.com/";
-  //     navigate("/404");
-  //     console.log("");
-  //   }
-  // }, [state, hash]);
+  useEffect(() => {
+    liff
+      .init({ liffId: "1660941787-3qkMjKae" })
+      .then(() => {
+        // const root = createRoot(container);
+        // root.render(element);
+        console.log("init success");
+      })
+      .catch(e => {
+        alert(`LIFF error: ${e.message}`);
+      });
+  }, []);
 
   return usePreRender(
     PreRender,
     <Provider store={store}>
-      <Question />
+      <div>index</div>
     </Provider>
   );
 };

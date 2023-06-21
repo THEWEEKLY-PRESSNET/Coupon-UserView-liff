@@ -34,8 +34,9 @@ exports.replaceHydrateFunction = () => {
     return (element, container) => {
         liff
             // .init({ liffId: process.env.REACT_APP_LIFF_ID || '' })
-            .init({ liffId: '1660941787-3qkMjKae' })
+            .init({ liffId: '1661486792-V0xKPX9B' })
             .then(() => {
+                console.log('success')
                 const root = createRoot(container)
                 root.render(element)
             })
