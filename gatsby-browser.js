@@ -16,7 +16,7 @@ const liffId = "1661486792-V0xKPX9B"
 
 exports.wrapRootElement = ({ element }) => {
     return (
-        <Provider store={store}>
+        <Provider store={store.default}>
             {/* <LiffProvider liffId={liffId}> */}
             {element}
             {/* </LiffProvider> */}
