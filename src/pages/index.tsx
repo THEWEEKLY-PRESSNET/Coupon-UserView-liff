@@ -16,7 +16,7 @@ const After: React.FC = () => {
   const [profile, setProfile] = useState({});
   const [friendship, setFriend] = useState(false);
   const { error, isLoggedIn, isReady, liff } = useLiff();
-  // console.log("liff", liff);
+  console.log("liff", liff);
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
 
@@ -28,10 +28,10 @@ const After: React.FC = () => {
       setDisplayName(profile.displayName);
       console.log("profile", profile);
     })();
-    // (async () => {
-    //   const profile = await liff.getProfile();
-    //   setDisplayName(profile.displayName);
-    // })();
+    (async () => {
+      const friendship = await liff.getFriendship();
+      setFriend(friendship.frienFlag);
+    })();
   }, [liff, isLoggedIn]);
 
   const showDisplayName = () => {
