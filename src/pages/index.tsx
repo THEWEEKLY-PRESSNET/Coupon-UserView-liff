@@ -18,20 +18,20 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      liff
-        .init({ liffId: "1660941787-3qkMjKae" })
-        .then(() => {
-          // const root = createRoot(container);
-          // root.render(element);
-          console.log("init success");
-        })
-        .catch(e => {
-          alert(`LIFF error: ${e.message}`);
-        });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     liff
+  //       .init({ liffId: "1660941787-3qkMjKae" })
+  //       .then(() => {
+  //         // const root = createRoot(container);
+  //         // root.render(element);
+  //         console.log("init success");
+  //       })
+  //       .catch(e => {
+  //         alert(`LIFF error: ${e.message}`);
+  //       });
+  //   }
+  // }, []);
 
   return usePreRender(
     PreRender,
