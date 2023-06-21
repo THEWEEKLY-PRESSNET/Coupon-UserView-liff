@@ -18,18 +18,21 @@ const After: React.FC = () => {
   console.log("isReady", isReady);
 
   useEffect(() => {
-    if (typeof window !== undefined) {
-      liff
-        .init({ liffId: "1660941787-3qkMjKae" })
-        .then(() => {
-          // const root = createRoot(container);
-          // root.render(element);
-          console.log("init success");
-        })
-        .catch(e => {
-          alert(`LIFF error: ${e.message}`);
-        });
+    if (typeof window !== "undefined") {
+      const item = localStorage.getItem("some");
+      console.log("item", item);
     }
+    //   liff
+    //     .init({ liffId: "1660941787-3qkMjKae" })
+    //     .then(() => {
+    //       // const root = createRoot(container);
+    //       // root.render(element);
+    //       console.log("init success");
+    //     })
+    //     .catch(e => {
+    //       alert(`LIFF error: ${e.message}`);
+    //     });
+    // }
   }, []);
   return <div>INDEX!!!!</div>;
 };
