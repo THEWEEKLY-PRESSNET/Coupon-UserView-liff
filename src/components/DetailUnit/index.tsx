@@ -13,6 +13,7 @@ const styles = {
     alignItems: "center",
     boxSizing: "border-box",
     gap: 1,
+    mb: "150px",
   },
   ticket: {
     // py: 1,

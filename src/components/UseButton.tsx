@@ -5,6 +5,7 @@ import { Paper } from "@mui/material";
 import { updateTopState } from "../stores/topState";
 import { updateModal } from "../stores/modal";
 import type { Root } from "../stores";
+import UseText from "../CouponUse/UseText";
 
 const styles = {
   container: {
@@ -89,14 +90,17 @@ const UseBtn: React.FC<Props> = ({ isValied }) => {
   }, [view]);
 
   return (
-    <Paper
-      className="usebtn"
-      elevation={5}
-      onClick={useBtn?.onClick}
-      sx={{ ...styles.container, ...useBtn?.style }}
-    >
-      {useBtn?.value}
-    </Paper>
+    <>
+      <Paper
+        className="usebtn"
+        elevation={5}
+        onClick={useBtn?.onClick}
+        sx={{ ...styles.container, ...useBtn?.style }}
+      >
+        <UseText />
+        {useBtn?.value}
+      </Paper>
+    </>
   );
 };
 

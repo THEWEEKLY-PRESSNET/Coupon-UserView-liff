@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import type { Root } from "../stores";
 import Detail from "../components/DetailUnit";
-import UseText from "./UseText";
+// import UseText from "./UseText";
 import UseButton from "../components/UseButton";
 import { strToDate } from "../utils/formatter";
 
@@ -22,7 +22,7 @@ const CouponUse = () => {
   return (
     <>
       <Detail {...coupon} red hide={hide} />
-      <UseText />
+      {/* <UseText /> */}
       <UseButton />
     </>
   );
