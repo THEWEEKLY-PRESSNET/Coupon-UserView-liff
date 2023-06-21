@@ -47,7 +47,7 @@ const After: React.FC = () => {
       </>
     );
   };
-  return <div>INDEX!!!!</div>;
+  return <div>INDEX!!!!{showDisplayName()}</div>;
 };
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {
