@@ -8,13 +8,18 @@
 
 const React = require("react")
 const { Provider } = require("react-redux")
+const { LiffProvider } = require('react-liff')
 const store = require("./src/stores")
 console.log("brouser stores", store)
+
+const liffId = "1661486792-V0xKPX9B"
 
 exports.wrapRootElement = ({ element }) => {
     return (
         <Provider store={store}>
-            {element}
+            <LiffProvider liffId={liffId}>
+                {element}
+            </LiffProvider>
         </Provider>
     )
 }
