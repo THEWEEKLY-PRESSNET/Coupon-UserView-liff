@@ -18,7 +18,7 @@ const After: React.FC = () => {
   console.log("isReady", isReady);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== undefined) {
       liff
         .init({ liffId: "1660941787-3qkMjKae" })
         .then(() => {
