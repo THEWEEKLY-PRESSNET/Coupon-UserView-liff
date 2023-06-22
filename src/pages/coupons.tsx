@@ -20,9 +20,7 @@ const After: React.FC = () => {
   //   console.log("friendship", friendship);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!isLoggedIn) {
-      liff.login();
-    }
+    if (!isLoggedIn) return;
 
     (async () => {
       const friendship = await liff.getFriendship();
@@ -52,6 +50,7 @@ const After: React.FC = () => {
     if (!friendship) return <p>公式アカウントを友達追加してください</p>;
     return <Coupons />;
   };
+  //   return <Coupons />;
   return (
     <>
       {(!isReady && <div>loading...</div>) ||
