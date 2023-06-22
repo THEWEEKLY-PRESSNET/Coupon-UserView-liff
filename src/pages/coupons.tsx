@@ -35,16 +35,21 @@ const After: React.FC = () => {
     if (error) return <p>Something is wrong.</p>;
     if (!isReady) return <p>Loading...</p>;
     if (!isLoggedIn) {
+      //   return (
+      //     <button
+      //       className="App-button"
+      //       onClick={() =>
+      //         liff.login({
+      //           redirectUri:
+      //             "https://asia-northeast2-coupon-proj.cloudfunctions.net/LineLogin/coupons",
+      //         })
+      //       }
+      //     >
+      //       Login
+      //     </button>
+      //   );
       return (
-        <button
-          className="App-button"
-          onClick={() =>
-            liff.login({
-              redirectUri:
-                "https://asia-northeast2-coupon-proj.cloudfunctions.net/LineLogin/coupons",
-            })
-          }
-        >
+        <button className="App-button" onClick={liff.login}>
           Login
         </button>
       );
