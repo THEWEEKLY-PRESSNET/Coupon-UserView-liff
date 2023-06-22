@@ -35,6 +35,10 @@ const After: React.FC = () => {
     })();
     (async () => {
       const friendship = await liff.getFriendship();
+      console.log("friendship", friendship);
+      if (!friendship) {
+        window.location.replace("https://lin.ee/LWvjdI0");
+      }
       setFriend(friendship.frienFlag);
     })();
     (async () => {
