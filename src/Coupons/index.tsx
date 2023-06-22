@@ -38,6 +38,7 @@ const Coupons: React.FC = () => {
             liffId,
           })
           .then(() => {
+            console.log("liff", liff);
             const newId = liff.getIDToken();
             console.log("newId", newId);
             return newId;
