@@ -49,7 +49,10 @@ const Coupons: React.FC = () => {
             console.log("newId", newId);
             return newId;
           })
-          .then(token => token);
+          .then(token => {
+            console.log("token", token);
+            return token;
+          });
       };
       const idToken = (isReady && (await getToken())) || "";
       console.log("idToken", idToken);
