@@ -17,9 +17,9 @@ const liffId = "1661486792-mWQ6Adxo";
 const PreRender: React.FC = () => <div>loading...</div>;
 
 const After: React.FC = () => {
-  const [displayName, setDisplayName] = useState("");
-  const [profile, setProfile] = useState({});
-  //   const [friendship, setFriend] = useState(false);
+  //   const [displayName, setDisplayName] = useState("");
+  //   const [profile, setProfile] = useState({});
+  const [friendship, setFriend] = useState(false);
   const { error, isLoggedIn, isReady, liff } = useLiff();
   console.log("liff id", liff);
   console.log("isLoggedIn", isLoggedIn);
@@ -28,14 +28,15 @@ const After: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isLoggedIn) return;
-    (async () => {
-      const profile = await liff.getProfile();
-      setDisplayName(profile.displayName);
-      console.log("profile", profile);
-    })();
+    // (async () => {
+    //   const profile = await liff.getProfile();
+    //   setDisplayName(profile.displayName);
+    //   console.log("profile", profile);
+    // })();
     (async () => {
       const friendship = await liff.getFriendship();
       console.log("friendship useEffect", friendship);
+      setFriend(friendship.friendFlag);
       if (!friendship.friendFlag) {
         window.location.replace("https://lin.ee/LWvjdI0");
       }
@@ -52,7 +53,7 @@ const After: React.FC = () => {
   const showDisplayName = () => {
     if (error) return <p>Something is wrong.</p>;
     if (!isReady) return <p>Loading...</p>;
-
+    if (!friendship) return <p>公式アカウントを友達追加してください</p>;
     if (!isLoggedIn) {
       return (
         <button className="App-button" onClick={liff.login}>

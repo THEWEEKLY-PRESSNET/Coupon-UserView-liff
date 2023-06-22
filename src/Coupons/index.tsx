@@ -12,6 +12,7 @@ import Loading from "../components/Loading";
 import { getCoupons } from "../providers/GetCoupons";
 import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
+import { useLiff } from "react-liff";
 
 const styles = {};
 
@@ -19,6 +20,7 @@ const Coupons: React.FC = () => {
   console.log("Coupons");
   const [loading, setLoading] = useState(true);
   const { view, idToken } = useSelector((s: Root) => s.couponState);
+  const { liff } = useLiff();
   console.log("view", view);
   console.log("idToken", idToken);
   const coupons = useSelector((s: Root) => s.coupons);
@@ -42,7 +44,14 @@ const Coupons: React.FC = () => {
       <Layout>
         {(loading && <Loading />) || (
           <>
-            {view === "coupons" && <List />}
+            {view === "coupons" && (
+              <>
+                <List />
+                <button className="App-button" onClick={liff.logout}>
+                  Logout
+                </button>
+              </>
+            )}
             {/* {view === "detail" && <Detail />}
             {view === "use" && <Use />}
             {view === "used" && <Used />} */}
