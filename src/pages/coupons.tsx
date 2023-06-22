@@ -41,21 +41,17 @@ const After: React.FC = () => {
         </button>
       );
     }
-    if (!friendship) return <p>公式アカウントを友達追加してください</p>;
+    if (!friendship)
+      return (
+        <>
+          <p>公式アカウントを友達追加してください</p>
+          <a href="https://lin.ee/LWvjdI0">東広島デジタル公式アカウント</a>
+        </>
+      );
     return <Coupons />;
   };
   //   return <Coupons />;
-  return (
-    <>
-      {(!isReady && <div>loading...</div>) ||
-        (friendship && <>{showDisplayName()}</>) || (
-          <>
-            <p>公式アカウントを友達追加してください</p>
-            <a href="https://lin.ee/LWvjdI0">東広島デジタル公式アカウント</a>
-          </>
-        )}
-    </>
-  );
+  return <>{(!isReady && <div>loading...</div>) || showDisplayName()}</>;
 };
 
 const CouponsPage: React.FC<PageProps> = ({ location }) => {
