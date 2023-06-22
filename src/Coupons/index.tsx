@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import liff from "@line/liff";
+// import liff from "@line/liff";
 import { useLiff } from "react-liff";
 
 import GetArticles from "../providers/GetArticle";
@@ -15,6 +15,12 @@ import { getCoupons } from "../providers/GetCoupons";
 import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
 
+const liff = (() => {
+  if (typeof window !== "undefined") {
+    return require("@line/liff");
+  }
+  return undefined;
+})();
 // import { useLiff } from "react-liff";
 
 const liffId = "1661486792-mWQ6Adxo";
@@ -55,6 +61,7 @@ const Coupons: React.FC = () => {
         setLoading(false);
       }
     };
+
     if (typeof window !== "undefined") {
       fetchCoupons();
     }
