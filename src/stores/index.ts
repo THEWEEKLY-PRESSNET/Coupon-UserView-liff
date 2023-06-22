@@ -1,28 +1,29 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 
-// import articles, { Article } from "./articles";
+import articles, { Article } from "./articles";
 // import question, { Question } from "./question";
-// import coupons from "./coupons";
-// import coupon, { Coupon } from "./coupon";
+import coupons, { Issued } from "./coupons";
+import coupon, { Coupon } from "./coupon";
 // import modal, { Modal } from "./modal";
-// import topState, { TopState } from "./topState";
+import couponState, { CouponState } from "./couponState";
 
 export type Root = {
-  // articles: Article[];
+  articles: Article[];
   // question: Question;
-  // coupons: Coupon[];
-  // coupon: Coupon;
-  // topState: TopState;
+  coupons: Issued[];
+  coupon: Coupon;
+  couponState: CouponState;
   // modal: Modal;
 };
 
 const reducer = combineReducers({
-  // articles,
+  couponState,
+  articles,
   // question,
-  // coupons,
-  // coupon,
-  // topState,
+  coupons,
+  coupon,
+
   // modal,
 });
 

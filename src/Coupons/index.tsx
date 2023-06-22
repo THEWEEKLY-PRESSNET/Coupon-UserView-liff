@@ -1,38 +1,55 @@
-import React, {
-  useState,
-  useEffect,
-  ReactElement,
-  useCallback,
-  useMemo,
-} from "react";
-import { useLiff } from "react-liff";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { usePreRender } from "../hooks/usePreRender";
+import GetArticles from "../providers/GetArticle";
+import Layout from "../Layout";
+import List from "../Coupon.List";
+// import Detail from "../CouponDetail";
+// import Use from "../CouponUse";
+// import Used from "../CouponUsed";
+import Loading from "../components/Loading";
+// import Modal from "../Modal";
+import { getCoupons } from "../providers/GetCoupons";
+import { updateCoupons } from "../stores/coupons";
+import type { Root } from "../stores";
 
-const liffId = "1661486792-ryW8Ay5o";
-const PreRender: React.FC = () => <div>loading...</div>;
+const styles = {};
 
-const Coupons: React.FC<PageProps> = ({ location }) => {
-  //   console.log("location", location);
-  const { liff } = useLiff();
-  const idToken = useMemo(() => {
-    return liff
-      .init({
-        liffId: "123456-abcedfg",
-      })
-      .then(() => {
-        const idToken = liff.getIDToken();
-        return idToken;
-      });
-  }, [liff]);
-  console.log("idToken", idToken);
-  return usePreRender(
-    PreRender,
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <div>hello!</div>
-      </Provider>
-    </ThemeProvider>
+const Coupons: React.FC = () => {
+  console.log("Coupons");
+  const [loading, setLoading] = useState(true);
+  const { view, idToken } = useSelector((s: Root) => s.couponState);
+  console.log("view", view);
+  const coupons = useSelector((s: Root) => s.coupons);
+  console.log("coupons", coupons);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchCoupons = async () => {
+      const res = await getCoupons({ idToken });
+      if (res.result) {
+        await dispatch(updateCoupons(res.payload));
+        await setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    };
+    fetchCoupons();
+  }, []);
+  return (
+    <>
+      <GetArticles userId={""} />
+      <Layout>
+        {(loading && <Loading />) || (
+          <>
+            {view === "coupons" && <List />}
+            {/* {view === "detail" && <Detail />}
+            {view === "use" && <Use />}
+            {view === "used" && <Used />} */}
+          </>
+        )}
+      </Layout>
+      {/* <Modal /> */}
+    </>
   );
 };
 

@@ -5,7 +5,7 @@ import { useLiff } from "react-liff";
 
 import { usePreRender } from "../hooks/usePreRender";
 import store from "../stores";
-import { Link, PageProps, navigate } from "gatsby";
+import type { PageProps } from "gatsby";
 
 const homeUrl = "https://www.higashihiroshima-digital.com/";
 
@@ -47,7 +47,7 @@ const After: React.FC = () => {
     }
     return (
       <>
-        <p>Welcome to the react-liff demo app, {displayName}!</p>
+        <p>Welcome to the coupon app, {displayName}!</p>
         <p>state: {liff.state}</p>
         <p>friendship: {friendship}</p>
         <p></p>
@@ -57,7 +57,7 @@ const After: React.FC = () => {
       </>
     );
   };
-  return <div>INDEX!!!!{showDisplayName()}</div>;
+  return <div>App Top{showDisplayName()}</div>;
 };
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {

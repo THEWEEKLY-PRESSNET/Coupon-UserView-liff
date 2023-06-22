@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { navigate } from "gatsby";
-import { Provider } from "react-redux";
+// import { navigate } from "gatsby";
+import { Provider, useDispatch } from "react-redux";
 import { LiffProvider, useLiff } from "react-liff";
+import { ThemeProvider } from "@mui/material/styles";
 
 import Coupons from "../Coupons";
 import { usePreRender } from "../hooks/usePreRender";
 import store from "../stores";
+import theme from "../styles/theme";
 import type { PageProps } from "gatsby";
+import { updateCouponState } from "../stores/couponState";
 
 const homeUrl = "https://www.higashihiroshima-digital.com/";
 const liffId = "1661486792-mWQ6Adxo";
@@ -21,7 +24,7 @@ const After: React.FC = () => {
   console.log("liff id", liff);
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!isLoggedIn) return;
     (async () => {
@@ -33,7 +36,13 @@ const After: React.FC = () => {
       const friendship = await liff.getFriendship();
       setFriend(friendship.frienFlag);
     })();
-  }, [liff, isLoggedIn]);
+    (async () => {
+      const idToken = liff.getIDToken();
+      // setFriend(friendship.frienFlag);
+      console.log("idToken", idToken);
+      dispatch(updateCouponState({ idToken }));
+    })();
+  }, [liff, isLoggedIn, dispatch]);
 
   const showDisplayName = () => {
     if (error) return <p>Something is wrong.</p>;
@@ -47,21 +56,22 @@ const After: React.FC = () => {
       );
     }
     return (
-      <Provider store={store}>
-        <LiffProvider liffId={liffId}>
-          <Coupons />
-          <p>Welcome to the react-liff demo app, {displayName}!</p>
-          <p>state: {liff.state}</p>
-          <p>friendship: {friendship}</p>
-          <p></p>
-          <button className="App-button" onClick={liff.logout}>
-            Logout
-          </button>
-        </LiffProvider>
-      </Provider>
+      //   <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Coupons />
+        <p>Welcome to the react-liff demo app, {displayName}!</p>
+        <p>state: {liff.state}</p>
+        <p>friendship: {friendship}</p>
+        <p></p>
+        <button className="App-button" onClick={liff.logout}>
+          Logout
+        </button>
+      </ThemeProvider>
+      //   {/* </Provider> */}
     );
   };
-  return <div>Coupons!!!!{showDisplayName()}</div>;
+  //   return <>{showDisplayName()}</>;
+  return <Coupons />;
 };
 
 const CouponsPage: React.FC<PageProps> = ({ location }) => {
