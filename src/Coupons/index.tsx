@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import liff from "@line/liff";
+import { useLiff } from "react-liff";
 
 import GetArticles from "../providers/GetArticle";
 import Layout from "../Layout";
@@ -12,7 +14,8 @@ import Loading from "../components/Loading";
 import { getCoupons } from "../providers/GetCoupons";
 import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
-import { useLiff } from "react-liff";
+
+// import { useLiff } from "react-liff";
 
 const liffId = "1661486792-mWQ6Adxo";
 const styles = {};
@@ -21,7 +24,7 @@ const Coupons: React.FC = () => {
   console.log("Coupons");
   const [loading, setLoading] = useState(true);
   const { view } = useSelector((s: Root) => s.couponState);
-  const { liff, isReady } = useLiff();
+  const { isReady } = useLiff();
   console.log("view", view);
   // console.log("idToken", idToken);
   const coupons = useSelector((s: Root) => s.coupons);
@@ -34,7 +37,11 @@ const Coupons: React.FC = () => {
           .init({
             liffId,
           })
-          .then(() => liff.getIdToken())
+          .then(() => {
+            const newId = liff.getIDToken();
+            console.log("newId", newId);
+            return newId;
+          })
           .then(token => token);
       };
       const idToken = (isReady && (await getToken())) || "";
