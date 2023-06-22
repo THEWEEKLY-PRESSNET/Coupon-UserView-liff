@@ -55,7 +55,9 @@ const Coupons: React.FC = () => {
         setLoading(false);
       }
     };
-    fetchCoupons();
+    if (typeof window !== "undefined") {
+      fetchCoupons();
+    }
   }, []);
   return (
     <>
