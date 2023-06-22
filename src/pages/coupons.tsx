@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Provider, useDispatch } from "react-redux";
+import { useLiff } from "react-liff";
 
 import Loading from "../components/Loading";
 import Coupons from "../Coupons";
