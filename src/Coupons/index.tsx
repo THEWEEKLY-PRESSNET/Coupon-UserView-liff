@@ -14,6 +14,7 @@ import { updateCoupons } from "../stores/coupons";
 import type { Root } from "../stores";
 import { useLiff } from "react-liff";
 
+const liffId = "1661486792-mWQ6Adxo";
 const styles = {};
 
 const Coupons: React.FC = () => {
@@ -30,7 +31,9 @@ const Coupons: React.FC = () => {
     const fetchCoupons = async () => {
       const getToken = () => {
         return liff
-          .init()
+          .init({
+            liffId,
+          })
           .then(() => liff.getIdToken())
           .then(token => token);
       };
