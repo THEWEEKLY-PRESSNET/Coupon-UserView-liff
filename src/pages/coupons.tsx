@@ -53,14 +53,17 @@ const After: React.FC = () => {
   const showDisplayName = () => {
     if (error) return <p>Something is wrong.</p>;
     if (!isReady) return <p>Loading...</p>;
-    if (!isLoggedIn) {
-      //   liff.login();
-      return (
-        <button className="App-button" onClick={liff.login}>
-          Login
-        </button>
-      );
+    if (isReady && !isLoggedIn) {
+      liff.login();
     }
+    // if (!isLoggedIn) {
+    //   //   liff.login();
+    //   return (
+    //     <button className="App-button" onClick={liff.login}>
+    //       Login
+    //     </button>
+    //   );
+    // }
     // if (!friendship) return <p>公式アカウントを友達追加してください</p>;
 
     return <Coupons />;
@@ -81,11 +84,12 @@ const After: React.FC = () => {
   };
   return (
     <>
-      friendship && {showDisplayName()} ||
-      <>
-        <p>公式アカウントを友達追加してください</p>
-        <a href="https://lin.ee/LWvjdI0">東広島デジタル公式アカウント</a>
-      </>
+      {(friendship && <>{showDisplayName()}</>) || (
+        <>
+          <p>公式アカウントを友達追加してください</p>
+          <a href="https://lin.ee/LWvjdI0">東広島デジタル公式アカウント</a>
+        </>
+      )}
     </>
   );
   //   return <Coupons />;
