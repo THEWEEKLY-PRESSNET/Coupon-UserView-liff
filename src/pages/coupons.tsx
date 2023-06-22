@@ -54,12 +54,12 @@ const After: React.FC = () => {
     if (error) return <p>Something is wrong.</p>;
     if (!isReady) return <p>Loading...</p>;
     if (!isLoggedIn) {
-      liff.login();
-      //   return (
-      //     <button className="App-button" onClick={liff.login}>
-      //       Login
-      //     </button>
-      //   );
+      //   liff.login();
+      return (
+        <button className="App-button" onClick={liff.login}>
+          Login
+        </button>
+      );
     }
     // if (!friendship) return <p>公式アカウントを友達追加してください</p>;
 
