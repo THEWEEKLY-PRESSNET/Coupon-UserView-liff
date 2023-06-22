@@ -12,8 +12,8 @@ export type Issued = {
   validStart: string;
   validEnd: string;
   usedAt: null;
-  favored: false;
-  expired: false;
+  favored: boolean;
+  expired: boolean;
 };
 
 const initialState: Issued[] = [];

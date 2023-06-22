@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 // import GetCoupons from "../providers/GetCoupons";
 import Layout from "../components/Layout";
 import Coupons from "../Coupons";
-import Detail from "../CouponDetail";
+import Detail from "../Coupon.Detail";
 import CouponUse from "../CouponUse";
 import CouponUsed from "../CouponUsed";
 import Modal from "../Modal";
