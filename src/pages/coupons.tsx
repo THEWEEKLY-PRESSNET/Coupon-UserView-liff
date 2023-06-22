@@ -19,12 +19,12 @@ const PreRender: React.FC = () => <div>loading...</div>;
 const After: React.FC = () => {
   const [displayName, setDisplayName] = useState("");
   const [profile, setProfile] = useState({});
-  const [friendship, setFriend] = useState(false);
+  //   const [friendship, setFriend] = useState(false);
   const { error, isLoggedIn, isReady, liff } = useLiff();
   console.log("liff id", liff);
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
-  console.log("friendship", friendship);
+  //   console.log("friendship", friendship);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -35,11 +35,11 @@ const After: React.FC = () => {
     })();
     (async () => {
       const friendship = await liff.getFriendship();
-      console.log("friendship", friendship);
-      if (!friendship) {
+      console.log("friendship useEffect", friendship);
+      if (!friendship.friendFlag) {
         window.location.replace("https://lin.ee/LWvjdI0");
       }
-      setFriend(friendship.frienFlag);
+      //   setFriend(friendship.frienFlag);
     })();
     (async () => {
       const idToken = liff.getIDToken();
@@ -60,23 +60,24 @@ const After: React.FC = () => {
         </button>
       );
     }
-    return (
-      //   <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Coupons />
-        <p>Welcome to the react-liff demo app, {displayName}!</p>
-        <p>state: {liff.state}</p>
-        <p>friendship: {friendship}</p>
-        <p></p>
-        <button className="App-button" onClick={liff.logout}>
-          Logout
-        </button>
-      </ThemeProvider>
-      //   {/* </Provider> */}
-    );
+    return <Coupons />;
+    // return (
+    //   //   <Provider store={store}>
+    //   <ThemeProvider theme={theme}>
+    //     <Coupons />
+    //     <p>Welcome to the react-liff demo app, {displayName}!</p>
+    //     <p>state: {liff.state}</p>
+    //     <p>friendship: {friendship}</p>
+    //     <p></p>
+    //     <button className="App-button" onClick={liff.logout}>
+    //       Logout
+    //     </button>
+    //   </ThemeProvider>
+    //   //   {/* </Provider> */}
+    // );
   };
-  //   return <>{showDisplayName()}</>;
-  return <Coupons />;
+  return <>{showDisplayName()}</>;
+  //   return <Coupons />;
 };
 
 const CouponsPage: React.FC<PageProps> = ({ location }) => {
