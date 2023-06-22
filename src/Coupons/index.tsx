@@ -20,6 +20,7 @@ const Coupons: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const { view, idToken } = useSelector((s: Root) => s.couponState);
   console.log("view", view);
+  console.log("idToken", idToken);
   const coupons = useSelector((s: Root) => s.coupons);
   console.log("coupons", coupons);
   const dispatch = useDispatch();

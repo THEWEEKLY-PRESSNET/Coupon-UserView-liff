@@ -24,6 +24,7 @@ const After: React.FC = () => {
   console.log("liff id", liff);
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
+  console.log("friendship", friendship);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isLoggedIn) return;
