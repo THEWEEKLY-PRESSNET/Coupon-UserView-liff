@@ -28,7 +28,13 @@ const Coupons: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchCoupons = async () => {
-      const idToken = (isReady && (await liff.getIDToken())) || "";
+      const getToken = () => {
+        return liff
+          .init()
+          .then(() => liff.getIdToken())
+          .then(token => token);
+      };
+      const idToken = (isReady && (await getToken())) || "";
       console.log("idToken", idToken);
       const res = await getCoupons({ idToken });
       if (res.result) {
