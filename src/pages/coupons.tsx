@@ -36,7 +36,15 @@ const After: React.FC = () => {
     if (!isReady) return <p>Loading...</p>;
     if (!isLoggedIn) {
       return (
-        <button className="App-button" onClick={liff.login}>
+        <button
+          className="App-button"
+          onClick={() =>
+            liff.login({
+              redirectUri:
+                "https://asia-northeast2-coupon-proj.cloudfunctions.net/LineLogin/coupons",
+            })
+          }
+        >
           Login
         </button>
       );
