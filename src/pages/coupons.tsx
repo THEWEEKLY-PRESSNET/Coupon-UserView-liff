@@ -9,7 +9,7 @@ import store from "../stores";
 import type { PageProps } from "gatsby";
 
 const homeUrl = "https://www.higashihiroshima-digital.com/";
-const liffId = "1661486792-ryW8Ay5o";
+const liffId = "1661486792-mWQ6Adxo";
 
 const PreRender: React.FC = () => <div>loading...</div>;
 
@@ -18,7 +18,7 @@ const After: React.FC = () => {
   const [profile, setProfile] = useState({});
   const [friendship, setFriend] = useState(false);
   const { error, isLoggedIn, isReady, liff } = useLiff();
-  console.log("liff", liff);
+  console.log("liff id", liff);
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
 

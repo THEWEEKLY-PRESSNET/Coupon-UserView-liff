@@ -12,7 +12,8 @@ const { LiffProvider } = require('react-liff')
 const store = require("./src/stores")
 console.log("brouser stores", store)
 
-const liffId = "1661486792-V0xKPX9B"
+// const liffId = "1661486792-V0xKPX9B"
+const liffId = "1661486792-mWQ6Adxo"
 
 exports.wrapRootElement = ({ element }) => {
     return (
@@ -39,7 +40,7 @@ exports.replaceHydrateFunction = () => {
     return (element, container) => {
         liff
             // .init({ liffId: process.env.REACT_APP_LIFF_ID || '' })
-            .init({ liffId: '1661486792-V0xKPX9B' })
+            .init({ liffId })
             .then(() => {
                 console.log('success')
                 const root = createRoot(container)
