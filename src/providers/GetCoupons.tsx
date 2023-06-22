@@ -7,7 +7,7 @@ import { updateCoupons } from "../stores/coupons";
 // import { updateSnackBar } from "../../stores/snackBar";
 
 type Params = {
-  state: string;
+  idToken: string | undefined;
 };
 
 export const getCoupons = async (params: Params) => {
@@ -22,7 +22,7 @@ export const getCoupons = async (params: Params) => {
   return response;
 };
 
-const GetCoupons: React.FC<Params> = ({ state }) => {
+const GetCoupons: React.FC<Params> = ({ idToken }) => {
   console.log("get coupons");
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,9 +32,9 @@ const GetCoupons: React.FC<Params> = ({ state }) => {
     //     })
     //   );
     const resolvePromise = async () => {
-      const response = await getCoupons({ state });
+      const response = await getCoupons({ idToken });
       if (response.result) {
-        console.log("success", response.payload);
+        // console.log("success", response.payload);
         dispatch(updateCoupons(response.payload));
         // dispatch(updateTopState({ view: "top" }));
       } else {
