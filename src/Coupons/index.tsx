@@ -19,15 +19,16 @@ const styles = {};
 const Coupons: React.FC = () => {
   console.log("Coupons");
   const [loading, setLoading] = useState(true);
-  const { view, idToken } = useSelector((s: Root) => s.couponState);
+  const { view } = useSelector((s: Root) => s.couponState);
   const { liff } = useLiff();
   console.log("view", view);
-  console.log("idToken", idToken);
+  // console.log("idToken", idToken);
   const coupons = useSelector((s: Root) => s.coupons);
   console.log("coupons", coupons);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchCoupons = async () => {
+      const idToken = await liff.getIDToken();
       const res = await getCoupons({ idToken });
       if (res.result) {
         await dispatch(updateCoupons(res.payload));

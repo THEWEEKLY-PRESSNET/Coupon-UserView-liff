@@ -18,7 +18,6 @@ const After: React.FC = () => {
   console.log("isLoggedIn", isLoggedIn);
   console.log("isReady", isReady);
   //   console.log("friendship", friendship);
-  const dispatch = useDispatch();
   useEffect(() => {
     if (!isLoggedIn) return;
 
@@ -30,12 +29,7 @@ const After: React.FC = () => {
         window.location.replace("https://lin.ee/LWvjdI0");
       }
     })();
-    (async () => {
-      const idToken = liff.getIDToken();
-      console.log("idToken", idToken);
-      dispatch(updateCouponState({ idToken }));
-    })();
-  }, [liff, isLoggedIn, dispatch]);
+  }, [liff, isLoggedIn]);
 
   const showDisplayName = () => {
     if (error) return <p>Something is wrong.</p>;
